@@ -1,0 +1,18 @@
+<xr-scene ar-system="modes:Plane" bind:ready="handleReady">
+  <xr-assets bind:loaded="handleAssetsLoaded">
+    <xr-asset-load type="gltf" asset-id="anchor" src="https://ar-p2.obs.cn-east-3.myhuaweicloud.com/dian.glb" />
+  </xr-assets>
+
+  <xr-env env-data="xr-frame-team-workspace-day" />
+  <xr-light type="ambient" color="1 1 1" intensity="1" />
+  <xr-light type="directional" rotation="40 70 0" color="1 1 1" intensity="3" cast-shadow />
+
+  <xr-ar-tracker mode="Plane">
+    <xr-gltf scale="0.04 0.04 0.04" node-id="anchor" model="anchor"></xr-gltf>
+  </xr-ar-tracker>
+  <xr-node node-id="setitem" visible="false">
+    <!-- <xr-gltf  anim-autoplay node-id="miku"/> -->
+  </xr-node>
+
+  <xr-camera id="camera" clear-color="0 0 0  1" background="ar" is-ar-camera />
+</xr-scene>

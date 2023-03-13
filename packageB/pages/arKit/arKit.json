@@ -1,0 +1,9 @@
+{
+    "usingComponents": {
+        "navigate-back":"/componments/navigateBack/navigateBack",
+        "xr-start": "../componment/xr-start/index"
+    },
+    "navigationStyle": "custom",
+    "disableScroll": true
+  }
+  

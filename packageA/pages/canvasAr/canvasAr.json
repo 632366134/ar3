@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+      "xr-marker":"/componments/xr-marker/index"
+  },
+  "navigationStyle": "custom",
+  "disableScroll": true
+}
