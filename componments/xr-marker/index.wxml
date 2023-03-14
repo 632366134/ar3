@@ -7,18 +7,18 @@
         <xr-ar-tracker mode="Marker" wx:for="{{obsList1}}" id="marker-{{item2.mediaCode}}" wx:for-item="item2" src="https:{{item2.mediaUrl}}" bind:ar-tracker-switch="handleTrackerSwitch">
             <xr-node wx:for="{{mediaList1}}" wx:key="mediaCode">
                 <!-- gltf情况 -->
-                <xr-node wx:if="{{ item.parentCode ===item2.mediaCode &&item.mediaType === 5 && gltfLoaded}}" position="0 0 0" rotation="-90 0 0" scale="0.0006 0.0006 0.0006">
-                    <xr-gltf node-id="mesh-gltf-fiesta_tea" model="gltf-{{item.id}}"></xr-gltf>
+                <xr-node wx:if="{{ item.parentCode ===item2.mediaCode &&item.mediaType === 5 && gltfLoaded}}" position="0 0 0" rotation="-90 0 0" scale="0.06 0.06 0.06">
+                    <xr-gltf anim-autoplay node-id="mesh-gltf-fiesta_tea" model="gltf-{{item.id}}"></xr-gltf>
                 </xr-node>
 
                 <!-- 视频情况 -->
-                <xr-node wx:if="{{item.parentCode ===item2.mediaCode &&item.mediaType === 4}}">
+                <xr-node  wx:if="{{item.parentCode ===item2.mediaCode &&item.mediaType === 4}}">
                     <xr-node wx:if="{{videoLoaded}}">
-                        <xr-mesh wx:if="{{videoRatioLoaded}}" scale="{{markerWidth}} 1 {{markerHeight}}" geometry="plane" material="video-bg-mat" states="cullOn: false" />
-                        <xr-mesh position="0 0.01 0" scale="{{markerWidth}} 1 {{markerHeight}}" geometry="plane" material="video-mat-{{item.id}}" />
+                        <!-- <xr-mesh wx:if="{{videoRatioLoaded}}" scale="{{markerWidth}} 1 {{markerHeight}}" geometry="plane" material="video-bg-mat" states="cullOn: false" /> -->
+                        <xr-mesh position="0 0.01 0" scale="{{markerWidth}} 1 1" geometry="plane" material="video-mat-{{item.id}}" />
                     </xr-node>
                     <xr-node wx:else>
-                        <xr-mesh wx:if="{{videoRatioLoaded}}" scale="{{markerWidth}} 1 {{markerHeight}}" geometry="plane" material="loading-mat" states="cullOn: false, alphaMode: BLEND,renderQueue: 2501" />
+                        <xr-mesh wx:if="{{videoRatioLoaded}}" scale="{{markerWidth}} 1 1" geometry="plane" material="loading-mat" states="cullOn: false, alphaMode: BLEND,renderQueue: 2501" />
                     </xr-node>
                 </xr-node>
             </xr-node>
