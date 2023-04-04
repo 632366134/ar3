@@ -2,7 +2,7 @@
     <navigate-back url="index"></navigate-back>
     <view class="main">
         <view class="container2  page" data-weui-theme="{{theme}}">
-            <xr-marker wx:if="{{flag}}" class="xr" bind:changeShow="changeShow" disable-scroll id="main-frame" width="{{renderWidth}}" height="{{renderHeight}}" style="width:{{width}}px;height:{{height}}px;" obsList="{{obsList}}" mediaList="{{mediaList}}" paramList="{{paramList}}" />
+            <xr-marker wx:if="{{flag}}" class="xr" bind:changeShow="changeShow" disable-scroll id="main-frame" width="{{renderWidth}}" height="{{renderHeight}}" style="width:{{width}}px;height:{{height}}px;" obsList="{{obsList}}" mediaList="{{mediaList}}" paramList="{{paramList}}" imageResList="{{imageResList}}" videoResList="{{videoResList}}" gltfResList="{{gltfResList}}"  />
             <view class="back" wx:if="{{isShowScan}}" bindtap="reset">重置</view>
         </view>
         <view class="{{isIPhoneX ? 'container2-x' :'container2'}}" wx:if="{{!isShowScan}}">

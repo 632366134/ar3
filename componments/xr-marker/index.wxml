@@ -1,5 +1,5 @@
 <xr-scene id="xr-scene" ar-system="modes:Marker" bind:ready="handleReady" bind:ar-ready="handleARReady">
-    <xr-assets>
+    <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
         <xr-asset-material asset-id="video-bg-mat" effect="simple" uniforms="u_baseColorFactor: 0.0 0.0 0.0 1" />
         <xr-asset-material asset-id="loading-mat" effect="simple" uniforms="u_baseColorFactor: 1.0 1.0 1.0 0.8" />
     </xr-assets>
@@ -10,9 +10,13 @@
                 <xr-node wx:if="{{ item.parentCode ===item2.mediaCode &&item.mediaType === 5 && gltfLoaded}}" position="0 0 0" rotation="-90 0 0" scale="0.06 0.06 0.06">
                     <xr-gltf anim-autoplay node-id="mesh-gltf-fiesta_tea" model="gltf-{{item.id}}"></xr-gltf>
                 </xr-node>
-
+                <!-- image情况 -->
+                <xr-node wx:if="{{ item.parentCode ===item2.mediaCode &&item.mediaType === 3 && imageLoaded}}" position="0 0.2 0" rotation="0 0 0">
+                    <xr-mesh position="0 0.01 0" scale="{{markerWidth}} 1 1" geometry="plane" material="image-mat-{{item.id}}"  states="cullOn: true, alphaMode: MASK,alphaCutOff: true" />
+                </xr-node>
                 <!-- 视频情况 -->
-                <xr-node  wx:if="{{item.parentCode ===item2.mediaCode &&item.mediaType === 4}}">
+
+                <xr-node wx:if="{{item.parentCode ===item2.mediaCode &&item.mediaType === 4}}">
                     <xr-node wx:if="{{videoLoaded}}">
                         <!-- <xr-mesh wx:if="{{videoRatioLoaded}}" scale="{{markerWidth}} 1 {{markerHeight}}" geometry="plane" material="video-bg-mat" states="cullOn: false" /> -->
                         <xr-mesh position="0 0.01 0" scale="{{markerWidth}} 1 1" geometry="plane" material="video-mat-{{item.id}}" />

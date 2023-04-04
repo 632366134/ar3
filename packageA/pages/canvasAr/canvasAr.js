@@ -27,7 +27,11 @@ Component({
         paramList: [],
         mediaList2: [],
         i: 0,
-        flag: false
+        flag: false,
+        gltfResList:[],
+       videoResList:[],
+      imageResList:[]
+
     },
     lifetimes: {
         /**
@@ -77,6 +81,36 @@ Component({
             const width = info.windowWidth;
             const height = info.windowHeight;
             const dpi = info.pixelRatio;
+            const gltfResList = [];
+            const videoResList = [];
+            const imageResList = [];
+            paramList = paramList.filter(i => {
+                let flag = mediaList.some(v => {
+                    return v.mediaCode == i.mediaCode
+                })
+                if (flag) return true
+            })
+            paramList.forEach(e => {
+                e.modelParamInfo = e.modelParamInfo.split("|")
+            })
+            console.log(paramList)
+
+            const markerList = mediaList
+            for (let i = 0; i < markerList.length; i++) {
+                const marker = markerList[i];
+                switch (marker.mediaType) {
+                    case 5:
+                        gltfResList.push(marker);
+                        break;
+                    case 4:
+                        videoResList.push(marker);
+                        break;
+                    case 3:
+                        imageResList.push(marker);
+                        break;
+                }
+            }
+            console.log(gltfResList, videoResList, imageResList)
             this.setData({
                 width,
                 height,
@@ -85,12 +119,16 @@ Component({
                 obsList,
                 mediaList,
                 paramList,
-                flag:true
+                gltfResList,
+                videoResList,
+                imageResList,
+
+                flag: true
 
             });
-            this.obsList = obsList
-            this.mediaList = mediaList
-            this.paramList = paramList
+            console.log(obsList, mediaList, paramList, gltfResList, videoResList, imageResList)
+
+
         },
     },
     methods: {
