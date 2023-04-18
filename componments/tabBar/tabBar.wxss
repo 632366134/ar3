@@ -14,6 +14,7 @@
   font-family: PingFang SC;
   font-weight: 500;
   color: #757474;
+  z-index: 9999;
 }
 .tabBar-x {
   width: 100%;

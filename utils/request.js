@@ -16,12 +16,19 @@ function request(method, url, data) {
         if (res.data.code === 1000) {
             // wx.hideToast()
           resolve(res.data.data);
+        }else if(res.data.code === 1006){
+                wx.showToast({
+                  title: `${res.data.message}`,
+                  icon:'none'
+                })
+                resolve(res.data);
         } else {
           wx.showToast({
             title: `${res.data.status}${res.data.error}`,
             icon:'error'
           })
-          reject(res);
+          console.log(res)
+          resolve(res.data);
         }
       },
       fail: (err) => {

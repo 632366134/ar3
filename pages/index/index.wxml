@@ -1,41 +1,41 @@
 <!--index.wxml-->
 <view class="{{isIPhoneX ? 'container-x' :'container'}} {{isMask === true ? 'mask-blur':''}}">
-    <search-enter disable="true" bind:goSearch="goSearch"></search-enter>
-    <view class="textline">
-        <view class="welcome">Welcome to AR world !</view>
+  <search-enter disable="true" bind:goSearch="goSearch"></search-enter>
+  <view class="textline">
+    <view class="welcome">Welcome to AR world !</view>
+  </view>
+  <scroll-view enhanced="true" bounces="true" enable-flex="{{true}}" class="scroll-view" scroll-x="{{true}}">
+    <view data-item="{{item}}" bindtap="gopriview" class="scroll-item" wx:for="{{list}}" wx:key="id">
+      <image src="https://ar-p2.obs.cn-east-3.myhuaweicloud.com/{{item.bookCoverObsPath +item.bookCoverObsName}}" class="scrollImage"></image>
+      <text class="text">{{item.projectName}}</text>
     </view>
-    <scroll-view enhanced="true" bounces="true" enable-flex="{{true}}" class="scroll-view" scroll-x="{{true}}">
-        <view data-item="{{item}}" bindtap="gopriview" class="scroll-item" wx:for="{{list}}" wx:key="id">
-            <image src="https://ar-p2.obs.cn-east-3.myhuaweicloud.com/{{item.bookCoverObsPath +item.bookCoverObsName}}" class="scrollImage"></image>
-            <text class="text">{{item.projectName}}</text>
-        </view>
-    </scroll-view>
-    <view class="collect" bindtap="goColllect" wx:if="{{!isCollect}}">
-        <image class="image" src="/images/index/logobg.png"></image>
-        <view class="addCollect">
-            <image class="imagebox" src="{{collectUrl}}"></image>
-            <text class="text2">点击收藏</text>
+  </scroll-view>
+  <view class="collect" bindtap="goColllect" wx:if="{{!isCollect}}">
+    <image class="image" src="/images/index/logobg.png"></image>
+    <view class="addCollect">
+      <image class="imagebox" src="{{collectUrl}}"></image>
+      <text class="text2">点击收藏</text>
 
-        </view>
     </view>
-    <view class="collect" bindtap="gopriview" wx:else data-item="{{collect}}">
-        <image class="image" src="/images/index/logobg.png"></image>
-        <view class="addCollect">
-            <image class="collectImage" src="{{collectUrl}}"></image>
-            <text class="text">{{collect.projectName}}</text>
-        </view>
-        <view capture-catch:touchstart="goColllect" class="resetImg">
-            <image class="image" src="/images/index/reset.png"></image>
-        </view>
+  </view>
+  <view class="collect" bindtap="gopriview" wx:else data-item="{{collect}}">
+    <image class="image" src="/images/index/logobg.png"></image>
+    <view class="addCollect">
+      <image class="collectImage" src="{{collectUrl}}"></image>
+      <text class="text">{{collect.projectName}}</text>
     </view>
-    <view class="compList">
+    <view capture-catch:touchstart="goColllect" class="resetImg">
+      <image class="image" src="/images/index/reset.png"></image>
+    </view>
+  </view>
+  <view class="compList">
 
-        <view class="compListTop">
-            <image class="imageComp" mode='heightFix' src="/images/index/best2.png"></image>
-            企业榜单
-        </view>
-        <view class="compListMain">
-            <view wx:if="{{compList.length !=0}}" class="mainLeft" bindtap="gopriview" data-item="{{compList[0]}}">
+    <view class="compListTop">
+      <image class="imageComp" mode='heightFix' src="/images/index/best2.png"></image>
+      企业榜单
+    </view>
+    <view class="compListMain">
+      <!-- <view wx:if="{{compList.length !=0}}" class="mainLeft" bindtap="gopriview" data-item="{{compList[0]}}">
                 <image class="imageStyle" src="https://ar-p2.obs.cn-east-3.myhuaweicloud.com/{{compList[0].bookCoverObsPath + compList[0].bookCoverObsName}}"></image>
                 <text>{{compList[0].projectName}}</text>
             </view>
@@ -59,10 +59,69 @@
                         <image mode='heightFix' class="mainRightImage2" src="/images/index/bestcomp.png"></image>
                     </view>
 
+            </view> -->
+      <van-tabs animated active="{{ active }}" bind:change="onChange">
+        <van-tab class="logo-box" title="公共服务">
+          <view class="logo-main" >
+            <view class="logo-content" wx:for="{{compList1}}" wx:key="id" bindtap="gopriview" data-item="{{item}}">
+              <view class="image-border">
+                <image class="imageStyle" src="{{item.logoPath}}" mode="" />
+              </view>
+              <view class="logo-text">
+                {{item.companyName}}</view>
             </view>
 
-        </view>
-        <!-- <view class="compListMain" wx:else="">
+
+
+          </view>
+        </van-tab>
+        <van-tab class="logo-box" title="消费科技">
+          <view class="logo-main">
+            <view class="logo-content"   wx:for="{{compList2}}" wx:key="id">
+              <view class="image-border">
+                <image class="imageStyle" src="{{item.logoPath}}" mode="" />
+              </view>
+              <view class="logo-text">
+                {{item.companyName}}</view>
+            </view>
+
+
+
+          </view>
+        </van-tab>
+        <van-tab class="logo-box" title="智能制造">
+          <view class="logo-main" >
+            <view class="logo-content"  wx:for="{{compList3}}" wx:key="id">
+              <view class="image-border">
+                <image class="imageStyle" src="{{item.logoPath}}" mode="" />
+              </view>
+              <view class="logo-text">
+                {{item.companyName}}</view>
+            </view>
+            
+
+
+
+          </view>
+        </van-tab>
+        <van-tab class="logo-box" title="其他">
+          <view class="logo-main" >
+            <view class="logo-content"  bindtap="gopriview" data-item="{{item}}" wx:for="{{compList4}}" wx:key="id">
+              <view class="image-border">
+                <image class="imageStyle" src="{{item.logoPath}}" mode="" />
+              </view>
+              <view class="logo-text">
+                {{item.companyName}}</view>
+            </view>
+            
+
+
+
+          </view>
+        </van-tab>
+      </van-tabs>
+    </view>
+    <!-- <view class="compListMain" wx:else="">
             <view class="mainLeft">
                 <image mode='heightFix' class="mainLeftImage2" src="/images/index/bestcomp.png"></image>
             </view>
@@ -73,7 +132,7 @@
             </view>
 
         </view> -->
-    </view>
-    <tab-bar tabIndex='2'></tab-bar>
+  </view>
+  <tab-bar tabIndex='2'></tab-bar>
 </view>
 <confirm-mask borchureDetail="{{borchureDetail}}" bindchangeMask="changeMask" isShow="{{isMask}}"></confirm-mask>

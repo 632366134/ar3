@@ -3,7 +3,7 @@
     <van-collapse  border="{{false}}" value="{{activeNames}}" >
         <block wx:for="{{list}}" wx:key="index" wx:for-item="item">
             <van-collapse-item  is-link="{{false}}"  data-index="{{index}}" bindtap="goAnswer" title="{{item.q}}" name="{{index}}">
-                <image  slot="right-icon" class="right-icon" src="../images/right_icon.png"></image>
+                <van-icon   slot="right-icon" class="right-icon" name="arrow" />
             </van-collapse-item>
         </block>
     </van-collapse>

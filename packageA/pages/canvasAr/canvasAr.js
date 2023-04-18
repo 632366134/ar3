@@ -2,6 +2,9 @@
 const {
     API
 } = require("../../../utils/request");
+import {
+    navigateBack
+} from "../../../utils/navigate";
 const app = getApp();
 const NEAR = 0.001;
 const FAR = 1000;
@@ -30,7 +33,17 @@ Component({
         flag: false,
         gltfResList:[],
        videoResList:[],
-      imageResList:[]
+      imageResList:[],
+      video:'',
+      videoFlag:false,
+      Videowidth:'',
+      Videoheight:'',
+      translateX:-50,
+      translateY:0,
+      scale:1,
+      rotateX:0,
+      rotateY:0
+
 
     },
     lifetimes: {
@@ -132,14 +145,38 @@ Component({
         },
     },
     methods: {
+        closeVideo(){
+                this.setData({
+                    videoFlag: false,
+
+                })
+        },
+        videoShow({detail}){
+            console.log('videoshow')
+            let translateX=-50 +parseInt(detail.params[0].modelParamInfo[0]) +'%'
+            console.log(detail.params[0].modelParamInfo[0],translateX)
+            this.setData({
+                videoFlag: true,
+                video:detail.video,
+                Videoheight:200*detail.l *detail.params[1].modelParamInfo[0],
+                Videowidth:300*detail.l *detail.params[1].modelParamInfo[0],
+                // scale:,
+                translateX:translateX,
+                translateY:detail.params[0].modelParamInfo[1]+'%',
+                rotateX:detail.params[2].modelParamInfo[0],
+                rotateY:detail.params[2].modelParamInfo[1],
+
+
+            })
+        },
         changeModel({
             target
         }) {
             let index = target.dataset.index
             this.child.changeModel(index)
         },
-        reset() {
-            this.child.reset()
+        back() {
+           navigateBack('index')
         },
         changeShow({
             detail

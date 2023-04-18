@@ -37,16 +37,14 @@ Page({
         //   const res2 = await API.getPhone({code:e.detail.code})
         // publicFn.Loading()
         console.log(e)
-        const {
-            data
-        } = await API.getPhone(`code=${e.detail.code}`);
+        const {data}= await API.getPhone(`code=${e.detail.code}`);
         console.log(data, 'data')
         wx.showToast({
             title: "绑定成功",
             icon: "success",
         });
         this.setData({
-            userPhone: data,
+            userPhone: data.purePhoneNumber,
         })
 
 
@@ -54,6 +52,8 @@ Page({
     async sendMsg() {
         publicFn.Loading()
         const data = await API.sendMsg(`phone=${this.data.userPhone}`);
+        // const data = await API.sendMsg({phone:this.data.userPhone});
+
 
         console.log(data)
     },

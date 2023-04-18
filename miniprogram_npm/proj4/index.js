@@ -4,7 +4,7 @@ var __DEFINE__ = function(modId, func, req) { var m = { exports: {}, _tempexport
 var __REQUIRE__ = function(modId, source) { if(!__MODS__[modId]) return require(source); if(!__MODS__[modId].status) { var m = __MODS__[modId].m; m._exports = m._tempexports; var desp = Object.getOwnPropertyDescriptor(m, "exports"); if (desp && desp.configurable) Object.defineProperty(m, "exports", { set: function (val) { if(typeof val === "object" && val !== m._exports) { m._exports.__proto__ = val.__proto__; Object.keys(val).forEach(function (k) { m._exports[k] = val[k]; }); } m._tempexports = val }, get: function () { return m._tempexports; } }); __MODS__[modId].status = 1; __MODS__[modId].func(__MODS__[modId].req, m, m.exports); } return __MODS__[modId].m.exports; };
 var __REQUIRE_WILDCARD__ = function(obj) { if(obj && obj.__esModule) { return obj; } else { var newObj = {}; if(obj != null) { for(var k in obj) { if (Object.prototype.hasOwnProperty.call(obj, k)) newObj[k] = obj[k]; } } newObj.default = obj; return newObj; } };
 var __REQUIRE_DEFAULT__ = function(obj) { return obj && obj.__esModule ? obj.default : obj; };
-__DEFINE__(1674889105321, function(require, module, exports) {
+__DEFINE__(1681801054333, function(require, module, exports) {
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
@@ -236,7 +236,7 @@ __DEFINE__(1674889105321, function(require, module, exports) {
     var ENDED = -1;
     var whitespace = /\s/;
     var latin = /[A-Za-z]/;
-    var keyword = /[A-Za-z84]/;
+    var keyword = /[A-Za-z84_]/;
     var endThings = /[,\]]/;
     var digets = /[\d\.E\-\+]/;
     // const ignoredChar = /[\s_\-\/\(\)]/g;
@@ -1100,6 +1100,13 @@ __DEFINE__(1674889105321, function(require, module, exports) {
       a: 6378249.145,
       rf: 293.4663,
       ellipseName: "Clarke 1880 mod."
+    };
+
+    exports$2.clrk80ign = {
+      a: 6378249.2,
+      b: 6356515,
+      rf: 293.4660213,
+      ellipseName: "Clarke 1880 (IGN)"
     };
 
     exports$2.clrk58 = {
@@ -2179,14 +2186,25 @@ __DEFINE__(1674889105321, function(require, module, exports) {
     }
 
     function checkNotWGS(source, dest) {
-      return ((source.datum.datum_type === PJD_3PARAM || source.datum.datum_type === PJD_7PARAM) && dest.datumCode !== 'WGS84') || ((dest.datum.datum_type === PJD_3PARAM || dest.datum.datum_type === PJD_7PARAM) && source.datumCode !== 'WGS84');
+      return (
+        (source.datum.datum_type === PJD_3PARAM || source.datum.datum_type === PJD_7PARAM || source.datum.datum_type === PJD_GRIDSHIFT) && dest.datumCode !== 'WGS84') ||
+        ((dest.datum.datum_type === PJD_3PARAM || dest.datum.datum_type === PJD_7PARAM || dest.datum.datum_type === PJD_GRIDSHIFT) && source.datumCode !== 'WGS84');
     }
 
     function transform(source, dest, point, enforceAxis) {
       var wgs84;
       if (Array.isArray(point)) {
         point = toPoint(point);
+      } else {
+        // Clone the point object so inputs don't get modified
+        point = {
+          x: point.x,
+          y: point.y,
+          z: point.z,
+          m: point.m
+        };
       }
+      var hasZ = point.z !== undefined;
       checkSanity(point);
       // Workaround for datum shifts towgs84, if either source or destination projection is not wgs84
       if (source.datum && dest.datum && checkNotWGS(source, dest)) {
@@ -2261,6 +2279,9 @@ __DEFINE__(1674889105321, function(require, module, exports) {
         return adjust_axis(dest, true, point);
       }
 
+      if (!hasZ) {
+        delete point.z;
+      }
       return point;
     }
 
@@ -4963,18 +4984,18 @@ __DEFINE__(1674889105321, function(require, module, exports) {
       this.t1 = this.sin_po;
       this.con = this.sin_po;
       this.ms1 = msfnz(this.e3, this.sin_po, this.cos_po);
-      this.qs1 = qsfnz(this.e3, this.sin_po, this.cos_po);
+      this.qs1 = qsfnz(this.e3, this.sin_po);
 
       this.sin_po = Math.sin(this.lat2);
       this.cos_po = Math.cos(this.lat2);
       this.t2 = this.sin_po;
       this.ms2 = msfnz(this.e3, this.sin_po, this.cos_po);
-      this.qs2 = qsfnz(this.e3, this.sin_po, this.cos_po);
+      this.qs2 = qsfnz(this.e3, this.sin_po);
 
       this.sin_po = Math.sin(this.lat0);
       this.cos_po = Math.cos(this.lat0);
       this.t3 = this.sin_po;
-      this.qs0 = qsfnz(this.e3, this.sin_po, this.cos_po);
+      this.qs0 = qsfnz(this.e3, this.sin_po);
 
       if (Math.abs(this.lat1 - this.lat2) > EPSLN) {
         this.ns0 = (this.ms1 * this.ms1 - this.ms2 * this.ms2) / (this.qs2 - this.qs1);
@@ -4996,7 +5017,7 @@ __DEFINE__(1674889105321, function(require, module, exports) {
       this.sin_phi = Math.sin(lat);
       this.cos_phi = Math.cos(lat);
 
-      var qs = qsfnz(this.e3, this.sin_phi, this.cos_phi);
+      var qs = qsfnz(this.e3, this.sin_phi);
       var rh1 = this.a * Math.sqrt(this.c - this.ns0 * qs) / this.ns0;
       var theta = this.ns0 * adjust_lon(lon - this.long0);
       var x = rh1 * Math.sin(theta) + this.x0;
@@ -7333,7 +7354,7 @@ __DEFINE__(1674889105321, function(require, module, exports) {
     proj4$1.nadgrid = nadgrid;
     proj4$1.transform = transform;
     proj4$1.mgrs = mgrs;
-    proj4$1.version = '2.8.0';
+    proj4$1.version = '2.9.0';
     includedProjections(proj4$1);
 
     return proj4$1;
@@ -7341,7 +7362,7 @@ __DEFINE__(1674889105321, function(require, module, exports) {
 })));
 
 }, function(modId) {var map = {}; return __REQUIRE__(map[modId], modId); })
-return __REQUIRE__(1674889105321);
+return __REQUIRE__(1681801054333);
 })()
 //miniprogram-npm-outsideDeps=[]
 //# sourceMappingURL=index.js.map

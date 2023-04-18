@@ -83,9 +83,9 @@ Component({
         paramList1: [],
         videoIdList: [],
         imageIdList: [],
-        gltfResList:[],
-        imageResList1:[],
-        videoResList1:[]
+        gltfResList: [],
+        imageResList1: [],
+        videoResList1: []
 
     },
 
@@ -95,9 +95,10 @@ Component({
             this.data.mediaList1.forEach((c, v) => {
                 this.scene.assets.releaseAsset('gltf', `gltf-${v}`);
             })
-            this.releaseVideo();
+            // this.releaseVideo();
+            this.closeVideo()
             this.releaseImage();
-            this.releaseGLTF();
+            // this.releaseGLTF();
             console.log('xr-startdetached')
             this.scene.removeChild(this.xrgltf);
             if (this.scene) {
@@ -338,6 +339,21 @@ Component({
                 console.log('video asset loaded')
             }
         },
+       async changeVideo(video,params){
+            await this.triggerEvent('videoShow', {
+                videoFlag: true,
+                video:video,
+                l:1,
+                params
+
+            })
+        },
+        async closeVideo(){
+            await this.triggerEvent('closeVideo', {
+                videoFlag: false
+
+            })
+        },
         handleTrackerSwitch({
             detail
         }) {
@@ -345,20 +361,45 @@ Component({
             const active = detail.value;
             const element = detail.el;
             let obsList = this.data.obsList1
-            obsList.forEach(i => {
+            obsList.forEach(async i => {
                 // const video = this.scene.assets.getAsset('video-texture', `video-${i}`);
                 const markerInfo = i;
                 console.log(markerInfo)
                 const markerTracker = this.scene.getElementById(`marker-${markerInfo.mediaCode}`)
                 if (element === markerTracker) {
                     // 处理视频纹理
-                    this.releaseVideo();
+                    // this.releaseVideo();
                     // 匹配 tracker
                     if (active) {
-                       const list = this.data.videoResList1.filter(v=> v.parentCode ===markerInfo.mediaCode)
-                       console.log(list)
-                        this.loadVideo(list[0])
-                      }
+                        const list = this.data.videoResList1.filter(v => v.parentCode === markerInfo.mediaCode)
+                        const list2 = this.data.paramList1.filter(v => v.mediaCode === list[0].mediaCode)
+
+
+                        this.changeVideo(list[0].mediaUrl,list2)
+                        // wx.downloadFile({
+                        //     url: `https:${list[0].mediaUrl}`, 
+                        //     success:(res)=> {
+                        //         console.log(res)
+                        //         // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
+                        //         if (res.statusCode === 200) {
+                        //             wx.getVideoInfo({
+                        //                 src: res.tempFilePath,
+                        //                 success:async(res)=>  {
+                        //                     console.log(res)
+                        //                     const l = res.width / res.height
+
+                        //                 }
+                        //             })
+                        //         }
+                        //     }
+                        // })
+
+                        console.log(list2)
+
+                        // this.loadVideo(list[0])
+                    }else {
+                        this.closeVideo()
+                    }
 
                 }
 
