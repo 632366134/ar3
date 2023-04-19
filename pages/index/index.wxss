@@ -183,20 +183,22 @@
   margin-bottom: 10rpx;
 }
 .compList .compListMain .logo-box .logo-main .logo-content .image-border {
-  padding: 5rpx;
   width: 132rpx;
   height: 132rpx;
   background: linear-gradient(127deg, #5195FE, #9DC3FD);
   border-radius: 50%;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .compList .compListMain .logo-box .logo-main .logo-content .image-border .imageStyle {
   width: 125rpx;
   height: 125rpx;
   border-radius: 50%;
 }
-.compList .compListMain .logo-box .logo-main .logo-content .image-border .logo-text {
-  margin-top: 20rpx;
+.compList .compListMain .logo-box .logo-main .logo-content .logo-text {
+  line-height: 40rpx;
   font-size: 30rpx;
   color: #020202;
   text-align: center;
