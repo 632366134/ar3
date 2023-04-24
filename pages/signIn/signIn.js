@@ -37,7 +37,7 @@ Page({
         //   const res2 = await API.getPhone({code:e.detail.code})
         // publicFn.Loading()
         console.log(e)
-        const {data}= await API.getPhone(`code=${e.detail.code}`);
+        const data= await API.getPhone(`code=${e.detail.code}`);
         console.log(data, 'data')
         wx.showToast({
             title: "绑定成功",
