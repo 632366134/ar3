@@ -118,7 +118,7 @@ Component({
       })
       if (!anchor.visible) {
         this.trs.setData({
-          scale: [0.05 * scale[0], 0.05 * scale[1], 0.05 * scale[2]]
+          scale: [scale[0],scale[1],scale[2]]
         })
       } else {
         console.log(this.scene.ar.arVersion)
@@ -133,7 +133,7 @@ Component({
         }
         this.scene.ar.placeHere(this.xrgltf, true);
         this.trs.setData({
-          scale: [0.05 * scale[0], 0.05 * scale[1], 0.05 * scale[2]],
+          scale: [scale[0], scale[1],scale[2]],
         })
       }
       anchor.visible = false

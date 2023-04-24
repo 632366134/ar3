@@ -77,7 +77,7 @@
         </van-tab>
         <van-tab class="logo-box" title="消费科技">
           <view class="logo-main">
-            <view class="logo-content"   wx:for="{{compList2}}" wx:key="id">
+            <view class="logo-content"   wx:for="{{compList2}}" wx:key="id" bindtap="gopriview" data-item="{{item}}">
               <view class="image-border">
                 <image class="imageStyle" src="{{item.logoPath}}" mode="" />
               </view>
@@ -91,7 +91,7 @@
         </van-tab>
         <van-tab class="logo-box" title="智能制造">
           <view class="logo-main" >
-            <view class="logo-content"  wx:for="{{compList3}}" wx:key="id">
+            <view class="logo-content"  wx:for="{{compList3}}" wx:key="id" bindtap="gopriview" data-item="{{item}}">
               <view class="image-border">
                 <image class="imageStyle" src="{{item.logoPath}}" mode="" />
               </view>

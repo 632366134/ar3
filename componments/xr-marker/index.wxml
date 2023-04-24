@@ -7,12 +7,12 @@
         <xr-ar-tracker mode="Marker" wx:for="{{obsList1}}" id="marker-{{item2.mediaCode}}" wx:for-item="item2" src="https:{{item2.mediaUrl}}" bind:ar-tracker-switch="handleTrackerSwitch">
             <xr-node wx:for="{{mediaList1}}" wx:key="mediaCode">
                 <!-- gltf情况 -->
-                <xr-node wx:if="{{ item.parentCode ===item2.mediaCode &&item.mediaType === 5 && gltfLoaded}}" position="0 0 0" rotation="-90 0 0" scale="0.06 0.06 0.06">
-                    <xr-gltf anim-autoplay node-id="mesh-gltf-fiesta_tea" model="gltf-{{item.id}}"></xr-gltf>
+                <xr-node wx:if="{{ item.parentCode ===item2.mediaCode &&item.mediaType === 5 && gltfLoaded}}" rotation="-90 0 0">
+                    <xr-gltf  visible="false"  id="mesh-gltf-{{item.id}}"  anim-autoplay node-id="mesh-gltf-{{item.id}}" model="gltf-{{item.id}}"></xr-gltf>
                 </xr-node>
                 <!-- image情况 -->
                 <xr-node wx:if="{{ item.parentCode ===item2.mediaCode &&item.mediaType === 3 && imageLoaded}}" position="0 0.2 0" rotation="0 0 0">
-                    <xr-mesh position="0 0.01 0" scale="{{markerWidth}} 1 1" geometry="plane" material="image-mat-{{item.id}}"   states="cullOn: true ,alphaMode:BLEND,alphaCutOff:false" />
+                    <xr-mesh  node-id="mesh-mat-{{item.id}}"  geometry="plane" material="image-mat-{{item.id}}"   states="cullOn: true ,alphaMode:BLEND,alphaCutOff:false" />
                 </xr-node>
                 <!-- 视频情况 -->
 
