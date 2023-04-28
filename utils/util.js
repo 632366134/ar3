@@ -104,3 +104,18 @@ export function lglt2xyz(lng, lat, radius){
       z: radius * Math.sin(theta) * Math.sin(phi),
     }
  }
+ export function throttle(func, marginTime) {
+    if (marginTime == undefined || marginTime == null) {
+      marginTime = 2000
+    }
+    let lastTime = null
+    return function () {
+      let currentTime = + new Date()
+      if (currentTime - lastTime > marginTime || !lastTime) {
+        func.apply(this, arguments)
+        lastTime = currentTime
+      }
+    }
+  }
+  
+   

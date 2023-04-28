@@ -24,7 +24,9 @@ Component({
   /**
    * 组件的初始数据
    */
-  data: {},
+  data: {
+      flag:false
+  },
   detached() {
     this.data.mediaList.forEach((c, v) => {
       this.scene.assets.releaseAsset('gltf', `gltf-${v}`);

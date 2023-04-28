@@ -227,9 +227,9 @@ Component({
           src: 'https:' + gltfItem.mediaUrl,
         })))
         console.log('glTF asset loaded')
-        this.setData({
-          gltfLoaded: true
-        })
+        // this.setData({
+        //   gltfLoaded: true
+        // })
       } else {
         console.log('gltfList', gltfList)
         this.setData({
@@ -371,6 +371,9 @@ Component({
           // this.releaseVideo();
           // 匹配 tracker
           if (active) {
+            this.setData({
+                gltfLoaded: true
+              })
             if (this.data.videoResList1.length != 0) {
               const list = this.data.videoResList1.filter(v => v.parentCode === markerInfo.mediaCode)
               console.log(list)

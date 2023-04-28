@@ -3,6 +3,9 @@ import {
     goTo,
     redirectTo
 } from "../../utils/navigate";
+import {
+    throttle
+} from "../../utils/util";
 var app = getApp();
 Component({
     /**
@@ -32,20 +35,21 @@ Component({
      * 组件的方法列表
      */
     methods: {
-        goModel() {
+        goModel: throttle(function () {
             this.handleCamera()
                 .then((res) => {
-                    redirectTo("arKit", {
+                    goTo("arKit", {
                         projectCode: "310574802046242816",
                     });
                 })
-                .catch((err) => {});
-        },
-        goIndex() {
+                .catch((err) => {})
+        }, null),
+        goIndex: throttle(function () {
             if (this.properties.tabIndex == 2) return
             redirectTo("index")
-        },
-        goMine() {
+        }, null),
+
+        goMine: throttle(function () {
             if (this.properties.tabIndex == 3) return
             let hasPhone = wx.getStorageSync('hasPhone')
             if (hasPhone) {
@@ -57,7 +61,8 @@ Component({
                 });
                 goTo("signIn")
             }
-        },
+
+        }, null),
         handleCamera() {
             return new Promise((resolve, reject) => {
                 wx.getSetting({

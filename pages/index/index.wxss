@@ -172,6 +172,7 @@
   width: 100%;
   justify-content: flex-start;
   flex-wrap: wrap;
+  height: 460rpx;
 }
 .compList .compListMain .logo-box .logo-main .logo-content {
   overflow: hidden;

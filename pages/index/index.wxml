@@ -121,17 +121,6 @@
         </van-tab>
       </van-tabs>
     </view>
-    <!-- <view class="compListMain" wx:else="">
-            <view class="mainLeft">
-                <image mode='heightFix' class="mainLeftImage2" src="/images/index/bestcomp.png"></image>
-            </view>
-            <view class="mainRight">
-                <view wx:for="{{[1,2]}}" wx:key="id" class="mainRight2">
-                    <image mode='heightFix' class="mainRightImage2" src="/images/index/bestcomp.png"></image>
-                </view>
-            </view>
-
-        </view> -->
   </view>
   <tab-bar tabIndex='2'></tab-bar>
 </view>
