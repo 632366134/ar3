@@ -1,5 +1,3 @@
-const { VideoTexture } = require('XrFrame/xrFrameSystem')
-
 // component/xr-start/xr-start.t
 let n = 0
 let map1 = new Map()
@@ -74,7 +72,7 @@ Component({
   data: {
     rawData: [],
     loaded: true,
-    arReady: true,
+    arReady: false,
     gltfLoaded: false,
     videoLoaded: false,
     videoRatioLoaded: false,
@@ -107,7 +105,7 @@ Component({
       // this.releaseGLTF();
       console.log('xr-startdetached')
       this.scene.removeChild(this.xrgltf);
-      map1 = null
+      map1 = new Map()
       if (this.scene) {
         this.scene = null
       }
@@ -203,7 +201,8 @@ Component({
     }) {
       console.log('assets loaded', detail.value);
     },
-    handleARReady: function () {},
+    handleARReady: function () {
+    },
     async handleReady({
       detail
     }) {
@@ -217,6 +216,8 @@ Component({
         await this.triggerEvent('changeShow', {
           isShowScan: true
         })
+      this.setData({arReady:true})
+
       } catch (err) {
         console.log('[gltf load] error: ', err)
       }
@@ -232,6 +233,7 @@ Component({
           type: 'gltf',
           assetId: 'gltf-' + gltfItem.id,
           src: 'https:' + gltfItem.mediaUrl,
+          options:{ignoreError:-1}
         })))
         console.log('glTF asset loaded')
         // this.setData({
@@ -286,13 +288,16 @@ Component({
       console.log(videoList)
       const videos = await Promise.all(videoList.map((videoItem) => {
         this.data.videoIdList.push(videoItem.id)
+        console.log(`video-${videoItem.id}`)
+
         return scene.assets.loadAsset({
           type: 'video-texture',
           assetId: `video-${videoItem.id}`,
           src: `https:${videoItem.mediaUrl}`,
           options: {
-            autoPlay: true,
-            loop: true
+            autoPlay: false,
+            loop: true,
+            abortAudio:false
           },
         })
       }))
@@ -308,10 +313,15 @@ Component({
           console.log(videoTexture)
           let p = videoTexture.value.width / videoTexture.value.height
           map1.set(videoList[index].id, 1 * p)
-        }
         scene.assets.addAsset('material', `video-mat-${videoList[index].id}`, videoMat)
 
+        }
+
       }))
+      this.setData({
+        videoLoaded:true
+      })
+
       console.log('video asset loaded')
     },
 
@@ -331,8 +341,8 @@ Component({
         if (element === markerTracker) {
           // 处理视频纹理
           // this.releaseVideo();
-          this.releaseVideo();
           // 匹配 tracker
+          let video
           if (active) {
             this.setData({
               gltfLoaded: true
@@ -355,13 +365,15 @@ Component({
                 }
 
               })
-              console.log(map1)
-              const markerWidth = map1.get(list[0].id)
-              console.log(markerWidth)
+              let id = list[0].id
+              const markerWidth = map1.get(id)
               this.setData({
-                markerWidth
+                markerWidth,
+                videoLoaded:true
               })
-              const video = this.scene.assets.getAsset('video-texture', `video-${list[0].id}`);
+              let vid = 'video-' + id
+              console.log(vid)
+               video = this.scene.assets.getAsset('video-texture',vid);
               console.log(video)
               video.play()
             }
@@ -412,6 +424,7 @@ Component({
             // }
 
           } else {
+            video?.stop()
             // this.closeVideo()
           }
         }
