@@ -28,6 +28,8 @@ Component({
       flag:false
   },
   detached() {
+    this.innerAudioContext?.destroy()
+
     this.data.mediaList.forEach((c, v) => {
       this.scene.assets.releaseAsset('gltf', `gltf-${v}`);
     })
@@ -74,10 +76,21 @@ Component({
     }) {
       oldRotation = rotation
       console.log('arReady', this.scene.ar.arVersion);
+      if(this.data.mediaList[0].projectCode =='312330376891027456'){
+        this.innerAudioContext = wx.createInnerAudioContext({
+            useWebAudioImplement: true // 是否使用 WebAudio 作为底层音频驱动，默认关闭。对于短音频、播放频繁的音频建议开启此选项，开启后将获得更优的性能表现。由于开启此选项后也会带来一定的内存增长，因此对于长音频建议关闭此选项
+          })
+          this.innerAudioContext.src = 'https://arimage-search.obs.cn-north-1.myhuaweicloud.com/arkitmp3.mp3'
+    
+          // this.innerAudioContext.play() // 播放
+         this.innerAudioContext.loop = true
+    
+    }
     },
     handleReady: function ({
       detail
     }) {
+
       const xrFrameSystem = wx.getXrFrameSystem();
       this.scene = detail.value;
       this.anchor = this.scene.getNodeById('anchor');
@@ -134,6 +147,8 @@ Component({
           wx.offDeviceMotionChange(this.listener)
         }
         this.scene.ar.placeHere(this.xrgltf, true);
+        console.log(this.innerAudioContext)
+      this.innerAudioContext?.play()
         this.trs.setData({
           scale: [scale[0], scale[1],scale[2]],
         })

@@ -98,12 +98,12 @@ Component({
       let url = `https://ar-p2.obs.cn-east-3.myhuaweicloud.com/${this.properties.borchureDetail.bookCoverObsPath}${this.properties.borchureDetail.bookCoverObsName}`;
       this.handleCamera()
         .then((res) => {
-          wx.setStorageSync("imgUrl", url);
-          console.log(this.properties.borchureDetail.projectCode);
-          wx.setStorageSync(
-            "projectCode",
-            this.properties.borchureDetail.projectCode
-          );
+        //   wx.setStorageSync("imgUrl", url);
+        //   console.log(this.properties.borchureDetail.projectCode);
+        //   wx.setStorageSync(
+        //     "projectCode",
+        //     this.properties.borchureDetail.projectCode
+        //   );
           goTo("canvasAr", {
             projectCode: this.properties.borchureDetail.projectCode,
           });
@@ -120,12 +120,12 @@ Component({
       let url = `https://ar-p2.obs.cn-east-3.myhuaweicloud.com/${this.properties.borchureDetail.bookCoverObsPath}${this.properties.borchureDetail.bookCoverObsName}`;
       this.handleCamera()
         .then((res) => {
-          wx.setStorageSync("imgUrl", url);
-          console.log(this.properties.borchureDetail.projectCode);
-          wx.setStorageSync(
-            "projectCode",
-            this.properties.borchureDetail.projectCode
-          );
+        //   wx.setStorageSync("imgUrl", url);
+        //   console.log(this.properties.borchureDetail.projectCode);
+        //   wx.setStorageSync(
+        //     "projectCode",
+        //     this.properties.borchureDetail.projectCode
+        //   );
           goTo("arKit", {
             projectCode: this.properties.borchureDetail.projectCode,
           });

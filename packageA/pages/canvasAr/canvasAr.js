@@ -8,7 +8,7 @@ import {
 const app = getApp();
 const NEAR = 0.001;
 const FAR = 1000;
-Component({
+Page({
     data: {
         isIPhoneX: app.isIPhoneX,
         isShowScan: false,
@@ -46,31 +46,54 @@ Component({
 
 
     },
-    lifetimes: {
+    onShareAppMessage() {
+        const promise = new Promise(resolve => {
+          setTimeout(() => {
+            resolve({
+              title: '',
+            })
+          }, 3500)
+        })
+        return {
+          title: '',
+          promise 
+        }},
+      //用户点击右上角分享朋友圈
+      onShareTimeline: function () {
+        return {
+          title: '',
+          query: {
+            key: ''
+          },
+          imageUrl: ''
+        }
+      },
         /**
          * 生命周期函数--监听页面加载
          */
-        detached() {
+        onUnload() {
             console.log("页面detached");
             if (wx.offThemeChange) {
                 wx.offThemeChange();
             }
             wx.removeStorageSync("projectCode");
         },
-        async ready() {
+        async onLoad({param}) {
+            param = decodeURIComponent(param)
+            param = JSON.parse(param)
             this.child = this.selectComponent('.xr');
-            let projectCode = wx.getStorageSync("projectCode");
-            wx.removeStorageSync("projectCode");
-            if (!projectCode) {
-                projectCode = "312330376891027456";
-            }
+            // let projectCode = wx.getStorageSync("projectCode");
+            // wx.removeStorageSync("projectCode");
+            // if (!projectCode) {
+            //     projectCode = "312330376891027456";
+            // }
             let obsList = [],
                 mediaList = [],
                 paramList = []
-            let data = {
-                projectCode
-            };
-            let dataList = await API.selMediaApps(data);
+            // let data = {
+            //     projectCode
+            // };
+            let dataList = await API.selMediaApps(param);
             dataList.mediaList.forEach((value) => {
                 switch (value.mediaType) {
                     case 1:
@@ -143,8 +166,6 @@ Component({
 
 
         },
-    },
-    methods: {
         closeVideo(){
                 this.setData({
                     videoFlag: false,
@@ -249,5 +270,4 @@ Component({
             this.renderer.render(this.scene, this.camera);
             this.renderer.state.setCullFace(this.THREE.CullFaceNone);
         },
-    },
 });

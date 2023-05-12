@@ -39,7 +39,7 @@ Component({
             this.handleCamera()
                 .then((res) => {
                     goTo("arKit", {
-                        projectCode: "310574802046242816",
+                        projectCode: "312330376891027456",
                     });
                 })
                 .catch((err) => {})

@@ -5,7 +5,7 @@ const {
 const app = getApp();
 const NEAR = 0.001;
 const FAR = 1000;
-Component({
+Page({
     data: {
         isIPhoneX: app.isIPhoneX,
         isShowScan: false,
@@ -29,31 +29,52 @@ Component({
         i: 0,
         flag:false
     },
-    lifetimes: {
+    onShareTimeline: function () {
+        return {
+          title: '',
+          query: {
+            key: ''
+          },
+          imageUrl: ''
+        }
+      },
+    
+      //用户点击右上角分享朋友圈
+      onShareAppMessage() {
+        const promise = new Promise(resolve => {
+          setTimeout(() => {
+            resolve({
+              title: '',
+            })
+          }, 3500)
+        })
+        return {
+          title: '',
+          promise 
+        }},
         /**
          * 生命周期函数--监听页面加载
          */
-        detached() {
+        onUnload() {
             console.log("页面detached");
             if (wx.offThemeChange) {
                 wx.offThemeChange();
             }
             wx.removeStorageSync("projectCode");
         },
-        async ready() {
+        async onLoad({param}) {
+            param = decodeURIComponent(param)
+            param = JSON.parse(param)
+            this.projectCode = param.projectCode
              this.child = this.selectComponent('.xr');
-            let projectCode = wx.getStorageSync("projectCode");
-            wx.removeStorageSync("projectCode");
-            if (!projectCode) {
+         
+            if (!param.projectCode) {
                 projectCode = "312330376891027456";
             }
             let obsList = [],
                 mediaList = [],
                 paramList = []
-            let data = {
-                projectCode
-            };
-            let dataList = await API.selMediaApps(data);
+            let dataList = await API.selMediaApps(param);
             dataList.mediaList.forEach((value) => {
                 switch (value.mediaType) {
                     case 1:
@@ -84,8 +105,6 @@ Component({
             this.mediaList = mediaList
             this.paramList= paramList
         },
-    },
-    methods: {
         changeModel({target}){
             let index = target.dataset.index
               this.child.changeModel(index)
@@ -164,5 +183,4 @@ Component({
             this.renderer.render(this.scene, this.camera);
             this.renderer.state.setCullFace(this.THREE.CullFaceNone);
         },
-    },
 });

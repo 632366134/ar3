@@ -5,9 +5,11 @@
 
   <xr-light type="ambient" color="1 1 1" intensity="0.5" />
   <xr-light type="directional" position="0 3 0" rotation="0 0 0" color="1 1 1" intensity="2.5" cast-shadow />
-  <xr-light type="directional"  position="0 3 0" rotation="40 70 0" color="1 1 1" intensity="2" cast-shadow />
+  <xr-light type="directional"  position="0 3 0" rotation="40 60 0" color="1 1 1" intensity="2" cast-shadow />
+  <xr-light type="directional" position="0 3 0" rotation="40 120 0" color="1 1 1" intensity="2" cast-shadow />
   <xr-light type="directional" position="0 3 0" rotation="40 180 0" color="1 1 1" intensity="2" cast-shadow />
-  <xr-light type="directional" position="0 3 0" rotation="40 0 0" color="1 1 1" intensity="2" cast-shadow />
+  <xr-light type="directional" position="0 3 0" rotation="40 240 0" color="1 1 1" intensity="2" cast-shadow />
+
 
 
 

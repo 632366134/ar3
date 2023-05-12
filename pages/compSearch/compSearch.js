@@ -115,5 +115,22 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage() {},
+  onShareAppMessage: function () {
+    wx.showShareMenu({
+      withShareTicket: true,
+      menu: ["shareAppMessage", "shareTimeline"],
+
+    });
+  },
+
+  //用户点击右上角分享朋友圈
+  onShareTimeline: function () {
+    return {
+      title: '',
+      query: {
+        key: ''
+      },
+      imageUrl: ''
+    }
+  },
 });
