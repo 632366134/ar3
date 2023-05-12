@@ -1,5 +1,8 @@
+const { VideoTexture } = require('XrFrame/xrFrameSystem')
+
 // component/xr-start/xr-start.t
 let n = 0
+let map1 = new Map()
 Component({
   behaviors: [require('../common/share-behavior').default],
   innerInterval: 0,
@@ -86,9 +89,9 @@ Component({
     gltfResList: [],
     imageResList1: [],
     videoResList1: [],
-    vp:[0,0,0],
-    vs:[1,1,1],
-    vr:[0,0,0]
+    vp: [0, 0, 0],
+    vs: [1, 1, 1],
+    vr: [0, 0, 0]
 
   },
 
@@ -99,11 +102,12 @@ Component({
         this.scene.assets.releaseAsset('gltf', `gltf-${v}`);
       })
       this.releaseVideo();
-    //   this.closeVideo()
+      //   this.closeVideo()
       this.releaseImage();
       // this.releaseGLTF();
       console.log('xr-startdetached')
       this.scene.removeChild(this.xrgltf);
+      map1 = null
       if (this.scene) {
         this.scene = null
       }
@@ -207,7 +211,7 @@ Component({
       console.log('xr-scene', xrScene);
       // 加载场景资源
       try {
-        // await this.loadVideo(this.data.videoResList1)
+        await this.loadVideo(this.data.videoResList1)
         await this.loadGLTF(this.data.gltfResList1)
         await this.loadImage(this.data.imageResList1)
         await this.triggerEvent('changeShow', {
@@ -240,7 +244,7 @@ Component({
         })
       }
     },
-    
+
     async loadImage(imageList) {
       console.log('goimage', imageList)
       const scene = this.scene
@@ -275,41 +279,43 @@ Component({
         })
       }
     },
-    async loadVideo(videoItem) {
+    async loadVideo(videoList) {
+      const scene = this.scene
 
-
-        const scene = this.scene
+      if (videoList.length == 0) return
+      console.log(videoList)
+      const videos = await Promise.all(videoList.map((videoItem) => {
         this.data.videoIdList.push(videoItem.id)
-        console.log(this.data.videoIdList)
-        const videoTexture = await scene.assets.loadAsset({
+        return scene.assets.loadAsset({
           type: 'video-texture',
           assetId: `video-${videoItem.id}`,
           src: `https:${videoItem.mediaUrl}`,
           options: {
-            loop: true,
-            autoPlay: true
+            autoPlay: true,
+            loop: true
           },
-        });
-        console.log('videoTexture', videoTexture);
+        })
+      }))
+
+
+      await Promise.all(videos.map((videoTexture, index) => {
         const videoMat = scene.createMaterial(
-          scene.assets.getAsset('effect', 'simple'), {
+          scene.assets.getAsset('effect', 'standard'), {
             u_baseColorMap: videoTexture.value.texture
           }
         )
-        scene.assets.addAsset('material', `video-mat-${videoItem.id}`, videoMat)
         if (videoTexture) {
+          console.log(videoTexture)
           let p = videoTexture.value.width / videoTexture.value.height
-          this.setData({
-            markerWidth: 1 * p,
-            videoLoaded:true
-          })
-  
-          console.log('video asset loaded')
+          map1.set(videoList[index].id, 1 * p)
         }
-     
+        scene.assets.addAsset('material', `video-mat-${videoList[index].id}`, videoMat)
+
+      }))
+      console.log('video asset loaded')
     },
 
- 
+
     handleTrackerSwitch({
       detail
     }) {
@@ -329,36 +335,35 @@ Component({
           // 匹配 tracker
           if (active) {
             this.setData({
-                gltfLoaded: true
-              })
+              gltfLoaded: true
+            })
             if (this.data.videoResList1.length != 0) {
               const list = this.data.videoResList1.filter(v => {
-                if(v.parentCode === markerInfo.mediaCode){
+                // return v.parentCode === markerInfo.mediaCode
+                if (v.parentCode === markerInfo.mediaCode) {
                   const list4 = this.data.paramList1.filter(d => v.mediaCode === d.mediaCode)
                   console.log(list4)
                   console.log(list4[0].modelParamInfo)
 
                   this.setData({
-                    vp:list4[0].modelParamInfo,
-                    vs:list4[1].modelParamInfo,
-                    vr:list4[2].modelParamInfo,
+                    vp: list4[0].modelParamInfo,
+                    vs: list4[1].modelParamInfo,
+                    vr: list4[2].modelParamInfo,
                   })
-                  console.log(this.data.vp,this.data.vs,this.data.vr)
+                  console.log(this.data.vp, this.data.vs, this.data.vr)
                   return v
                 }
 
               })
-              console.log(list[0])
-              this.loadVideo(list[0])
-
-
-              // this.setData({
-              //   videoLoaded: true,
-              // })
-              // const video = this.scene.assets.getAsset('video-texture', `video-mat-${list[0].id}`);
-              // console.log(video)
-  
-              // video.play()
+              console.log(map1)
+              const markerWidth = map1.get(list[0].id)
+              console.log(markerWidth)
+              this.setData({
+                markerWidth
+              })
+              const video = this.scene.assets.getAsset('video-texture', `video-${list[0].id}`);
+              console.log(video)
+              video.play()
             }
             if (this.data.gltfResList1.length != 0) {
               const list3 = this.data.gltfResList1.forEach(v => {
@@ -375,9 +380,9 @@ Component({
                     rotation: [list4[2].modelParamInfo[0], list4[2].modelParamInfo[1], list4[2].modelParamInfo[2]],
                     // visible:true
                   })
-                  wx.nextTick(()=>{
+                  wx.nextTick(() => {
                     gltf.setData({
-                      visible:true
+                      visible: true
                     })
                   })
                 }
