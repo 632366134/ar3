@@ -17,8 +17,8 @@
                 <!-- 视频情况 -->
 
                 <xr-node wx:if="{{item.parentCode ===item2.mediaCode &&item.mediaType === 4}}">
-                    <xr-node wx:if="{{videoLoaded}}">
-                        <!-- <xr-mesh wx:if="{{videoRatioLoaded}}" scale="{{markerWidth}} 1 {{markerHeight}}" geometry="plane" material="video-bg-mat" states="cullOn: false" /> -->
+                    <xr-node wx:if="{{videoLoaded}}" position="{{vp[0]}} {{vp[1]}} {{vp[2]}}" rotation="{{vr[0]}} {{vr[1]}} {{vr[2]}}" scale="{{vs[0]}} {{vs[1]}} {{vs[2]}}">
+                        <!-- <xr-mesh wx:if="{{videoRatioLoaded}}" scale="{{markerWidth}} 1 1" geometry="plane" material="video-bg-mat" states="cullOn: false" /> -->
                         <xr-mesh position="0 0.01 0" scale="{{markerWidth}} 1 1" geometry="plane" material="video-mat-{{item.id}}" />
                     </xr-node>
                     <xr-node wx:else>

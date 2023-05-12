@@ -85,7 +85,10 @@ Component({
     imageIdList: [],
     gltfResList: [],
     imageResList1: [],
-    videoResList1: []
+    videoResList1: [],
+    vp:[0,0,0],
+    vs:[1,1,1],
+    vr:[0,0,0]
 
   },
 
@@ -95,8 +98,8 @@ Component({
       this.data.mediaList1.forEach((c, v) => {
         this.scene.assets.releaseAsset('gltf', `gltf-${v}`);
       })
-      // this.releaseVideo();
-      this.closeVideo()
+      this.releaseVideo();
+    //   this.closeVideo()
       this.releaseImage();
       // this.releaseGLTF();
       console.log('xr-startdetached')
@@ -237,43 +240,7 @@ Component({
         })
       }
     },
-    // async loadVideo(videoList) {
-    //     console.log('goloadvideo', videoList)
-    //     const scene = this.scene
-    //     if (videoList.length > 0) {
-    //         const videoIdList = [];
-    //         const videos = await Promise.all(videoList.map(async(videoItem) => {
-    //             videoIdList.push(videoItem.id);
-    //             const v = await scene.assets.loadAsset({
-    //                 type: 'video-texture',
-    //                 assetId: `video-${videoItem.id}`,
-    //                 src: `https:${videoItem.mediaUrl}`
-    //             })
-    //             console.log(v)
-    //             return v
-    //         }))
-    //         videos.map((videoTexture, index) => {
-    //             const videoMat = scene.createMaterial(
-    //                 scene.assets.getAsset('effect', 'standard'), {
-    //                     u_baseColorMap: videoTexture.value.texture
-    //                 }
-    //             )
-    //             scene.assets.addAsset('material', `video-mat-${videoList[index].id}`, videoMat)
-    //         })
-    //         console.log('video asset loaded')
-    //         this.setData({
-    //             videoIdList: videoIdList,
-    //             // videoLoaded: false
-    //         })
-    //     } else {
-    //         console.log('goloadvideo2', videoList)
-
-    //         this.setData({
-    //             videoIdList: [],
-    //             videoLoaded: false
-    //         })
-    //     }
-    // },
+    
     async loadImage(imageList) {
       console.log('goimage', imageList)
       const scene = this.scene
@@ -309,51 +276,40 @@ Component({
       }
     },
     async loadVideo(videoItem) {
-      const scene = this.scene
-      this.data.videoIdList.push(videoItem.id)
-      console.log(this.data.videoIdList)
-      const videoTexture = await scene.assets.loadAsset({
-        type: 'video-texture',
-        assetId: `video-${videoItem.id}`,
-        src: `https:${videoItem.mediaUrl}`,
-        options: {
-          loop: true,
-          autoPlay: false
-        },
-      });
-      console.log('videoTexture', videoTexture);
-      const videoMat = scene.createMaterial(
-        scene.assets.getAsset('effect', 'simple'), {
-          u_baseColorMap: videoTexture.value.texture
+
+
+        const scene = this.scene
+        this.data.videoIdList.push(videoItem.id)
+        console.log(this.data.videoIdList)
+        const videoTexture = await scene.assets.loadAsset({
+          type: 'video-texture',
+          assetId: `video-${videoItem.id}`,
+          src: `https:${videoItem.mediaUrl}`,
+          options: {
+            loop: true,
+            autoPlay: true
+          },
+        });
+        console.log('videoTexture', videoTexture);
+        const videoMat = scene.createMaterial(
+          scene.assets.getAsset('effect', 'simple'), {
+            u_baseColorMap: videoTexture.value.texture
+          }
+        )
+        scene.assets.addAsset('material', `video-mat-${videoItem.id}`, videoMat)
+        if (videoTexture) {
+          let p = videoTexture.value.width / videoTexture.value.height
+          this.setData({
+            markerWidth: 1 * p,
+            videoLoaded:true
+          })
+  
+          console.log('video asset loaded')
         }
-      )
-      scene.assets.addAsset('material', `video-mat-${videoItem.id}`, videoMat)
-      if (videoTexture) {
-        let p = videoTexture.value.width / videoTexture.value.height
-        this.setData({
-          videoLoaded: true,
-          markerWidth: 1 * p,
-        })
-        const video = this.scene.assets.getAsset('video-texture', `video-${videoItem.id}`);
-        video.play()
-        console.log('video asset loaded')
-      }
+     
     },
-    async changeVideo(video, params) {
-      await this.triggerEvent('videoShow', {
-        videoFlag: true,
-        video: video,
-        l: 1,
-        params
 
-      })
-    },
-    async closeVideo() {
-      await this.triggerEvent('closeVideo', {
-        videoFlag: false
-
-      })
-    },
+ 
     handleTrackerSwitch({
       detail
     }) {
@@ -369,19 +325,40 @@ Component({
         if (element === markerTracker) {
           // 处理视频纹理
           // this.releaseVideo();
+          this.releaseVideo();
           // 匹配 tracker
           if (active) {
             this.setData({
                 gltfLoaded: true
               })
             if (this.data.videoResList1.length != 0) {
-              const list = this.data.videoResList1.filter(v => v.parentCode === markerInfo.mediaCode)
-              console.log(list)
-              if(list.length != 0){
-                const list2 = this.data.paramList1.filter(v => v.mediaCode === list[0].mediaCode)
-                this.changeVideo(list[0].mediaUrl, list2)
-              }
+              const list = this.data.videoResList1.filter(v => {
+                if(v.parentCode === markerInfo.mediaCode){
+                  const list4 = this.data.paramList1.filter(d => v.mediaCode === d.mediaCode)
+                  console.log(list4)
+                  console.log(list4[0].modelParamInfo)
+
+                  this.setData({
+                    vp:list4[0].modelParamInfo,
+                    vs:list4[1].modelParamInfo,
+                    vr:list4[2].modelParamInfo,
+                  })
+                  console.log(this.data.vp,this.data.vs,this.data.vr)
+                  return v
+                }
+
+              })
+              console.log(list[0])
+              this.loadVideo(list[0])
+
+
+              // this.setData({
+              //   videoLoaded: true,
+              // })
+              // const video = this.scene.assets.getAsset('video-texture', `video-mat-${list[0].id}`);
+              // console.log(video)
   
+              // video.play()
             }
             if (this.data.gltfResList1.length != 0) {
               const list3 = this.data.gltfResList1.forEach(v => {
@@ -430,7 +407,7 @@ Component({
             // }
 
           } else {
-            this.closeVideo()
+            // this.closeVideo()
           }
         }
 
