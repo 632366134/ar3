@@ -1,6 +1,7 @@
 // component/xr-start/xr-start.t
 let n = 0
 let map1 = new Map()
+let video =null
 Component({
   behaviors: [require('../common/share-behavior').default],
   innerInterval: 0,
@@ -102,6 +103,8 @@ Component({
       this.releaseVideo();
       //   this.closeVideo()
       this.releaseImage();
+video =null
+
       // this.releaseGLTF();
       console.log('xr-startdetached')
       this.scene.removeChild(this.xrgltf);
@@ -342,7 +345,6 @@ Component({
           // 处理视频纹理
           // this.releaseVideo();
           // 匹配 tracker
-          let video
           if (active) {
             this.setData({
               gltfLoaded: true
@@ -424,6 +426,7 @@ Component({
             // }
 
           } else {
+            console.log(video)
             video?.stop()
             // this.closeVideo()
           }
