@@ -22,3 +22,4 @@
         <button bindtap="goMine"  class="successBtn">完成</button>
     </view>
 </view>
+<privacy-popup></privacy-popup>

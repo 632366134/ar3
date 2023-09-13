@@ -1,6 +1,8 @@
 {
     "usingComponents": {
         "tab-bar": "/componments/tabBar/tabBar",
-        "menu-item":"../componment/menu-item/menu-item"
+        "menu-item":"../componment/menu-item/menu-item",
+        "privacy-popup": "/componments/privacyPopup/privacyPopup"
+
     }
 }

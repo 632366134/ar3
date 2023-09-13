@@ -1,5 +1,6 @@
+<privacy-popup></privacy-popup>
 <view class="{{isIPhoneX ? 'tabBar-x' :'tabBar'}}">
-    <view  bindtap="goModel" class="tabBar-box">
+    <view bindtap="goModel" class="tabBar-box">
         <image class="tabBar-image" src="{{tabIndex==1?modelSrc2: modelSrc1}}"></image>
         <text class="{{tabIndex==1?'clickStyle' : 'noClickStyle'}}">虚拟人</text>
     </view>

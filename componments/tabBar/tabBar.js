@@ -3,9 +3,15 @@ import {
     goTo,
     redirectTo
 } from "../../utils/navigate";
+// app.js
+const {
+    API
+} = require("../../utils/request.js");
 import {
     throttle
 } from "../../utils/util";
+const publicFn = require("../../utils/public");
+
 var app = getApp();
 Component({
     /**
@@ -35,14 +41,42 @@ Component({
      * 组件的方法列表
      */
     methods: {
-        goModel: throttle(function () {
+        goModel: throttle(async function () {
             this.handleCamera()
-                .then((res) => {
+                .then(async (res) => {
+
                     goTo("arKit", {
                         projectCode: "312330376891027456",
                     });
+                    // goTo("web-view",{openid:data});
                 })
                 .catch((err) => {})
+            // await wx.getUserProfile({
+            //     desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+            //     success: async (res) => {
+            //         console.log(res)
+            //         let signature = res.signature
+            //         const code = await publicFn.wxLogin()
+            //         console.log(code, 'logincode')
+            //         let obj = {
+            //             code: code,
+            //             // rawData: code,
+            //             // phone: '17625008824',
+            //             signature: signature
+            //             // encryptedData: res.encryptedData,
+            //             // iv: res.iv
+            //         }
+            //         const data = await API.login(obj);
+            //         console.log(data)
+            //         // wx.setStorageSync('hasPhone', true)
+            //         // this.setData({
+            //         //     hasPhone: true
+            //         // })
+            //         // redirectTo('mine')
+
+            //     }
+            // })
+
         }, null),
         goIndex: throttle(function () {
             if (this.properties.tabIndex == 2) return
@@ -75,7 +109,9 @@ Component({
                                 success: () => {
                                     resolve();
                                 },
-                                fail: () => {
+                                fail: (err) => {
+                                    if (err.errno === 104) return
+
                                     wx.showModal({
                                         title: "", // 提示的标题,
                                         content: "检测到您已拒绝摄像头授权，请先授权！", // 提示的内容,
@@ -88,9 +124,11 @@ Component({
                                             if (res.confirm) {
                                                 wx.openSetting({
                                                     success: (res) => {
+
                                                         if (res.authSetting["scope.camera"]) {
                                                             return resolve();
                                                         }
+
                                                         reject(res);
                                                     },
                                                 });
@@ -108,6 +146,12 @@ Component({
                     },
                 });
             });
+        },
+        async getOpenid() {
+            console.log('gomine')
+
+
+
         },
     },
 });

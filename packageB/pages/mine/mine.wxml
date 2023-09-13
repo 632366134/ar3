@@ -32,3 +32,4 @@
     </view>
     <tab-bar tabIndex="3"></tab-bar>
 </view>
+<privacy-popup></privacy-popup>

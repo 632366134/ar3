@@ -1,24 +1,20 @@
 <xr-scene ar-system="modes:Plane" bind:ready="handleReady" bind:ar-ready="handleARReady">
-  <xr-assets bind:loaded="handleAssetsLoaded">
-    <xr-asset-load options="ignoreError: -1" type="gltf" asset-id="anchor" src="https://ar-p2.obs.cn-east-3.myhuaweicloud.com/dian.glb" />
-  </xr-assets>
+    <xr-assets bind:loaded="handleAssetsLoaded">
+        <xr-asset-load options="ignoreError: -1" type="gltf" asset-id="anchor" src="https://arp3.arsnowslide.com/dian.glb" />
+    </xr-assets>
 
-  <xr-light type="ambient" color="1 1 1" intensity="0.5" />
-  <xr-light type="directional" position="0 3 0" rotation="0 0 0" color="1 1 1" intensity="2.5" cast-shadow />
-  <xr-light type="directional"  position="0 3 0" rotation="40 60 0" color="1 1 1" intensity="2" cast-shadow />
-  <xr-light type="directional" position="0 3 0" rotation="40 120 0" color="1 1 1" intensity="2" cast-shadow />
-  <xr-light type="directional" position="0 3 0" rotation="40 180 0" color="1 1 1" intensity="2" cast-shadow />
-  <xr-light type="directional" position="0 3 0" rotation="40 240 0" color="1 1 1" intensity="2" cast-shadow />
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="80 0 0" color="1 1 1" intensity="1.5" cast-shadow />
+    <xr-light visible="{{lightFlag}}" type="directional" rotation="20 180 0" color="1 1 1" intensity="3" />
+    <xr-light visible="{{lightFlag}}" type="directional" rotation="20 0 0" color="1 1 1" intensity="3" />
+    <xr-light visible="{{lightFlag}}" type="directional" rotation="20 90 0" color="1 1 1" intensity="3" />
+    <xr-light visible="{{lightFlag}}" type="directional" rotation="20 270 0" color="1 1 1" intensity="3" />
+    <xr-ar-tracker mode="Plane">
+        <xr-gltf cast-shadow scale="0.05 0.05 0.05" node-id="anchor" model="anchor"></xr-gltf>
+    </xr-ar-tracker>
+    <xr-node node-id="setitem" visible="false" id="setitem">
+        <!-- <xr-gltf  anim-autoplay node-id="miku"/> -->
+    </xr-node>
 
-
-
-
-  <xr-ar-tracker mode="Plane">
-    <xr-gltf  cast-shadow scale="0.05 0.05 0.05" node-id="anchor" model="anchor"></xr-gltf>
-  </xr-ar-tracker>
-  <xr-node node-id="setitem" visible="false">
-    <!-- <xr-gltf  anim-autoplay node-id="miku"/> -->
-  </xr-node>
-
-  <xr-camera id="camera" clear-color="0 0 0  1" background="ar" is-ar-camera />
+    <xr-camera id="camera" clear-color="0 0 0  1" background="ar" is-ar-camera />
 </xr-scene>
