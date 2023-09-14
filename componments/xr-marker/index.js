@@ -417,6 +417,8 @@ Component({
                             u_baseColorMap: videoTexture.value
                         }
                     )
+                    videoMat.renderQueue = 2500;
+                    videoMat.alphaMode = "BLEND";
                     scene.assets.addAsset('material', `image-mat-${imageList[index].id}`, videoMat)
                 })
                 console.log('image asset loaded')
@@ -458,7 +460,9 @@ Component({
                     scene.assets.getAsset('effect', 'standard'), {
                         u_baseColorMap: videoTexture.value.texture
                     }
+                  
                 )
+               
                 if (videoTexture) {
                     console.log(videoTexture)
                     let p = videoTexture.value.width / videoTexture.value.height
