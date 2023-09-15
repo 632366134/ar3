@@ -98,9 +98,10 @@ Component({
 
         }, null),
         handleCamera() {
-            wx.requirePrivacyAuthorize({
-                success: () => {
-                    return new Promise((resolve, reject) => {
+            return new Promise((resolve, reject) => {
+
+                wx.requirePrivacyAuthorize({
+                    success: () => {
                         wx.getSetting({
                             success: (scope) => {
                                 if (scope.authSetting["scope.camera"]) {
@@ -113,7 +114,7 @@ Component({
                                         },
                                         fail: (err) => {
                                             if (err.errno === 104) return
-        
+
                                             wx.showModal({
                                                 title: "", // 提示的标题,
                                                 content: "检测到您已拒绝摄像头授权，请先授权！", // 提示的内容,
@@ -126,11 +127,11 @@ Component({
                                                     if (res.confirm) {
                                                         wx.openSetting({
                                                             success: (res) => {
-        
+
                                                                 if (res.authSetting["scope.camera"]) {
                                                                     return resolve();
                                                                 }
-        
+
                                                                 reject(res);
                                                             },
                                                         });
@@ -147,12 +148,12 @@ Component({
                                 reject(err);
                             },
                         });
-                    });
-                },
-                fail: () => {}, // 用户拒绝授权
-                complete: () => {}
-              })
-         
+                    },
+                    fail: () => {}, // 用户拒绝授权
+                    complete: () => {}
+                })
+            });
+
         },
         async getOpenid() {
             console.log('gomine')

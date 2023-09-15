@@ -155,30 +155,31 @@ Component({
             // publicFn.Loading();
             // this.handleCamera()
             //     .then((res) => {
-                    //   wx.setStorageSync("imgUrl", url);
-                    //   console.log(this.properties.borchureDetail.projectCode);
-                    //   wx.setStorageSync(
-                    //     "projectCode",
-                    //     this.properties.borchureDetail.projectCode
-                    //   );
-                    goTo("web-view", {
-                        userCode: this.data.borchureDetail.userCode,
-                        userName: this.data.borchureDetail.companyName
-                    });
-                    this.setData({
-                        isShow: false
-                    });
-                    // },
-                    //   });
-                // })
-                // .catch((err) => {
-                //     publicFn.LoadingOff();
-                // });
+            //   wx.setStorageSync("imgUrl", url);
+            //   console.log(this.properties.borchureDetail.projectCode);
+            //   wx.setStorageSync(
+            //     "projectCode",
+            //     this.properties.borchureDetail.projectCode
+            //   );
+            goTo("web-view", {
+                userCode: this.data.borchureDetail.userCode,
+                userName: this.data.borchureDetail.companyName
+            });
+            this.setData({
+                isShow: false
+            });
+            // },
+            //   });
+            // })
+            // .catch((err) => {
+            //     publicFn.LoadingOff();
+            // });
         },
         handleCamera() {
-            wx.requirePrivacyAuthorize({
-                success: () => {
-                    return new Promise((resolve, reject) => {
+            return new Promise((resolve, reject) => {
+
+                wx.requirePrivacyAuthorize({
+                    success: () => {
                         wx.getSetting({
                             success: (scope) => {
                                 if (scope.authSetting["scope.camera"]) {
@@ -202,9 +203,9 @@ Component({
                                                 success: (res) => {
                                                     if (res.confirm) {
                                                         wx.openSetting({
-        
+
                                                             success: (res) => {
-        
+
                                                                 if (res.authSetting["scope.camera"]) {
                                                                     return resolve();
                                                                 }
@@ -225,12 +226,12 @@ Component({
                                 reject(err);
                             },
                         });
-                    });
-                },
-                fail: () => {}, // 用户拒绝授权
-                complete: () => {}
-              })
-           
+                    },
+                    fail: () => {}, // 用户拒绝授权
+                    complete: () => {}
+                })
+            });
+
         },
     },
 });
