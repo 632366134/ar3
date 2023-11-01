@@ -4,25 +4,42 @@
         <image class="arlogo" src="/images/confirm-mask/arlogo2.png"></image>
         <view class="text1">确认进入宣传册</view>
         <view class="text2">《{{borchureDetail.projectName}}》</view>
-        <view class="confirmBtn" bindtap="confirmAr">{{m2.flag2(borchureDetail.projectCode)}}</view>
-        <view class="arKitBtn" wx:if="{{m2.flag(borchureDetail.mediaType)}}" bindtap="arKitBtn">{{m2.flag3(borchureDetail.projectCode)}}</view>
-        <view class="ShowRoomBtn" bindtap="ShowRoomBtn">展厅</view>
+        <view class="btnGrop">
+            <view class="bgc">
+                <view class="border">
+                    <button  class="confirmBtn" bindtap="confirmAr" hover-class="hover_confirmBtn">{{m2.flag2(borchureDetail.projectCode)}}</button>
+                </view>
+            </view>
+            <view class="bgc">
+                <view class="border">
 
+                    <button  class="arKitBtn" disabled="{{m2.flag(borchureDetail.mediaType)}}" bindtap="arKitBtn" hover-class="hover_arKitBtn">{{m2.flag3(borchureDetail.projectCode)}}</button>
+                </view>
+            </view>
+
+            <view class="bgc">
+                <view class="border">
+
+                    <button  class="ShowRoomBtn" bindtap="ShowRoomBtn" hover-class="hover_ShowRoomBtn">展厅</button>
+                </view>
+            </view>
+
+        </view>
         <view class="pointRow">
             <image src="/images/confirm-mask/point.png"></image>
             <text>建议在wifi环境下加载AR宣传册</text>
         </view>
     </view>
-</page-container>   
+</page-container>
 <wxs module="m2">
     var flag = function (mediaType) {
-        return mediaType == 5 ? true :false
+        return mediaType == 5 ? false : true
     }
     var flag2 = function (projectCode) {
-        return projectCode == 369654870789541888 ? '扫描宣传册' :'扫描画册'
+        return projectCode == 369654870789541888 ? '扫描宣传册' : 'AR识图'
     }
     var flag3 = function (projectCode) {
-        return projectCode == 369654870789541888 ? '虚拟人' :'模型放置'
+        return projectCode == 369654870789541888 ? '虚拟人' : '模型放置'
     }
 
     module.exports.flag = flag;

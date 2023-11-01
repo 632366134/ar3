@@ -28,7 +28,9 @@ Page({
         mediaList2: [],
         i: 0,
         flag: false,
-        name: '虚拟人'
+        name: '虚拟人',
+        modelIndex: 0
+
     },
     onShareTimeline: function () {
         return {
@@ -67,6 +69,7 @@ Page({
     async onLoad({
         param
     }) {
+
         param = decodeURIComponent(param)
         param = JSON.parse(param)
         this.projectCode = param.projectCode
@@ -116,9 +119,33 @@ Page({
     changeModel({
         target
     }) {
+        let modelIndex = this.data.modelIndex
+        const length = this.data.mediaList.length - 1
+        if (length === -1) {
+            wx.showToast({
+                title: '无模型数据',
+                icon: 'none'
+            })
+            return
+        }
+     
         this.child.changeLight(true)
-        let index = target.dataset.index
-        this.child.changeModel(index)
+
+        this.child.changeModel(modelIndex)
+    },
+    changeModelIndex({
+        detail
+    }) {
+        if (detail.index > this.data.mediaList.length - 1) {
+
+            this.setData({
+                modelIndex: 0
+            })
+        } else {
+            this.setData({
+                modelIndex: detail.index
+            })
+        }
 
     },
     reset() {
@@ -126,6 +153,9 @@ Page({
         this.child.reset()
 
 
+    },
+    back() {
+        wx.navigateBack()
     },
     changeShow({
         detail

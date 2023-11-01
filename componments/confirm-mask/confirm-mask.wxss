@@ -1,83 +1,135 @@
 .confirmMask {
-  z-index: 99999;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
+
 .confirmMask .exit {
-  font-size: 32rpx;
-  font-family: PingFang SC;
-  font-weight: 500;
-  color: #15161b;
-  position: absolute;
-  top: 89rpx;
-  left: 51rpx;
+    font-size: 32rpx;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #15161b;
+    position: absolute;
+    top: 89rpx;
+    left: 51rpx;
 }
+
 .confirmMask .arlogo {
-  margin-top: 275rpx;
-  width: 207rpx;
-  height: 238rpx;
+    margin-top: 215rpx;
+    width: 300rpx;
+    height: 300rpx;
 }
+
 .confirmMask .text1 {
-  margin-top: 19rpx;
-  font-size: 26rpx;
-  font-family: PingFang SC;
-  font-weight: 500;
-  color: #4e4e4f;
+    margin-top: 19rpx;
+    font-size: 26rpx;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #4e4e4f;
 }
+
 .confirmMask .text2 {
-  margin-top: 29rpx;
-  font-size: 32rpx;
-  font-family: PingFang SC;
-  font-weight: 500;
-  color: #1e74ed;
+    margin-top: 29rpx;
+    font-size: 32rpx;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #1e74ed;
 }
+
 .confirmMask .confirmBtn,
 .confirmMask .arKitBtn,
-.confirmMask .ShowRoomBtn  {
-  background-color: #829fff;
-  margin-top: 80rpx;
-  width: 400rpx;
-  height: 88rpx;
-  text-align: center;
-  line-height: 88rpx;
-  font-size: 28rpx;
-  font-family: PingFang SC;
-  font-weight: 500;
-  color: #fff;
-  border-radius: 10rpx;
-}
-.confirmMask .arKitBtn {
-  margin-top: 42rpx;
-  background-color: #dbeafc;
- color: #829fff;
+.confirmMask .ShowRoomBtn {
+    background: linear-gradient(0deg, #829FFF, #6A85DB);
+    width: 315rpx;
+    height: 90rpx;
+    text-align: center;
+    line-height: 90rpx;
+    font-size: 32rpx;
+    border-radius: 15rpx;
+    font-family: PingFang SC;
+    font-weight: bold;
+    padding: 0;
+    color: #fff;
+    text-align: center;
 
 }
+
+
+.border {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 326rpx;
+    height: 101rpx;
+    background: linear-gradient(0deg, #6077C1, #AABEFE);
+    border-radius: 20rpx;
+    text-align: center;
+
+}
+
+.bgc {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 57rpx;
+    width: 338rpx;
+    height: 113rpx;
+    background: linear-gradient(0deg, #3F4E80, #6A85DB);
+    box-shadow: 3rpx 8rpx 7rpx 1rpx rgba(0, 0, 0, 0.2);
+    border-radius: 25rpx;
+}
+
+.btnGrop {
+    margin-top: 13rpx;
+}
+
+.confirmMask .arKitBtn {
+    background: linear-gradient(180deg, #CBD6FC, #E9EEFE);
+    color: #829fff;
+
+}
+
 .confirmMask .ShowRoomBtn {
-    margin-top: 42rpx;
-    background-color: #dbeafc;
- color: #829fff;
-  }
+    background: linear-gradient(180deg, #CBD6FC, #E9EEFE);
+    color: #829fff;
+}
+
 .confirmMask .pointRow {
-  position: absolute;
-  bottom: 99rpx;
+    position: absolute;
+    bottom: 99rpx;
 }
+
 .confirmMask .pointRow image {
-  width: 19rpx;
-  height: 19rpx;
+    width: 26rpx;
+    height: 26rpx;
 }
+
 .confirmMask .pointRow text {
-  margin-left: 9rpx;
-  font-size: 24rpx;
-  font-family: PingFang SC;
-  font-weight: 500;
-  color: #4e4e4f;
+    margin-left: 9rpx;
+    font-size: 28rpx;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #4e4e4f;
 }
+
 .confirmMask .slam {
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 100vw;
-  height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+}
+.hover_confirmBtn {
+    background: linear-gradient(0deg, #7089DC, #5063A4) !important;
+}
+
+.hover_arKitBtn {
+    background: linear-gradient(180deg, #9DAEE4, #D2DCFB) !important;
+}
+
+.hover_ShowRoomBtn {
+    background: linear-gradient(180deg, #9DAEE4, #D2DCFB) !important;
+
 }

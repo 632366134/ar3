@@ -116,7 +116,7 @@ Component({
                         projectCode: this.properties.borchureDetail.projectCode,
                     });
                     this.setData({
-                        isShow: false
+                        isShow: true
                     });
                     // },
                     //   });
@@ -140,7 +140,7 @@ Component({
                         projectCode: this.properties.borchureDetail.projectCode,
                     });
                     this.setData({
-                        isShow: false
+                        isShow: true
                     });
                     // },
                     //   });
@@ -166,7 +166,7 @@ Component({
                 userName: this.data.borchureDetail.companyName
             });
             this.setData({
-                isShow: false
+                isShow: true
             });
             // },
             //   });
