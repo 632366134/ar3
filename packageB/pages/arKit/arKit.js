@@ -26,10 +26,12 @@ Page({
         mediaList: [],
         paramList: [],
         mediaList2: [],
+        videoList:[],
         i: 0,
         flag: false,
         name: '虚拟人',
-        modelIndex: 0
+        modelIndex: 0,
+        percent: 0
 
     },
     onShareTimeline: function () {
@@ -84,7 +86,8 @@ Page({
         }
         let obsList = [],
             mediaList = [],
-            paramList = []
+            paramList = [],
+            videoList = []
         let dataList = await API.selMediaApps(param);
         dataList.mediaList.forEach((value) => {
             switch (value.mediaType) {
@@ -93,6 +96,9 @@ Page({
                     break;
                 case 5:
                     mediaList.push(value);
+                    break;
+                case 4:
+                    videoList.push(value);
                     break;
                 default:
                     break;
@@ -109,12 +115,14 @@ Page({
             renderWidth: width * dpi,
             renderHeight: height * dpi,
             mediaList,
-            paramList
+            paramList,
+            videoList
 
         });
         this.obsList = obsList
         this.mediaList = mediaList
         this.paramList = paramList
+        this.videoList=videoList
     },
     changeModel({
         target
@@ -128,10 +136,24 @@ Page({
             })
             return
         }
-     
+
         this.child.changeLight(true)
 
         this.child.changeModel(modelIndex)
+    },
+    loadingProgress({
+        detail
+    }) {
+
+        const {
+            index,
+            length
+        } = detail
+        console.log(index, length)
+        this.setData({
+            percent: (index / length).toFixed(2) * 100
+        })
+
     },
     changeModelIndex({
         detail

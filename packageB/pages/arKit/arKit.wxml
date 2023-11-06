@@ -2,7 +2,7 @@
     <navigate-back url="index"></navigate-back>
     <view class="main">
         <view class="container2  page" data-weui-theme="{{theme}}">
-            <xr-start  class="xr"  bind:changeShow="changeShow" disable-scroll id="main-frame" width="{{renderWidth}}" height="{{renderHeight}}" style="width:{{width}}px;height:{{height}}px;" bind:assetsLoaded="handleLoaded" bind:syncPositions="handleSyncPositions" bindchangeModelIndex="changeModelIndex" obsList="{{obsList}}" mediaList="{{mediaList}}" paramList="{{paramList}}" 
+            <xr-start bind:handleAssetsProgress="loadingProgress"  class="xr"  bind:changeShow="changeShow" disable-scroll id="main-frame" width="{{renderWidth}}" height="{{renderHeight}}" style="width:{{width}}px;height:{{height}}px;" bind:assetsLoaded="handleLoaded" bind:syncPositions="handleSyncPositions" bindchangeModelIndex="changeModelIndex" obsList="{{obsList}}" mediaList="{{mediaList}}" videoList="{{videoList}}" paramList="{{paramList}}" 
             />
             <view class="selectionModel" wx:if="{{isShowScan}}">
                 <view catchtap="changeModel" class="selectionModelItem">切换模型</view>
@@ -15,7 +15,7 @@
             <image class="logo" src="/images/confirm-mask/arlogo2.png"></image>
             <view class="boxShadow"></view>
             <view class="progressPercent">正在加载素材中...</view>
-            <progress active-mode="forwards" activeColor="#b2b2b2" duration="{{percentLine}}" class="progress" active="true" percent="{{100}}"></progress>
+            <progress active-mode="forwards" activeColor="#b2b2b2"  class="progress" active percent="{{percent}}"></progress>
             <view class="longText">AR宣传册让宣传刊加添了一个全新的角度</view>
         </view>
 

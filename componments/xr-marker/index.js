@@ -208,7 +208,7 @@ Component({
             detail
         }) {
             console.log('assets loaded', detail.value);
-      this.scene.event.addOnce('touchstart', this.placeNode.bind(this));
+            this.scene.event.addOnce('touchstart', this.placeNode.bind(this));
 
         },
         handleARReady: function () {
@@ -229,11 +229,14 @@ Component({
         }) {
             const xrScene = this.scene = detail.value;
             console.log('xr-scene', xrScene);
-      const xrFrameSystem=this.xrFrameSystem = wx.getXrFrameSystem()
+            const xrFrameSystem = this.xrFrameSystem = wx.getXrFrameSystem()
 
 
             // 加载场景资源
             try {
+                this.length = this.data.videoResList1.length + this.data.gltfResList1.length + this.data.imageResList1.length
+                this.index = 0
+                console.log(this.length, 'this.leng')
                 await this.loadVideo(this.data.videoResList1)
                 await this.loadGLTF(this.data.gltfResList1)
                 await this.loadImage(this.data.imageResList1)
@@ -248,123 +251,123 @@ Component({
                     width,
                     height
                 } = this.scene
-               // 旋转缩放相关配置
-               this.radius = (width + height) / 4
-               this.rotateSpeed = 5
+                // 旋转缩放相关配置
+                this.radius = (width + height) / 4
+                this.rotateSpeed = 5
 
-               this.handleTouchStart = (event) => {
-                       this.mouseInfo = {
-                           startX: 0,
-                           startY: 0,
-                           isDown: false,
-                           startPointerDistance: 0,
-                           state: STATE.NONE
-                       }
-                       this.mouseInfo.isDown = true
+                this.handleTouchStart = (event) => {
+                        this.mouseInfo = {
+                            startX: 0,
+                            startY: 0,
+                            isDown: false,
+                            startPointerDistance: 0,
+                            state: STATE.NONE
+                        }
+                        this.mouseInfo.isDown = true
 
-                       const touch0 = event.touches[0]
-                       const touch1 = event.touches[1]
+                        const touch0 = event.touches[0]
+                        const touch1 = event.touches[1]
 
-                       if (event.touches.length === 1) {
-                           this.mouseInfo.startX = touch0.pageX
-                           this.mouseInfo.startY = touch0.pageY
-                           this.mouseInfo.state = STATE.MOVE
-                       } else if (event.touches.length === 2) {
-                           const dx = (touch0.pageX - touch1.pageX)
-                           const dy = (touch0.pageY - touch1.pageY)
-                           this.mouseInfo.startPointerDistance = Math.sqrt(dx * dx + dy * dy)
-                           this.mouseInfo.startX = (touch0.pageX + touch1.pageX) / 2
-                           this.mouseInfo.startY = (touch0.pageY + touch1.pageY) / 2
-                           this.mouseInfo.state = STATE.ZOOM_OR_PAN
-                       }
+                        if (event.touches.length === 1) {
+                            this.mouseInfo.startX = touch0.pageX
+                            this.mouseInfo.startY = touch0.pageY
+                            this.mouseInfo.state = STATE.MOVE
+                        } else if (event.touches.length === 2) {
+                            const dx = (touch0.pageX - touch1.pageX)
+                            const dy = (touch0.pageY - touch1.pageY)
+                            this.mouseInfo.startPointerDistance = Math.sqrt(dx * dx + dy * dy)
+                            this.mouseInfo.startX = (touch0.pageX + touch1.pageX) / 2
+                            this.mouseInfo.startY = (touch0.pageY + touch1.pageY) / 2
+                            this.mouseInfo.state = STATE.ZOOM_OR_PAN
+                        }
 
-                       this.scene.event.add('touchmove', this.handleTouchMove.bind(this))
-                       this.scene.event.addOnce('touchend', this.handleTouchEnd.bind(this))
+                        this.scene.event.add('touchmove', this.handleTouchMove.bind(this))
+                        this.scene.event.addOnce('touchend', this.handleTouchEnd.bind(this))
 
-                   },
-                   this.handleTouchMove = (event) => {
-                       const mouseInfo = this.mouseInfo
-                       if (!mouseInfo.isDown) {
-                           return
-                       }
+                    },
+                    this.handleTouchMove = (event) => {
+                        const mouseInfo = this.mouseInfo
+                        if (!mouseInfo.isDown) {
+                            return
+                        }
 
-                       switch (mouseInfo.state) {
-                           case STATE.MOVE:
-                               if (event.touches.length === 1) {
-                                   this.handleRotate(event)
-                               } else if (event.touches.length === 2) {
-                                   // 支持单指变双指，兼容双指操作但是两根手指触屏时间不一致的情况
-                                   this.scene.event.remove('touchmove', this.handleTouchMove)
-                                   this.scene.event.remove('touchend', this.handleTouchEnd)
-                                   this.handleTouchStart(event)
-                               }
-                               break
-                           case STATE.ZOOM_OR_PAN:
-                               if (event.touches.length === 1) {
-                                   // 感觉双指松掉一指的行为还是不要自动切换成旋转了，实际操作有点奇怪
-                               } else if (event.touches.length === 2) {
-                                   this.handleZoomOrPan(event)
-                               }
-                               break
-                           default:
-                               break
-                       }
-                   }
+                        switch (mouseInfo.state) {
+                            case STATE.MOVE:
+                                if (event.touches.length === 1) {
+                                    this.handleRotate(event)
+                                } else if (event.touches.length === 2) {
+                                    // 支持单指变双指，兼容双指操作但是两根手指触屏时间不一致的情况
+                                    this.scene.event.remove('touchmove', this.handleTouchMove)
+                                    this.scene.event.remove('touchend', this.handleTouchEnd)
+                                    this.handleTouchStart(event)
+                                }
+                                break
+                            case STATE.ZOOM_OR_PAN:
+                                if (event.touches.length === 1) {
+                                    // 感觉双指松掉一指的行为还是不要自动切换成旋转了，实际操作有点奇怪
+                                } else if (event.touches.length === 2) {
+                                    this.handleZoomOrPan(event)
+                                }
+                                break
+                            default:
+                                break
+                        }
+                    }
 
-               this.handleTouchEnd = (event) => {
-                   this.mouseInfo.isDown = false
-                   this.mouseInfo.state = STATE.NONE
+                this.handleTouchEnd = (event) => {
+                    this.mouseInfo.isDown = false
+                    this.mouseInfo.state = STATE.NONE
 
-                   this.scene.event.remove('touchmove', this.handleTouchMove)
-                   this.scene.event.addOnce('touchstart', this.handleTouchStart)
-               }
+                    this.scene.event.remove('touchmove', this.handleTouchMove)
+                    this.scene.event.addOnce('touchstart', this.handleTouchStart)
+                }
 
-               this.handleRotate = (event) => {
-                   const x = event.touches[0].pageX
-                   const y = event.touches[0].pageY
+                this.handleRotate = (event) => {
+                    const x = event.touches[0].pageX
+                    const y = event.touches[0].pageY
 
-                   const {
-                       startX,
-                       startY
-                   } = this.mouseInfo
+                    const {
+                        startX,
+                        startY
+                    } = this.mouseInfo
 
-                   const theta = (x - startX) / this.radius * -this.rotateSpeed
-                   const phi = (y - startY) / this.radius * -this.rotateSpeed
-                   if (Math.abs(theta) < .01 && Math.abs(phi) < .01) {
-                       return
-                   }
-                   this.gltfItemTRS.rotation.x -= phi
-                   this.gltfItemSubTRS.rotation.z += theta
-                   this.mouseInfo.startX = x
-                   this.mouseInfo.startY = y
-               }
+                    const theta = (x - startX) / this.radius * -this.rotateSpeed
+                    const phi = (y - startY) / this.radius * -this.rotateSpeed
+                    if (Math.abs(theta) < .01 && Math.abs(phi) < .01) {
+                        return
+                    }
+                    this.gltfItemTRS.rotation.x -= phi
+                    this.gltfItemSubTRS.rotation.z += theta
+                    this.mouseInfo.startX = x
+                    this.mouseInfo.startY = y
+                }
 
-               this.handleZoomOrPan = (event) => {
-                   const touch0 = event.touches[0]
-                   const touch1 = event.touches[1]
+                this.handleZoomOrPan = (event) => {
+                    const touch0 = event.touches[0]
+                    const touch1 = event.touches[1]
 
-                   const dx = (touch0.pageX - touch1.pageX)
-                   const dy = (touch0.pageY - touch1.pageY)
-                   const distance = Math.sqrt(dx * dx + dy * dy)
+                    const dx = (touch0.pageX - touch1.pageX)
+                    const dy = (touch0.pageY - touch1.pageY)
+                    const distance = Math.sqrt(dx * dx + dy * dy)
 
-                   let deltaScale = distance - this.mouseInfo.startPointerDistance
-                   this.mouseInfo.startPointerDistance = distance
-                   this.mouseInfo.startX = (touch0.pageX + touch1.pageX) / 2
-                   this.mouseInfo.startY = (touch0.pageY + touch1.pageY) / 2
-                   if (deltaScale < -2) {
-                       deltaScale = -2
-                   } else if (deltaScale > 2) {
-                       deltaScale = 2
-                   }
+                    let deltaScale = distance - this.mouseInfo.startPointerDistance
+                    this.mouseInfo.startPointerDistance = distance
+                    this.mouseInfo.startX = (touch0.pageX + touch1.pageX) / 2
+                    this.mouseInfo.startY = (touch0.pageY + touch1.pageY) / 2
+                    if (deltaScale < -2) {
+                        deltaScale = -2
+                    } else if (deltaScale > 2) {
+                        deltaScale = 2
+                    }
 
-                   const s = deltaScale * 0.02 + 1
-                   // 缩小
-                   this.gltfItemTRS.scale.x *= s
-                   this.gltfItemTRS.scale.y *= s
-                   this.gltfItemTRS.scale.z *= s
-               }
+                    const s = deltaScale * 0.02 + 1
+                    // 缩小
+                    this.gltfItemTRS.scale.x *= s
+                    this.gltfItemTRS.scale.y *= s
+                    this.gltfItemTRS.scale.z *= s
+                }
 
-           }  catch (err) {
+            } catch (err) {
                 console.log('[gltf load] error: ', err)
             }
 
@@ -376,15 +379,26 @@ Component({
             if (gltfList.length > 0) {
 
                 console.log(gltfList)
-                const gltfModel = await Promise.all(gltfList.map(gltfItem => scene.assets.loadAsset({
-                    type: 'gltf',
-                    assetId: 'gltf-' + gltfItem.id,
-                    src: 'https:' + gltfItem.mediaUrl,
-                    // src:'http://arp3.arsnowslide.com/model.glb',
-                    // options: {
-                    //     "ignoreError": '-1'
-                    // }
-                })))
+                const gltfModel = await Promise.all(gltfList.map(gltfItem => {
+                    const model = scene.assets.loadAsset({
+                        type: 'gltf',
+                        assetId: 'gltf-' + gltfItem.id,
+                        src: 'https:' + gltfItem.mediaUrl,
+                        // src:'http://arp3.arsnowslide.com/model.glb',
+                        // options: {
+                        //     "ignoreError": '-1'
+                        // }
+                    })
+                    this.triggerEvent('handleAssetsProgress', {
+                        index: ++this.index,
+                        length: this.length
+                    }, {
+                        composed: true,
+                        capturePhase: false,
+                        bubbles: true
+                    })
+                    return model
+                }))
                 console.log('glTF asset loaded')
                 // this.setData({
                 //   gltfLoaded: true
@@ -404,11 +418,20 @@ Component({
                 const imageIdList = [];
                 const images = await Promise.all(imageList.map((imageItem) => {
                     imageIdList.push(imageItem.id);
-                    return scene.assets.loadAsset({
+                    const img = scene.assets.loadAsset({
                         type: 'texture',
                         assetId: `image-${imageItem.id}`,
                         src: 'https:' + imageItem.mediaUrl
                     })
+                    this.triggerEvent('handleAssetsProgress', {
+                        index: ++this.index,
+                        length: this.length
+                    }, {
+                        composed: true,
+                        capturePhase: false,
+                        bubbles: true
+                    })
+                    return img
                 }))
                 console.log(images[0], 'images')
                 images.map((videoTexture, index) => {
@@ -426,6 +449,7 @@ Component({
                     imageIdList: imageIdList,
                     imageLoaded: true
                 })
+
             } else {
                 this.setData({
                     imageIdList: [],
@@ -442,7 +466,7 @@ Component({
                 this.data.videoIdList.push(videoItem.id)
                 console.log(`video-${videoItem.id}`)
 
-                return scene.assets.loadAsset({
+                 const video =scene.assets.loadAsset({
                     type: 'video-texture',
                     assetId: `video-${videoItem.id}`,
                     src: `https:${videoItem.mediaUrl}`,
@@ -452,6 +476,15 @@ Component({
                         abortAudio: false
                     },
                 })
+                this.triggerEvent('handleAssetsProgress', {
+                    index: ++this.index,
+                    length: this.length
+                }, {
+                    composed: true,
+                    capturePhase: false,
+                    bubbles: true
+                })
+                return video
             }))
 
 
@@ -460,9 +493,9 @@ Component({
                     scene.assets.getAsset('effect', 'standard'), {
                         u_baseColorMap: videoTexture.value.texture
                     }
-                  
+
                 )
-               
+
                 if (videoTexture) {
                     console.log(videoTexture)
                     let p = videoTexture.value.width / videoTexture.value.height
@@ -540,11 +573,11 @@ Component({
                                     const list4 = this.data.paramList1.filter(d => v.mediaCode === d.mediaCode)
                                     console.log(`mesh-gltf-${v.id}`)
                                     const gltf = this.scene.getNodeById(`mesh-gltf-${v.id}`)
-                                       // 获取改动元素
-                                       this.gltfItemTRS = this.scene.getElementById(`gltf-${v.id}`).getComponent(this.xrFrameSystem.Transform)
-                                       this.gltfItemSubTRS = this.scene.getElementById(v.id).getComponent(this.xrFrameSystem.Transform)
-      // 开启旋转缩放逻辑
-      this.scene.event.addOnce('touchstart', this.handleTouchStart)
+                                    // 获取改动元素
+                                    this.gltfItemTRS = this.scene.getElementById(`gltf-${v.id}`).getComponent(this.xrFrameSystem.Transform)
+                                    this.gltfItemSubTRS = this.scene.getElementById(v.id).getComponent(this.xrFrameSystem.Transform)
+                                    // 开启旋转缩放逻辑
+                                    this.scene.event.addOnce('touchstart', this.handleTouchStart)
                                     console.log(gltf, list4)
                                     console.log([list4[0].modelParamInfo[0]])
 

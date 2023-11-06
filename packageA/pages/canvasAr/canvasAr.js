@@ -42,7 +42,8 @@ Page({
       translateY:0,
       scale:1,
       rotateX:0,
-      rotateY:0
+      rotateY:0,
+      percent:0
 
 
     },
@@ -171,6 +172,20 @@ Page({
                     videoFlag: false,
 
                 })
+        },
+        loadingProgress({
+            detail
+        }) {
+
+            const {
+                index,
+                length
+            } = detail
+            console.log(index,length)
+            this.setData({
+                percent: (index / length).toFixed(2) * 100
+            })
+
         },
         videoShow({detail}){
             console.log('videoshow')

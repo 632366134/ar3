@@ -7,6 +7,8 @@ const STATE = {
     MOVE: 0,
     ZOOM_OR_PAN: 1
 }
+let map1 = new Map()
+
 Component({
     /**
      * 组件的属性列表
@@ -27,6 +29,10 @@ Component({
         modelIndex: {
             type: Number,
             default: 0
+        },
+        videoList: {
+            type: Array,
+            default: []
         }
 
     },
@@ -39,7 +45,6 @@ Component({
         lightFlag: false
     },
     detached() {
-        this.innerAudioContext?.destroy()
 
         this.data.mediaList.forEach((c, v) => {
             this.scene.assets.releaseAsset('gltf', `gltf-${v}`);
@@ -87,34 +92,39 @@ Component({
         }) {
             oldRotation = rotation
             console.log('arReady', this.scene.ar.arVersion);
-            if (this.data.mediaList[0].projectCode == '312330376891027456' || this.data.mediaList[0].projectCode == '369654870789541888') {
-                this.innerAudioContext = wx.createInnerAudioContext({
-                    useWebAudioImplement: true // 是否使用 WebAudio 作为底层音频驱动，默认关闭。对于短音频、播放频繁的音频建议开启此选项，开启后将获得更优的性能表现。由于开启此选项后也会带来一定的内存增长，因此对于长音频建议关闭此选项
-                })
-                this.innerAudioContext.src = 'https://arimage-search-copy.arsnowslide.cn/arkitmp3.mp3'
+            // if (this.data.mediaList[0].projectCode == '312330376891027456' || this.data.mediaList[0].projectCode == '369654870789541888') {
+            //     this.innerAudioContext = wx.createInnerAudioContext({
+            //         useWebAudioImplement: true // 是否使用 WebAudio 作为底层音频驱动，默认关闭。对于短音频、播放频繁的音频建议开启此选项，开启后将获得更优的性能表现。由于开启此选项后也会带来一定的内存增长，因此对于长音频建议关闭此选项
+            //     })
+            //     this.innerAudioContext.src = 'https://arimage-search-copy.arsnowslide.cn/arkitmp3.mp3'
 
-                // this.innerAudioContext.play() // 播放
-                this.innerAudioContext.loop = true
+            //     // this.innerAudioContext.play() // 播放
+            //     this.innerAudioContext.loop = true
 
-            }
+            // }
         },
         handleReady: function ({
             detail
         }) {
-
+            this.videoList = []
+            this.videoNode = []
             const xrFrameSystem = this.xrFrameSystem = wx.getXrFrameSystem();
             this.scene = detail.value;
             this.anchor = this.scene.getNodeById('anchor');
+            const markerShadow = this.markerShadow = this.scene.getElementById('markerShadow')
+            this.markerShadowTrs = markerShadow.getComponent(xrFrameSystem.Transform)
 
             this.xrgltf = this.scene.createElement(xrFrameSystem.XRGLTF, {
-                'anim-autoplay': true,
+                // 'anim-autoplay': true,
                 'castShadow': true,
-                'receiveShadow': true
+                'receiveShadow': true,
+                'visible': false
             })
+            const node = this.videoXRMESH = this.scene.createElement(this.xrFrameSystem.XRMesh);
             this.GLTF = this.xrgltf.getComponent(xrFrameSystem.GLTF)
             this.trs = this.xrgltf.getComponent(xrFrameSystem.Transform);
             this.tmpV3 = new(xrFrameSystem.Vector3)();
-            this.scene.addChild(this.xrgltf);
+            markerShadow.addChild(this.xrgltf);
             this.mat = new(wx.getXrFrameSystem().Matrix4)();
             const {
                 width,
@@ -125,7 +135,7 @@ Component({
             this.rotateSpeed = 5
 
             this.handleTouchStart = (event) => {
-                    this.scene.ar.placeHere('setitem', true);
+                    // this.scene.ar.placeHere('markerShadow', true);
                     this.mouseInfo = {
                         startX: 0,
                         startY: 0,
@@ -239,20 +249,89 @@ Component({
 
 
         },
+        async loadVideo(videoList) {
+            const scene = this.scene
+            if (videoList.length > 0) {
+
+                this.videos = await Promise.all(videoList.map(async (videoItem, index) => {
+                    const video = await scene.assets.loadAsset({
+                        type: 'video-texture',
+                        assetId: 'video-' + index,
+                        src: 'https:' + videoItem.mediaUrl,
+                        assetId: 'video-' + index,
+                        options: {
+                            autoPlay: true,
+                            loop: true,
+                            abortAudio: false,
+                        },
+
+
+                    })
+                    const videoMat = await scene.createMaterial(
+                        scene.assets.getAsset('effect', 'standard'), {
+                            u_baseColorMap: video.value.texture
+                        }
+                    )
+                    let p = video.value.width / video.value.height
+                    map1.set(index, 1 * p)
+                    // const node = scene.createElement(this.xrFrameSystem.XRMesh);
+                    // node.setId(`video-${index}`)
+                    // console.log(`video-${index}`)
+
+                    this.triggerEvent('handleAssetsProgress', {
+                        index: ++this.index,
+                        length: this.length
+                    }, {
+                        composed: true,
+                        capturePhase: false,
+                        bubbles: true
+                    })
+                    // node.getComponent(this.xrFrameSystem.Mesh).setData({
+                    //     material: videoMat,
+                    //     geometry: scene.assets.getAsset('geometry', 'plane'),
+                    //     assetId: `video-material-${index}`,
+                    // });
+                    this.videoList.push(video.value);
+                    // this.videoNode.push(node);
+
+                    return videoMat
+                }))
+
+                this.triggerEvent('changeShow', {
+                    isShowScan: true
+                })
+                // this.scene.event.add('touchstart', () => {
+                //     setTimeout(() => {
+                //         this.changeLight(true)
+                //         this.changeModel(this.data.modelIndex)
+
+                //     });
+                // }, 50)
+            }
+        },
         async loadGLTF(gltfList) {
             const scene = this.scene
-            this.gltfModel = await Promise.all(gltfList.map((gltfItem, index) => scene.assets.loadAsset({
-                type: 'gltf',
-                assetId: 'gltf-' + index,
-                src: 'https:' + gltfItem.mediaUrl,
-                id: 'gltf-' + index,
-                options: {
-                    "ignoreError": "-1"
-                }
-            })))
-            this.triggerEvent('changeShow', {
-                isShowScan: true
-            })
+            this.gltfModel = await Promise.all(gltfList.map((gltfItem, index) => {
+                const model = scene.assets.loadAsset({
+                    type: 'gltf',
+                    assetId: 'gltf-' + index,
+                    src: 'https:' + gltfItem.mediaUrl,
+                    id: 'gltf-' + index,
+                    options: {
+                        "ignoreError": "-1"
+                    }
+                })
+                this.triggerEvent('handleAssetsProgress', {
+                    index: ++this.index,
+                    length: this.length
+                }, {
+                    composed: true,
+                    capturePhase: false,
+                    bubbles: true
+                })
+                return model
+            }))
+
             // this.scene.event.add('touchstart', () => {
             //     setTimeout(() => {
             //         this.changeLight(true)
@@ -262,46 +341,87 @@ Component({
             // }, 50)
 
         },
-        handleAssetsLoaded() {
-            this.loadGLTF(this.data.mediaList)
+        async handleAssetsLoaded() {
+            this.index = 0
+            this.length = this.data.mediaList.length + this.data.videoList.length
+            await this.loadGLTF(this.data.mediaList)
+            await this.loadVideo(this.data.videoList)
+            this.triggerEvent('changeShow', {
+                isShowScan: true
+            })
         },
         async changeModel(index) {
+            console.log(index)
+            if (this.index === index && this.markerShadowTrs.visible) return
+            this.index = index
             if (this.loading) return
             this.loading = true
-            this.trs.visible = true
+            this.markerShadowTrs.visible = true
             const anchor = this.anchor
             let params = this.data.paramList.filter((e) => {
                 return e.mediaCode == this.data.mediaList[index].mediaCode
             })
+            let params2 = this.data.paramList.filter((e) => {
+                return e.mediaCode == this.data.videoList[index].mediaCode
+            })
             const scale = params[1].modelParamInfo.split("|");
+            const scale2 = params2[1].modelParamInfo.split("|");
+            const rotation2 = params2[2].modelParamInfo.split("|");
+            const position2 = params2[0].modelParamInfo.split("|");
+
+
             this.GLTF.setData({
                 model: this.gltfModel[index].value
             })
-            if (!anchor.visible) {
+            const animator = this.xrgltf.getComponent('animator')
+            if (this.GLTF._animations.length !== 0) {
+                animator.stop()
+
+                animator.play(this.GLTF._animations[0].clipNames[0])
+            }
+
+            console.log(this.scene.ar.arVersion)
+            if (this.scene.ar.arVersion == 1) {
+                rotation = -rotation - oldRotation
+                rotation = Math.trunc(rotation)
                 this.trs.setData({
-                    scale: [scale[0], scale[1], scale[2]]
+                    rotation: [0, rotation, 0]
                 })
-            } else {
-                console.log(this.scene.ar.arVersion)
-                if (this.scene.ar.arVersion == 1) {
-                    rotation = -rotation - oldRotation
-                    rotation = Math.trunc(rotation)
-                    this.trs.setData({
-                        rotation: [0, rotation, 0]
-                    })
-                } else {
-                    wx.offDeviceMotionChange(this.listener)
-                }
-                this.scene.ar.placeHere(this.xrgltf, true);
-                console.log(this.innerAudioContext)
-                this.innerAudioContext?.play()
+            } else {}
+            console.log(index, 'video-index')
+
+            if (this.videoList.length > 0) {
+                console.log(index, 'video-index')
+                const markerWidth = map1.get(index)
+                this.videoXRMESH.getComponent(this.xrFrameSystem.Mesh).setData({
+                    material: this.videos[index],
+                    geometry: this.scene.assets.getAsset('geometry', 'plane'),
+                    assetId: `video-material-${index}`,
+                });
+                const video = this.video = this.videoXRMESH
+                console.log(this.videoList)
+                const videocontext = this.videoList[index]
+                videocontext.stop();
+                setTimeout(() => {
+                    videocontext.play();
+                }, 50);
+                this.markerShadow.addChild(video)
+                this.videotrs = video.getComponent(this.xrFrameSystem.Transform)
+                this.videotrs.setData({
+                    scale: [scale2[0] * markerWidth, scale2[1], scale2[2]],
+                })
+
+                this.videotrs.rotation.setValue((rotation2[0] + 90) * (Math.PI / 180), (rotation2[1]) * (Math.PI / 180), rotation2[2] * (Math.PI / 180))
+                this.videotrs.position.setValue(position2[0], position2[1], position2[2])
+                this.scene.ar.placeHere(this.markerShadow, true);
                 this.trs.setData({
                     scale: [scale[0], scale[1], scale[2]],
                 })
+
             }
             anchor.visible = false
             // 获取改动元素
-            this.gltfItemTRS = this.trs
+            this.gltfItemTRS = this.markerShadowTrs
             // 开启旋转缩放逻辑
             this.scene.event.addOnce('touchstart', this.handleTouchStart)
             index++
@@ -313,9 +433,9 @@ Component({
         },
         reset() {
             this.anchor.visible = true
-            this.trs.visible = false
-            console.log(this.data.lightFlag)
-
+            this.markerShadowTrs.visible = false
+            // this.trs.visible=false
+            // this.videotrs.visible=false
         },
         changeLight(boolean) {
             this.setData({

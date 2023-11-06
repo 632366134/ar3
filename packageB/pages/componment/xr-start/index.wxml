@@ -12,9 +12,8 @@
     <xr-ar-tracker mode="Plane">
         <xr-gltf cast-shadow scale="0.05 0.05 0.05" node-id="anchor" model="anchor"></xr-gltf>
     </xr-ar-tracker>
-    <xr-node node-id="setitem" visible="false" id="setitem">
-        <!-- <xr-gltf  anim-autoplay node-id="miku"/> -->
-    </xr-node>
+    <xr-node  id="markerShadow" visible="false" node-id="markerShadow" position="0 0 0">
 
+    </xr-node>
     <xr-camera id="camera" clear-color="0 0 0  1" background="ar" is-ar-camera />
 </xr-scene>

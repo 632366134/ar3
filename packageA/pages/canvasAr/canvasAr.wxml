@@ -2,7 +2,7 @@
     <navigate-back url="index"></navigate-back>
     <view class="main">
         <view class="container2  page" data-weui-theme="{{theme}}">
-            <xr-marker wx:if="{{flag}}" class="xr" bind:closeVideo="closeVideo" bind:videoShow="videoShow" bind:changeShow="changeShow" disable-scroll id="main-frame" width="{{renderWidth}}" height="{{renderHeight}}" style="width:{{width}}px;height:{{height}}px;" obsList="{{obsList}}" mediaList="{{mediaList}}" paramList="{{paramList}}" imageResList="{{imageResList}}" videoResList="{{videoResList}}" gltfResList="{{gltfResList}}" />
+            <xr-marker bind:handleAssetsProgress="loadingProgress" wx:if="{{flag}}" class="xr" bind:closeVideo="closeVideo" bind:videoShow="videoShow" bind:changeShow="changeShow" disable-scroll id="main-frame" width="{{renderWidth}}" height="{{renderHeight}}" style="width:{{width}}px;height:{{height}}px;" obsList="{{obsList}}" mediaList="{{mediaList}}" paramList="{{paramList}}" imageResList="{{imageResList}}" videoResList="{{videoResList}}" gltfResList="{{gltfResList}}" />
             <!-- <video controls="{{false}}" loop autoplay wx:if="{{videoFlag}}" style="position:absolute;top:0;left:50%;width:{{Videowidth}}px;height:{{Videoheight}}px;transform: translate({{translateX}},{{translateY}}); transform:rotate({{rotateX}},{{rotateY}}) " src="https:{{video}}"></video> -->
             <view class="back" wx:if="{{isShowScan}}" bindtap="back">返回</view>
             <view class="scan">
@@ -14,7 +14,7 @@
             <image class="logo" src="/images/confirm-mask/arlogo2.png"></image>
             <view class="boxShadow"></view>
             <view class="progressPercent">正在加载素材中...</view>
-            <progress active-mode="forwards" activeColor="#b2b2b2" duration="{{percentLine}}" class="progress" active="true" percent="{{100}}"></progress>
+            <progress active-mode="forwards" active activeColor="#b2b2b2" class="progress" percent="{{percent}}"></progress>
             <view class="longText">AR宣传册让宣传刊加添了一个全新的角度</view>
         </view>
 
