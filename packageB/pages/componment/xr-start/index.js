@@ -258,9 +258,8 @@ Component({
                         type: 'video-texture',
                         assetId: 'video-' + index,
                         src: 'https:' + videoItem.mediaUrl,
-                        assetId: 'video-' + index,
                         options: {
-                            autoPlay: true,
+                            autoPlay: false,
                             loop: true,
                             abortAudio: false,
                         },
@@ -358,16 +357,16 @@ Component({
             this.loading = true
             this.markerShadowTrs.visible = true
             const anchor = this.anchor
+            const videoItem = this.data.videoList.filter(v => {
+                return v.parentCode === this.data.mediaList[index].parentCode
+            })
             let params = this.data.paramList.filter((e) => {
                 return e.mediaCode == this.data.mediaList[index].mediaCode
             })
-            let params2 = this.data.paramList.filter((e) => {
-                return e.mediaCode == this.data.videoList[index].mediaCode
-            })
+
+
             const scale = params[1].modelParamInfo.split("|");
-            const scale2 = params2[1].modelParamInfo.split("|");
-            const rotation2 = params2[2].modelParamInfo.split("|");
-            const position2 = params2[0].modelParamInfo.split("|");
+
 
 
             this.GLTF.setData({
@@ -391,34 +390,42 @@ Component({
             console.log(index, 'video-index')
 
             if (this.videoList.length > 0) {
-                console.log(index, 'video-index')
-                const markerWidth = map1.get(index)
-                this.videoXRMESH.getComponent(this.xrFrameSystem.Mesh).setData({
-                    material: this.videos[index],
-                    geometry: this.scene.assets.getAsset('geometry', 'plane'),
-                    assetId: `video-material-${index}`,
-                });
-                const video = this.video = this.videoXRMESH
-                console.log(this.videoList)
-                const videocontext = this.videoList[index]
-                videocontext.stop();
-                setTimeout(() => {
-                    videocontext.play();
-                }, 50);
-                this.markerShadow.addChild(video)
-                this.videotrs = video.getComponent(this.xrFrameSystem.Transform)
-                this.videotrs.setData({
-                    scale: [scale2[0] * markerWidth, scale2[1], scale2[2]],
-                })
+                if (videoItem.length > 0) {
+                    let params2 = this.data.paramList.filter((e) => {
+                        return e.mediaCode === videoItem[0].mediaCode
+                    })
+                    const scale2 = params2[1].modelParamInfo.split("|");
+                    const rotation2 = params2[2].modelParamInfo.split("|");
+                    const position2 = params2[0].modelParamInfo.split("|");
+                    const markerWidth = map1.get(index)
+                    this.videoXRMESH.getComponent(this.xrFrameSystem.Mesh).setData({
+                        material: this.videos[index],
+                        geometry: this.scene.assets.getAsset('geometry', 'plane'),
+                        assetId: `video-material-${index}`,
+                    });
+                    const video = this.video = this.videoXRMESH
+                    console.log(this.videoList)
+                    const videocontext = this.videocontext = this.videoList[index]
+                    videocontext.stop();
+                    setTimeout(() => {
+                        videocontext.play();
+                    }, 50);
+                    this.markerShadow.addChild(video)
+                    this.videotrs = video.getComponent(this.xrFrameSystem.Transform)
+                    this.videotrs.setData({
+                        scale: [scale2[0] * markerWidth, scale2[1], scale2[2]],
+                    })
 
-                this.videotrs.rotation.setValue((rotation2[0] + 90) * (Math.PI / 180), (rotation2[1]) * (Math.PI / 180), rotation2[2] * (Math.PI / 180))
-                this.videotrs.position.setValue(position2[0], position2[1], position2[2])
-                this.scene.ar.placeHere(this.markerShadow, true);
-                this.trs.setData({
-                    scale: [scale[0], scale[1], scale[2]],
-                })
+                    this.videotrs.rotation.setValue((rotation2[0] + 90) * (Math.PI / 180), (rotation2[1]) * (Math.PI / 180), rotation2[2] * (Math.PI / 180))
+                    this.videotrs.position.setValue(position2[0], position2[1], position2[2])
+
+                }
 
             }
+            this.scene.ar.placeHere(this.markerShadow, true);
+            this.trs.setData({
+                scale: [scale[0], scale[1], scale[2]],
+            })
             anchor.visible = false
             // 获取改动元素
             this.gltfItemTRS = this.markerShadowTrs
@@ -434,6 +441,7 @@ Component({
         reset() {
             this.anchor.visible = true
             this.markerShadowTrs.visible = false
+            this.videocontext && this.videocontext.stop()
             // this.trs.visible=false
             // this.videotrs.visible=false
         },

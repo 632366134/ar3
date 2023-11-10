@@ -13,6 +13,8 @@ export default {
     'useQA':'/packageB/pages/useQA/useQA', // 历史
     'answer':'/packageB/pages/answer/answer', // 历史
     'web-view':'/pages/web-view/web-view', // 历史
+    'web-view2':'/pages/web-view2/web-view2', // 历史
+
     'signIn':'/pages/signIn/signIn' // 历史
 
 

@@ -37,7 +37,7 @@ Page({
         goTo('useQA')
     },
     goRegister() {
-        goTo('web-view')
+        goTo('web-view2')
 
     },
     /**

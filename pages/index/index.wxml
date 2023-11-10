@@ -24,9 +24,9 @@
       <image mode="aspectFill" class="collectImage" src="{{collectUrl}}"></image>
       <text class="text">{{collect.projectName}}</text>
     </view>
-    <!-- <view capture-catch:touchstart="goColllect" class="resetImg">
+    <view capture-catch:touchstart="goColllect" class="resetImg">
       <image class="image" src="/images/index/reset.png"></image>
-    </view> -->
+    </view>
   </view>
   <view class="compList">
 

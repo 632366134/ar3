@@ -7,7 +7,8 @@
         "pages/compSearch/compSearch",
         "pages/compSearchList/compSearchList",
         "pages/web-view/web-view",
-        "pages/signIn/signIn"
+        "pages/signIn/signIn",
+        "pages/web-view2/web-view2"
     ],
     "window": {
         "backgroundTextStyle": "light",

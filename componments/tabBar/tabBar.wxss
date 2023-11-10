@@ -33,6 +33,7 @@
   font-weight: 500;
   color: #757474;
   box-sizing: border-box;
+  /* clip-path: circle(20%); */
 }
 .tabBar-box {
   flex: 1;
