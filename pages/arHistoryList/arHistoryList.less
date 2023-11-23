@@ -1,0 +1,128 @@
+.swiperClass {
+    width: 100vw;
+    padding: 0 95rpx;
+    box-sizing: border-box;
+    margin-top: 88rpx;
+
+    .swiperItem {
+        height: 698rpx;
+        padding-bottom: 10rpx;
+        box-sizing: border-box;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+
+        .projectBot {
+            width: 100%;
+            position: absolute;
+            bottom: 10rpx;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            .projectBtn {
+                height: 80rpx;
+                display: flex;
+
+                .collectBtn {
+                    position: relative;
+                }
+
+                .delete {
+                    margin-left: 30rpx;
+                    width: 80rpx !important;
+                    height: 80rpx !important;
+                    position: relative;
+
+                    .btn {
+                        width: 80rpx !important;
+                        height: 80rpx !important;
+                        padding: 0 !important;
+                        background: linear-gradient(90deg, #C841F5, #4F39DE);
+                        border-radius: 50%;
+
+                    }
+
+                    .deleteImg {
+                        width: 34rpx;
+                        height: 34rpx;
+                        z-index: 999;
+                        position: absolute;
+                        left: 23rpx;
+                        bottom: 23rpx;
+                    }
+                }
+
+
+            }
+        }
+
+        .date {
+            width: 100%;
+            height: 60rpx;
+            width: 155rpx;
+            font-size: 26rpx;
+            color: #FFFFFF;
+            line-height: 60rpx;
+        }
+
+        .bgc {
+            width: 560rpx;
+            height: 560rpx;
+            background: radial-gradient(rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.1));
+            border: solid 2rpx rgba(255, 255, 255, 0.2);
+            filter: drop-shadow(0 0 15rpx rgba(255, 255, 255, 0.2));
+            box-sizing: border-box;
+            padding: 30rpx;
+            border-radius: 50rpx 10rpx 50rpx 10rpx;
+
+            .main {
+                position: relative;
+
+                width: 500rpx;
+                height: 500rpx;
+                background: #817E93;
+                border-radius: 50rpx 10rpx 50rpx 10rpx;
+
+                .projectImg {
+                    width: 500rpx;
+                    height: 500rpx;
+                    background: #817E93;
+                    border-radius: 50rpx 10rpx 50rpx 10rpx;
+                }
+
+                .projectName {
+                    position: absolute;
+                    bottom: 0;
+                    width: 500rpx;
+                    height: 100rpx;
+                    background: linear-gradient(38deg, rgba(200, 65, 245, 0.5), rgba(79, 57, 222, 0.5));
+                    border-radius: 50rpx 0rpx 50rpx 10rpx;
+                    font-size: 34rpx;
+                    color: #FFFFFF;
+                    line-height: 96rpx;
+                    text-align: center;
+                }
+            }
+
+
+        }
+    }
+}
+
+.goTop {
+    width: 100%;
+    height: 174rpx;
+    bottom: 0;
+    position: fixed;
+}
+
+.goTop-x {
+    width: 100%;
+    height: 230rpx;
+    bottom: 0;
+    position: fixed;
+    padding-bottom: 56rpx;
+}

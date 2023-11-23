@@ -1,24 +1,24 @@
-<view class="collect_list">
-    <view class=" collect_box {{listIndex===item.id ? 'url collect_box2' : ''}}" data-item="{{item}}" wx:for="{{list}}" wx:key="id" bindtap="select_box">
-        <view class="border">
-            <image class="collect_point" wx:if="{{item.collect}}" src="/images/collect/collectType.png"></image>
+<view class="collectTabs">
+    <view class="tabs">
+        <van-tabs active="{{active}}" swipe-threshold="4" swipeable bind:change="onChange" color="#9266FA" line-width="116rpx" line-height="5rpx" animated custom-class="custom-class" nav-class="nav-class" tab-class="tab-class" tab-active-class="tab-active-class" wrap-class="wrap-class">
+            <van-tab name="0" title="全部">
+                <collect-box bindchangecollectProjectCode="changecollectProjectCode" collect="{{collect}}" wx:for="{{list}}" compItem="{{item}}" wx:key="id"></collect-box>
+            </van-tab>
+            <van-tab name="1" title="公关服务">
+                <collect-box bindchangecollectProjectCode="changecollectProjectCode" collect="{{collect}}" wx:for="{{compList1}}" compItem="{{item}}" wx:key="id"></collect-box>
+            </van-tab>
+            <van-tab name="2" title="消费科技">
+                <collect-box bindchangecollectProjectCode="changecollectProjectCode" collect="{{collect}}" wx:for="{{compList2}}" compItem="{{item}}" wx:key="id"></collect-box>
+            </van-tab>
+            <van-tab name="3" title="智能制造">
+                <collect-box bindchangecollectProjectCode="changecollectProjectCode" collect="{{collect}}" wx:for="{{compList3}}" compItem="{{item}}" wx:key="id"></collect-box>
+            </van-tab>
+            <van-tab name="4" title="其他">
+                <collect-box bindchangecollectProjectCode="changecollectProjectCode" collect="{{collect}}" wx:for="{{compList4}}" compItem="{{item}}" wx:key="id"></collect-box>
+            </van-tab>
 
-            <image class="image" 	lazy-load="true" src="https://arp3.arsnowslide.com/{{item.bookCoverObsPath + item.bookCoverObsName}}"></image>
-            <view class="desc">
-                <view class="proName">{{item.projectName}}</view>
-                <view class="compName">{{item.companyName}}</view>
-                <view class="btn">
-                    <view wx:if="{{item.collect}}" class="collectView">收藏</view>
-                    <view wx:if="{{m1.flag(item.mediaType) == true}}" class="modelView">模型</view>
-                </view>
-            </view>
-        </view>
+        </van-tabs>
     </view>
+    <image wx:if="{{flag}}" src="/images/tabBar/top.png" mode="aspectFit" class="{{isIPhoneX ? 'goTop-x' :'goTop'}}" bind:tap="goTop"></image>
 </view>
-<wxs module="m1">
-    var flag = function (mediaType) {
-        return mediaType == 5
-    }
-
-    module.exports.flag = flag;
-</wxs>
+<!-- <my-dialog bind:collectCancel="collectCancel" bind:collectConfirm="collectConfirm" title="提示" message="{{message}}" show="{{show}}"></my-dialog> -->

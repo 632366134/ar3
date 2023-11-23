@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+        "top-bar": "/componments/topBar/index",
+        "comp-box": "../../components/compBox/index",
+        "van-tab": "@vant/weapp/tab/index",
+        "van-tabs": "@vant/weapp/tabs/index"
+    }
+}

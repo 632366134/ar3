@@ -1,83 +1,105 @@
-.collect_list {
-  //   margin-top: 20rpx;
-  width: 720rpx;
-  .collect_box {
-    width: 99%;
-    height: 204rpx;
-    margin-bottom: 18rpx;
-    box-sizing: border-box;
-    background-color: #f7f9fd;
-    border-radius: 10rpx;
-
-    .border {
-      width: 100%;
-      height: 204rpx;
-      box-sizing: border-box;
-      padding: 15rpx;
-      padding-right: 29rpx;
-      display: flex;
-      position: relative;
-      .collect_point {
-        position: absolute;
-        top: 15rpx;
-        left: 40rpx;
-        width: 24rpx;
-        height: 48rpx;
-    } 
-      .image {
-        width: 160rpx;
-        height: 160rpx;
-        border-radius: 10rpx;
-      }
-      .desc {
-        margin-top: 12rpx;
-        margin-left: 32rpx;
-
-        font-family: PingFang SC;
-        font-weight: 500;
-
-        .proName {
-          font-size: 28rpx;
-          color: #020202;
-        }
-        .compName {
-          margin-top: 33rpx;
-          font-size: 24rpx;
-          color: #757474;
-          line-height: 22rpx;
-        }
-        .btn {
-          margin-top: 27rpx;
-          text-align: center;
-          display: flex;
-          align-items: center;
-          .modelView {
-            width: 97rpx;
-            height: 34rpx;
-            background: #e9eefe;
-            border-radius: 5rpx;
-            font-size: 20rpx;
-            color: #829fff;
-          }
-          .collectView {
-            width: 97rpx;
-            height: 34rpx;
-            background: #fdf1db;
-            border-radius: 5rpx;
-            font-size: 20rpx;
-            color: #fd9b01;
-            margin-right: 10rpx;
-          }
-        }
-      }
-    }
-  }
-  .collect_box2 {
+/* packageA/pages/copmList/copmList.wxss */
+.collectTabs {
+    background: #2E2B3F;
     width: 100%;
-    height: 204rpx;
-    margin-bottom: 18rpx;
-    box-sizing: border-box;
-    background-color: transparent;
-    border-radius: 10rpx;
-  }
+    height: auto;
+
+    .tabs {
+        background: #2E2B3F;
+        padding-top: 188rpx;
+
+        .tabs-index--van-tabs__scroll {
+            background-color: #2E2B3F !important;
+        }
+
+        .custom-class {
+
+            width: 100vw !important;
+            background: #2E2B3F;
+            height: 100%;
+
+        }
+
+        .van-tabs__content {
+            padding-top: 80rpx;
+        }
+
+        .van-tabs {}
+
+        .tab-class {
+
+            flex-basis: 28% !important;
+            border: none;
+            background: #2E2B3F;
+            color: #B2ACD4;
+            font-size: 34rpx;
+            font-family: YouSheBiaoTiHei;
+            font-weight: 400;
+            background: #2E2B3F;
+        }
+
+        .tab-active-class {
+
+            color: #FFFFFF;
+        }
+
+        .van-tab {
+            flex-basis: 33%;
+
+        }
+
+        .nav-class {
+
+            background: #2E2B3F;
+            min-width: 100vw;
+            box-sizing: border-box;
+
+            .van-tabs__line {
+
+                box-shadow: 0rpx -5rpx 23rpx 4rpx rgba(146, 102, 250, 0.6) !important;
+            }
+        }
+
+        .wrap-class {
+
+            min-width: 100vw;
+            position: fixed;
+
+            .van-tabs__scroll {
+
+                background-color: #2E2B3F;
+            }
+
+            .van-tabs__scroll {
+                background-color: #2E2B3F !important;
+
+            }
+
+            .van-tabs__scroll--line {
+                background-color: #2E2B3F !important;
+
+            }
+
+
+        }
+
+
+
+
+    }
+
+    .goTop {
+        width: 100%;
+        height: 174rpx;
+        bottom: 0;
+        position: fixed;
+    }
+
+    .goTop-x {
+        width: 100%;
+        height: 230rpx;
+        bottom: 0;
+        position: fixed;
+        padding-bottom: 56rpx;
+    }
 }

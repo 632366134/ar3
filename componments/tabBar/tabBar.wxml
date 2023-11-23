@@ -1,15 +1,30 @@
-<privacy-popup></privacy-popup>
 <view class="{{isIPhoneX ? 'tabBar-x' :'tabBar'}}">
-    <view bindtap="goModel" class="tabBar-box">
-        <image class="tabBar-image" src="{{tabIndex==1?modelSrc2: modelSrc1}}"></image>
-        <text class="{{tabIndex==1?'clickStyle' : 'noClickStyle'}}">虚拟人</text>
+    <image class="tabBarimg" src="{{m1.flag(tabIndex)}}" mode="aspectFit">
+    </image>
+    <view class="tabbarBoxList">
+        <view bindtap="goSearch" class="tabBar-box">
+            <text wx:if="{{tabIndex!==1}}" class="{{tabIndex==1?'clickStyle' : 'noClickStyle'}}">搜索</text>
+        </view>
+        <view bindtap="goIndex" class="tabBar-box">
+            <text wx:if="{{tabIndex!==2}}" class="{{tabIndex==2?'clickStyle' : 'noClickStyle'}}">首页</text>
+        </view>
+        <view bindtap="goMine" class="tabBar-box">
+            <text wx:if="{{tabIndex!==3}}" class="{{tabIndex==3?'clickStyle' : 'noClickStyle'}} ">我的</text>
+        </view>
     </view>
-    <view bindtap="goIndex" class="tabBar-box">
-        <image class="tabBar-image" src="{{tabIndex==2?indexSrc2 : indexSrc1}}"></image>
-        <text class="{{tabIndex==2?'clickStyle' : 'noClickStyle'}}">首页</text>
-    </view>
-    <view bindtap="goMine" class="tabBar-box">
-        <image class="tabBar-image" src="{{tabIndex==3?mSrc2 : mSrc1}}"></image>
-        <text class="{{tabIndex==3?'clickStyle' : 'noClickStyle'}} ">我的</text>
-    </view>
+
 </view>
+<wxs module="m1">
+    var flag = function (tabIndex) {
+        var list = ['/images/tabBar/left.png', '/images/tabBar/right.png', '/images/tabBar/mid.png']
+        if (tabIndex === 1) {
+            return list[0]
+        } else if (tabIndex === 2) {
+            return list[2]
+        } else {
+            return list[1]
+        }
+    }
+
+    module.exports.flag = flag;
+</wxs>

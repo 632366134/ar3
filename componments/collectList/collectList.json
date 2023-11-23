@@ -1,4 +1,10 @@
 {
     "component": true,
-    "usingComponents": {}
+    "usingComponents": {
+        "collect-box": "/componments/collectBox/index",
+        "van-tab": "@vant/weapp/tab/index",
+        "van-tabs": "@vant/weapp/tabs/index",
+        "my-dialog":"/componments/myDialog/myDialog"
+
+    }
 }

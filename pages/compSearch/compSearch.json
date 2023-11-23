@@ -1,6 +1,8 @@
 {
     "usingComponents": {
-        "navigate-back":"/componments/navigateBack/navigateBack",
-        "search-row-history":"/componments/searchRowHistroy/searchRowHistroy"
+        "top-bar": "/componments/topBar/index",
+        "search-row-history":"/componments/searchRowHistroy/searchRowHistroy",
+        "tab-bar": "/componments/tabBar/tabBar"
+
     }
 }

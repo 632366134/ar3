@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@vant/weapp": "^1.10.9",
+    "@vant/weapp": "^1.11.1",
     "jpeg-js": "^0.4.4",
     "mina-touch": "^1.0.1",
     "proj4": "^2.8.0",

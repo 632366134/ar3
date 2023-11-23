@@ -5,7 +5,7 @@ const {
 import {
     goTo,
     navigateBack,
-    redirectTo
+    redirectTo,switchTab
 } from "../../utils/navigate";
 const publicFn = require("../../utils/public");
 const app = getApp();
@@ -88,7 +88,7 @@ Page({
                 this.setData({
                     hasPhone: true
                 })
-                redirectTo('mine')
+                switchTab('mine')
             }
         })
 

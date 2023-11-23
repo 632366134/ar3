@@ -3,9 +3,13 @@
         "confirm-mask": "/componments/confirm-mask/confirm-mask",
         "tab-bar": "/componments/tabBar/tabBar",
         "search-enter": "/componments/searchEnter/searchEnter",
-          "van-tab": "@vant/weapp/tab/index",
-          "van-tabs": "@vant/weapp/tabs/index"
+        "van-tab": "@vant/weapp/tab/index",
+        "van-tabs": "@vant/weapp/tabs/index",
+        "van-button": "@vant/weapp/button/index",
+        "left-text":"/componments/leftText/index",
+        "privacy-popup": "/componments/privacyPopup/privacyPopup"
 
-      },
-      "enablePullDownRefresh":false
+
+    },
+    "enablePullDownRefresh": false
 }

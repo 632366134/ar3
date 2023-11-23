@@ -1,4 +1,6 @@
 {
     "component": true,
-    "usingComponents": {}
+    "usingComponents": {
+        "model-btn": "/componments/modelBtn/modelBtn"
+    }
 }

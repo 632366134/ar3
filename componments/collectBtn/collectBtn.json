@@ -1,5 +1,8 @@
 {
     "component": true,
-    "usingComponents": {},
-    "disableScroll": true
+    "usingComponents": {
+        "van-button": "@vant/weapp/button/index",
+        "my-dialog":"/componments/myDialog/myDialog"
+
+    }
 }

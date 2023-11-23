@@ -95,7 +95,12 @@ Component({
                 return resultDate + " " + resultTime;
             }
         },
-        exit() {
+        changeCollect(){
+            this.setData({
+                collect:wx.getStorageSync('changeCollect') || {}
+            })
+        },
+        goBack() {
             this.triggerEvent("changeMask");
         },
         move() {

@@ -1,0 +1,9 @@
+<view class="{{isIPhoneX ? 'top_bar-x' :'top_bar'}}">
+    <view class="left">
+        <slot name="left"></slot>
+    </view>
+    <view class="right">
+        <slot name="right"></slot>
+    </view>
+    <text class="compText">{{text}}</text>
+</view>

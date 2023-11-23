@@ -1,0 +1,10 @@
+<view class="{{isIPhoneX ? 'container-x' :'container'}} {{isMask === true ? 'mask-blur':''}}">
+    <top-bar text="企业榜单">
+        <image bind:tap="goBack" slot="left" src="/images/compList/back.png" mode="" />
+        <image bind:tap="goHome" slot="right" src="/images/compList/home.png" mode="" />
+    </top-bar>
+    <search-row-history bindmyKeyinput="bindKeyInput" bindmyevent1="goSearch" bindmyevent2="goSearch2"></search-row-history>
+    <result-list inputValue="{{inputValue}}" class="collectList" bindChangeList="changeList" bindmyevent="select" list="{{list}}"></result-list>
+    <image wx:if="{{topflag}}" src="/images/tabBar/top.png" mode="aspectFit" class="{{isIPhoneX ? 'goTop-x' :'goTop'}}" bind:tap="goTop"></image>
+</view>
+<confirm-mask borchureDetail="{{borchureDetail}}" bindchangeMask="changeMask" isShow="{{isMask}}"></confirm-mask>

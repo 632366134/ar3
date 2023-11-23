@@ -9,6 +9,7 @@ App({
     },
     async onLaunch() {
         // await this.getUserInfo();
+        this.loadFontFace()
         this.checkIsIPhoneX()
     },
     checkIsIPhoneX: function () {
@@ -19,6 +20,7 @@ App({
                 that.kBottomSafeHeight = safeBottom
                 let statusBarHeight = res.statusBarHeight
                 //根据安全高度判断
+                console.log(statusBarHeight)
                 if (safeBottom === 34 || statusBarHeight >= 44) {
                     that.globalData.isIPhoneX = true
                     that.isIPhoneX = true
@@ -34,6 +36,23 @@ App({
                 // }
             }
         })
+    },
+    loadFontFace() {
+        wx.loadFontFace({
+            global: true,
+            family: 'YouSheBiaoTiHei',
+            source: 'url("https://arp3.arsnowslide.com/zz/YouSheBiaoTiHei-2.ttf")',
+            success(res) {
+                console.log(res.status)
+         
+            },
+            fail: function (res) {
+                console.log(res.status)
+            },
+            complete: function (res) {
+                console.log(res.status)
+            }
+        });
     },
     async getUserInfo() {
         let data = {

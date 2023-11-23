@@ -1,6 +1,8 @@
 import { goTo } from "../../utils/navigate";
 const publicFn = require("../../utils/public"); // componments/searchEnter/searchEnter.js
 const { API } = require("../../utils/request");
+var app = getApp();
+
 Component({
   /**
    * 组件的属性列表
@@ -17,6 +19,8 @@ Component({
    */
   data: {
     inputValue: "",
+    isIPhoneX: app.isIPhoneX,
+
   },
 
   /**

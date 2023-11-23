@@ -1,30 +1,19 @@
 <page-container z-index="99999" bind:enter="enter" bind:beforeleave="exit" custom-style="height:100vh;background: rgba(255,255,255,.8);" position="bottom" show="{{isShow}}">
-    <view class="confirmMask">
-        <view class="exit" bindtap="exit">关闭</view>
-        <image class="arlogo" src="/images/confirm-mask/arlogo2.png"></image>
-        <view class="text1">确认进入宣传册</view>
-        <view class="text2">《{{borchureDetail.projectName}}》</view>
-        <view class="btnGrop">
-            <view class="bgc">
-                <view class="border">
-                    <button  class="confirmBtn" bindtap="confirmAr" hover-class="hover_confirmBtn">{{m2.flag2(borchureDetail.projectCode)}}</button>
-                </view>
+    <view class="{{isIPhoneX ? 'container-x' :'container'}}">
+        <view class="{{isIPhoneX ? 'top_bar-x' :'top_bar'}}">
+            <view class="left">
+                <image class="goBack" bind:tap="goBack" src="/images/confirm-mask/back.png" mode="" />
             </view>
-            <view class="bgc">
-                <view class="border">
-
-                    <button  class="arKitBtn" disabled="{{m2.flag(borchureDetail.mediaType)}}" bindtap="arKitBtn" hover-class="hover_arKitBtn">{{m2.flag3(borchureDetail.projectCode)}}</button>
-                </view>
-            </view>
-
-            <view class="bgc">
-                <view class="border">
-
-                    <button  class="ShowRoomBtn" bindtap="ShowRoomBtn" hover-class="hover_ShowRoomBtn">展厅</button>
-                </view>
-            </view>
-
+            <text class="compText">AR宣传册</text>
         </view>
+        <view class="projectMain">
+            <collect-btn  class="collectBtn" detail="{{borchureDetail}}" ></collect-btn>
+
+            <image mode="aspectFill" src="https://arp3.arsnowslide.com/{{borchureDetail.bookCoverObsPath +borchureDetail.bookCoverObsName}}" class="projectImg"></image>
+        </view>
+        <button class="confirmBtn" bindtap="confirmAr" hover-class="hover_confirmBtn">{{m2.flag2(borchureDetail.projectCode)}}</button>
+        <button class="arKitBtn" disabled="{{m2.flag(borchureDetail.mediaType)}}" bindtap="arKitBtn" hover-class="hover_arKitBtn">{{m2.flag3(borchureDetail.projectCode)}}</button>
+        <button class="ShowRoomBtn" bindtap="ShowRoomBtn" hover-class="hover_ShowRoomBtn">虚拟展厅</button>
         <view class="pointRow">
             <image src="/images/confirm-mask/point.png"></image>
             <text>建议在wifi环境下加载AR宣传册</text>
@@ -41,10 +30,15 @@
     var flag3 = function (projectCode) {
         return projectCode == 369654870789541888 ? '虚拟人' : '模型放置'
     }
+    var flag4 = function (collect, item) {
+        return collect.projectCode === item.projectCode
+    }
 
     module.exports.flag = flag;
     module.exports.flag2 = flag2;
     module.exports.flag3 = flag3;
+    module.exports.flag4 = flag4;
+
 
 
 </wxs>

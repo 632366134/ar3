@@ -1,0 +1,14 @@
+<view class="compBox">
+    <view class="compContext">
+        <view class="logoBox">
+            <image lazy-load class="logo" src="{{compItem.logoPath}}">
+            </image>
+
+        </view>
+        <view class="compName">
+            <view>{{compItem.projectName}}</view>
+            <view class="compName2">{{compItem.companyName}}</view>
+        </view>
+        <image lazy-load class="compImg" src="https://arp3.arsnowslide.com/{{compItem.bookCoverObsPath +compItem.bookCoverObsName}}" mode="aspectFill" />
+    </view>
+</view>

@@ -1,1 +1,7 @@
-<view class="{{isIPhoneX ? 'collectBtn-x' :'collectBtn'}}" bindtap="mytap">确认收藏</view>
+<!--componments/collectBtn/collectBtn.wxml-->
+<view class="collectBtn" catch:tap="goCollect">
+    <van-button type="primary" custom-class="btn"></van-button>
+    <view class="{{flag?'compImg_iscollect' :'compImg'}}">
+    </view>
+</view>
+<my-dialog bind:collectCancel="collectCancel" bind:collectConfirm="collectConfirm" title="提示" message="{{message}}" show="{{show}}"></my-dialog>

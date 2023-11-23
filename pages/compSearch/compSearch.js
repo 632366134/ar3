@@ -36,9 +36,21 @@ Page({
     }
     this.filterProjectName(inputValue);
   },
+  goSearch2({detail}) {
+    publicFn.Loading();
+    console.log(detail)
+    this.setData({inputValue:detail})
+    let inputValue = this.data.inputValue;
+    if (!inputValue) {
+      publicFn.Toast("请输入正确", "error");
+      return;
+    }
+    this.filterProjectName(inputValue);
+  },
   async filterProjectName(inputValue) {
+      console.log(inputValue)
     let pageNum = 1,
-      pageSize = 8;
+      pageSize =8;
     let data1 = `pageNum=${pageNum}&pageSize=${pageSize}&projectName=${inputValue}`;
     let data2 = `pageNum=${pageNum}&pageSize=${pageSize}&CompanyName=${inputValue}`;
     let list1 = await API.selProjectsOnNameByPage(data1);
@@ -75,12 +87,12 @@ Page({
       });
     }
   },
-  deleteHistory() {
-    this.setData({
-      compList: [],
-    });
-    wx.setStorageSync("compList", this.data.compList);
-  },
+//   deleteHistory() {
+//     this.setData({
+//       compList: [],
+//     });
+//     wx.setStorageSync("compList", this.data.compList);
+//   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

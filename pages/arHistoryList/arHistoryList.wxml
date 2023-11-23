@@ -1,0 +1,47 @@
+<view class="{{isIPhoneX ? 'container-x' :'container'}}">
+    <top-bar text="历史记录">
+        <image bind:tap="goBack" slot="left" src="/images/compList/back.png" mode="" />
+    </top-bar>
+    <scroll-view class="swiperClass">
+        <view wx:for="{{historyList}}" wx:key="id" class="swiperItem">
+            <view class="date">{{item.date}}</view>
+            <view class="bgc">
+                <view class="main">
+                    <image class="projectImg" mode="aspectFill" src="https://arp3.arsnowslide.com/{{item.bookCoverObsPath +item.bookCoverObsName}}">
+
+                    </image>
+                    <view class=" projectName">
+                        {{item.projectName}}
+                    </view>
+                </view>
+            </view>
+            <view class="projectBot">
+                <model-btn wx:if="{{m1.flag(item.mediaType) == true}}"></model-btn>
+                <view wx:else></view>
+                <view class="projectBtn">
+                    <collect-btn data-item="{{item}}" bind:goCollect="goCollect" flag="{{m1.flag2(collect,item)}}"></collect-btn>
+
+                    <view data-index="{{index}}" class="delete" bind:tap="deleteHistory">
+                        <van-button type="primary" custom-class="btn"></van-button>
+                        <image class="deleteImg" src="/images/history/delete.png" mode="aspectFit" />
+                    </view>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+<my-dialog bind:collectCancel="collectCancel" bind:collectConfirm="collectConfirm" title="提示" message="{{message}}" show="{{show}}"></my-dialog>
+<my-dialog bind:collectCancel="collectCancel2" bind:collectConfirm="collectConfirm2" title="提示" message="{{message2}}" show="{{show2}}"></my-dialog>
+<image wx:if="{{flag}}" src="/images/tabBar/top.png" mode="aspectFit" class="{{isIPhoneX ? 'goTop-x' :'goTop'}}" bind:tap="goTop"></image>
+<wxs module="m1">
+    var flag = function (mediaType) {
+        return mediaType == 5
+    }
+    var flag2 = function (collect, item) {
+        return collect.projectCode === item.projectCode
+    }
+
+    module.exports.flag = flag;
+    module.exports.flag2 = flag2;
+
+</wxs>

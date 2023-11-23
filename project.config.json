@@ -35,7 +35,9 @@
             "outputPath": ""
         },
         "disableUseStrict": false,
-        "useCompilerPlugins": false,
+        "useCompilerPlugins": [
+            "less"
+        ],
         "condition": true,
         "ignoreUploadUnusedFiles": true,
         "skylineRenderEnable": false

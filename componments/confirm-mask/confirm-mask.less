@@ -1,37 +1,119 @@
-.confirmMask {
-  z-index: 99999;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  .exit {
-    font-size: 32rpx;
-    font-family: PingFang SC;
-    font-weight: 500;
-    color: #15161b;
+.container-x {
+    padding-top: 80rpx;
+    padding-bottom: 320rpx;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.container {
+    width: 100vw;
+
+    top: 0;
+    left: 0;
+    padding-top: 40rpx;
+    padding-bottom: 252rpx;
+    position: relative;
+    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.top_bar {
+    width: 100vw;
+    height: 128rpx;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    padding-top: 40rpx;
+    left: 0;
+    z-index: 99;
+    box-sizing: border-box;
+
+}
+
+.top_bar-x {
+    width: 100vw;
+    height: 168rpx;
+    display: flex;
+    padding-top: 80rpx;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+
+    z-index: 99;
+
+}
+
+
+
+.left {
+    width: 58rpx;
+    height: 58rpx;
+    background: #FFFFFF;
+    box-shadow: 2rpx 3rpx 10rpx 0rpx rgba(165, 189, 251, 0.4);
+    border-radius: 50%;
+    margin-left: 20rpx !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .goBack {
+        width: 17rpx;
+        height: 29rpx;
+    }
+}
+
+.compText {
     position: absolute;
-    top: 89rpx;
-    left: 51rpx;
-  }
-  .arlogo {
-    margin-top: 275rpx;
-    width: 207rpx;
-    height: 238rpx;
-  }
-  .text1 {
-    margin-top: 19rpx;
-    font-size: 26rpx;
-    font-family: PingFang SC;
-    font-weight: 500;
-    color: #4e4e4f;
-  }
-  .text2 {
-    margin-top: 29rpx;
-    font-size: 32rpx;
-    font-family: PingFang SC;
-    font-weight: 500;
-    color: #1e74ed;
-  }
-  .confirmBtn {
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 34rpx;
+    line-height: 88rpx;
+    font-size: 34rpx;
+    color: #020202;
+    line-height: 48rpx;
+}
+
+.projectMain {
+    width: 540rpx;
+    height: 620rpx;
+    background: #FFFFFF;
+    box-shadow: 0rpx 4rpx 30rpx 0rpx rgba(165, 189, 251, 0.4);
+    border-radius: 80rpx;
+    margin-top: 108rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    .collectBtn {
+        position: absolute;
+        top: 30rpx;
+        left: 30rpx;
+    }
+
+    .projectImg {
+        width: 460rpx;
+        height: 540rpx;
+        background: #817E93;
+        box-shadow: 0rpx 4rpx 30rpx 0rpx rgba(165, 189, 251, 0.4);
+        border-radius: 60rpx;
+    }
+}
+
+.confirmBtn {
     background-color: #829fff;
     margin-top: 80rpx;
     width: 400rpx;
@@ -43,8 +125,9 @@
     font-weight: 500;
     color: #fff;
     border-radius: 10rpx;
-  }
-  .arKitBtn {
+}
+
+.arKitBtn {
     margin-top: 42rpx;
     background-color: RGBA(219, 234, 252, 1);
     width: 400rpx;
@@ -56,28 +139,31 @@
     font-weight: 500;
     color: #829fff;
     border-radius: 10rpx;
-  }
-  .pointRow {
-      position: absolute;
-      bottom: 99rpx;
+}
+
+.pointRow {
+    position: absolute;
+    bottom: 99rpx;
+
     image {
-      width: 19rpx;
-      height: 19rpx;
+        width: 19rpx;
+        height: 19rpx;
     }
+
     text {
-      margin-left: 9rpx;
-      font-size: 24rpx;
-      font-family: PingFang SC;
-      font-weight: 500;
-      color: #4e4e4f;
+        margin-left: 9rpx;
+        font-size: 24rpx;
+        font-family: PingFang SC;
+        font-weight: 500;
+        color: #4e4e4f;
     }
-  }
-  .slam {
+}
+
+.slam {
     position: fixed;
     top: 0;
     left: 0;
     display: block;
     width: 100vw;
     height: 100vh;
-  }
 }

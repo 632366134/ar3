@@ -1,0 +1,4 @@
+<view class="left_textBox">
+    <view class="left_line"></view>
+    <text class="left_text">{{text}}</text>
+</view>

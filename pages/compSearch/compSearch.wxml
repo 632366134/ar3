@@ -1,5 +1,9 @@
 <view class="{{isIPhoneX ? 'container-x' :'container'}}">
-    <navigate-back url="index"></navigate-back>
-    <search-row-history class="search-row-history" bindmyKeyinput="bindKeyInput" bindmyevent1="goSearch"
-     ></search-row-history>
+    <top-bar text="搜索"></top-bar>
+    <search-row-history historyFlag="true" class="search-row-history" bindmyKeyinput="bindKeyInput" bindmyevent1="goSearch" bindmyevent2="goSearch2"></search-row-history>
+    <view class="searchLogo">
+        <image class="logo" src="/images/search/nosearch.png" mode="aspectFit" />
+    </view>
+    <tab-bar tabIndex='1'></tab-bar>
+
 </view>

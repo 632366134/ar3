@@ -7,8 +7,9 @@
                 <view class="proName">{{item.projectName}}</view>
                 <view class="compName">{{item.companyName}}</view>
                 <view class="btn">
-                    <view wx:if="{{item.collect}}" class="collectView">收藏</view>
-                    <view wx:if="{{m1.flag(item.mediaType) == true}}" class="modelView">模型</view>
+                    <!-- <view wx:if="{{item.collect}}" class="collectView">收藏</view> -->
+                    <model-btn wx:if="{{m1.flag(item.mediaType) == true}}"></model-btn>
+                    <!-- <view wx:if="{{m1.flag(item.mediaType) == true}}" class="modelView">内置模型</view> -->
                 </view>
             </view>
         </view>

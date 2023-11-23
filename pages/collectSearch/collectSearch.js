@@ -1,17 +1,16 @@
 // pages/collect/collect.js
-import { goTo } from "../../utils/navigate";
+import { goTo,switchTab } from "../../utils/navigate";
 const publicFn = require("../../utils/public");
 const { API } = require("../../utils/request.js");
 const app = getApp();
 
 Page({
+    
   /**
    * 页面的初始数据
    */
   data: {
-    compList: [],
     inputValue: "",
-    list: [],
     isIPhoneX: app.isIPhoneX,
   },
 
@@ -19,22 +18,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   async onLoad() {
-    let list;
-    list = wx.getStorageSync("list");
-    if (list.length == 0) {
-      let data = {
-        pagination: "1",
-        pageNum: "5",
-        page: "1",
-        projectName: "",
-        userCode: "",
-      };
-      list = await API.selProjects(data);
-      await wx.setStorageSync("list", list);
-    }
-    this.setData({ list });
+    publicFn.LoadingOff();
   },
   bindKeyInput(e) {
+    console.log(e.detail);
     this.setData({
       inputValue: e.detail.detail,
     });
@@ -42,6 +29,17 @@ Page({
   goSearch() {
     publicFn.Loading();
     console.log(this.data.inputValue);
+    let inputValue = this.data.inputValue;
+    if (!inputValue) {
+      publicFn.Toast("请输入正确", "error");
+      return;
+    }
+    this.filterProjectName(inputValue);
+  },
+  goSearch2({detail}) {
+    publicFn.Loading();
+    console.log(detail)
+    this.setData({inputValue:detail})
     let inputValue = this.data.inputValue;
     if (!inputValue) {
       publicFn.Toast("请输入正确", "error");
@@ -64,8 +62,8 @@ Page({
       return v.projectCode != "312330376891027456";
     });
     if (list.length !== 0) {
-        let { projectCode } = wx.getStorageSync("collect");
- 
+      let { projectCode } = wx.getStorageSync("collect");
+
       for (let i = 0; i < list.length; i++) {
         let { mediaList } = await API.selMediaApps({
           projectCode: list[i].projectCode,
@@ -77,7 +75,7 @@ Page({
           list[i].mediaType = 5;
         }
       }
-      goTo("searchList", { list, inputValue });
+      goTo("collectSearchList", { list, inputValue });
     } else {
       wx.showToast({
         title: "没有符合的结果！",
@@ -88,13 +86,18 @@ Page({
       });
     }
   },
-  deleteHistory() {
-    this.setData({
-      compList: [],
-    });
-    wx.setStorageSync("compList", this.data.compList);
+//   deleteHistory() {
+//     this.setData({
+//       compList: [],
+//     });
+//     wx.setStorageSync("compList", this.data.compList);
+//   },
+  goBack(){
+      wx.navigateBack()
   },
-
+  goHome(){
+    switchTab('index')
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -103,12 +106,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow() {
-    this.setData({
-      compList: wx.getStorageSync("compList") || [],
-    });
-    publicFn.LoadingOff();
-  },
+  onShow() {},
 
   /**
    * 生命周期函数--监听页面隐藏

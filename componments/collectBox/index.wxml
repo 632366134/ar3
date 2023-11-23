@@ -1,0 +1,16 @@
+<view class="compBox">
+    <view class="compContext">
+        <view class="logoBox">
+            <image wx:if="{{compItem.bookCoverObsName}}" mode="aspectFill" lazy-load class="logo" src="https://arp3.arsnowslide.com/{{compItem.bookCoverObsPath +compItem.bookCoverObsName}}">
+            </image>
+
+        </view>
+        <view class="compName">
+            <view>{{compItem.projectName}}</view>
+            <view class="compName2">{{compItem.companyName}}</view>
+        </view>
+        <collect-btn detail="{{compItem}}" bindgoCollect="goCollect" flag="{{flag}}" class="collectBtn"></collect-btn>
+
+    </view>
+
+</view>

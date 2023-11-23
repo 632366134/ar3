@@ -1,0 +1,41 @@
+<view class="{{isIPhoneX ? 'container-x' :'container'}} mine">
+    <top-bar text="我的">
+    </top-bar>
+
+    <view class="main">
+        <view class="avatar">
+            <button bindchooseavatar="onChooseAvatar" class="getAvatar" open-type="chooseAvatar">
+                <image mode="aspectFill" class="image" src='{{userAvatar}}'></image>
+            </button>
+
+        </view>
+        <view class="userName">
+            <input placeholder-style="color: #FFFFFF; font-family: YouSheBiaoTiHei;font-weight: 400;" value='{{userName}}' bindblur='blur' type="nickname" class="weui-input" placeholder="点击授权用户名" />
+
+        </view>
+    </view>
+    <view bindtap="goRegister" class="banner">
+        <image class="bannerStyle" src="/images/mine/register.png"></image>
+    </view>
+    <view class="menu">
+        <menu-item bind:tap="goHistroy" text="历史记录">
+            <image class="fontStyle" src="/images/mine/history.png"></image>
+
+        </menu-item>
+        <menu-item BtnType="contact" text="微信客服">
+            <image class="fontStyle" src="/images/mine/customer.png"></image>
+
+        </menu-item>
+
+        <menu-item bindtap="goQA" text="使用常见问题">
+            <image class="fontStyle" src="/images/mine/question.png"></image>
+
+        </menu-item>
+        <menu-item BtnType="feedback" text="投诉与建议">
+            <image class="fontStyle" src="/images/mine/suggest.png"></image>
+
+        </menu-item>
+    </view>
+    <tab-bar tabIndex="3"></tab-bar>
+</view>
+<privacy-popup></privacy-popup>

@@ -7,10 +7,31 @@
         "autoAudits": false
     },
     "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-    "libVersion": "3.1.5",
+    "libVersion": "3.2.2",
     "condition": {
         "miniprogram": {
             "list": [
+                {
+                    "name": "packs/mycomp/mycomp",
+                    "pathName": "pages/compSearchList/compSearchList",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "packageA/pages/compList/compList",
+                    "pathName": "pages/compSearch/compSearch",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "compSearch",
+                    "pathName": "pages/compSearchList/compSearchList",
+                    "query": "param=%7B%22list%22%3A%5B%7B%22id%22%3A683%2C%22projectCode%22%3A%22333025836072914944%22%2C%22projectName%22%3A%221234%22%2C%22bookCoverName%22%3A%22obs.jpg%22%2C%22bookCoverObsName%22%3A%22333764975370129408.jpg%22%2C%22bookCoverObsPath%22%3A%22305163922260025344%2F%22%2C%22projectIntroduce%22%3A%224%22%2C%22status%22%3Anull%2C%22delFlag%22%3Anull%2C%22createTime%22%3Anull%2C%22modifyTime%22%3Anull%2C%22userCode%22%3A%22305163922260025344%22%2C%22createrCode%22%3Anull%2C%22classify%22%3Anull%2C%22memberType%22%3A2%2C%22companyName%22%3Anull%2C%22logoPath%22%3Anull%7D%2C%7B%22id%22%3A697%2C%22projectCode%22%3A%22333421749291405312%22%2C%22projectName%22%3A%22test1%22%2C%22bookCoverName%22%3A%22A%E8%B5%8F%20%E8%93%9D%E5%8F%91%E8%B4%9D%E5%90%89%E5%A1%94.jpeg%22%2C%22bookCoverObsName%22%3A%22333421748595150848.jpeg%22%2C%22bookCoverObsPath%22%3A%22333420996472557568%2F%22%2C%22projectIntroduce%22%3Anull%2C%22status%22%3Anull%2C%22delFlag%22%3Anull%2C%22createTime%22%3Anull%2C%22modifyTime%22%3Anull%2C%22userCode%22%3A%22333420996472557568%22%2C%22createrCode%22%3Anull%2C%22classify%22%3Anull%2C%22memberType%22%3A0%2C%22companyName%22%3A%22abc%22%2C%22logoPath%22%3Anull%7D%2C%7B%22id%22%3A820%2C%22projectCode%22%3A%22434494315640082432%22%2C%22projectName%22%3A%22123%22%2C%22bookCoverName%22%3A%22%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230113132226.jpg%22%2C%22bookCoverObsName%22%3A%22434494314222407680.jpg%22%2C%22bookCoverObsPath%22%3A%22347832588421255168%2F%22%2C%22projectIntroduce%22%3Anull%2C%22status%22%3Anull%2C%22delFlag%22%3Anull%2C%22createTime%22%3Anull%2C%22modifyTime%22%3Anull%2C%22userCode%22%3A%22347832588421255168%22%2C%22createrCode%22%3Anull%2C%22classify%22%3Anull%2C%22memberType%22%3A0%2C%22companyName%22%3A%22eintoo6%22%2C%22logoPath%22%3Anull%2C%22mediaType%22%3A5%7D%5D%2C%22inputValue%22%3A%221%22%7D",
+                    "launchMode": "default",
+                    "scene": null
+                },
                 {
                     "name": "",
                     "pathName": "pages/canvasAr/canvasAr",
@@ -49,13 +70,6 @@
                 {
                     "name": "",
                     "pathName": "packageB/pages/arKit/arKit",
-                    "query": "",
-                    "launchMode": "default",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "packageA/pages/canvasAr/canvasAr",
                     "query": "",
                     "launchMode": "default",
                     "scene": null

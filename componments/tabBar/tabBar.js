@@ -1,7 +1,8 @@
 // componments/tabBar/tabBar.js
 import {
     goTo,
-    redirectTo
+    redirectTo,
+    switchTab
 } from "../../utils/navigate";
 // app.js
 const {
@@ -29,65 +30,37 @@ Component({
      */
     data: {
         isIPhoneX: app.isIPhoneX,
-        modelSrc1: "/images/tabBar/modelbar1.png",
-        modelSrc2: "/images/tabBar/modelbar2.png",
-        indexSrc1: "/images/tabBar/indexbar1.png",
-        indexSrc2: "/images/tabBar/indexbar2.png",
-        mSrc1: "/images/tabBar/mbar1.png",
-        mSrc2: "/images/tabBar/mbar2.png",
+        tabbarIMG: ['/images/tabBar/left.png', '/images/tabBar/right.png', '/images/tabBar/mid.png']
     },
 
     /**
      * 组件的方法列表
      */
     methods: {
-        goModel: throttle(async function () {
-            this.handleCamera()
-                .then(async (res) => {
+        goSearch: throttle(async function () {
+            switchTab("compSearch")
 
-                    goTo("arKit", {
-                        projectCode: "312330376891027456",
-                    });
-                    // goTo("web-view",{openid:data});
-                })
-                .catch((err) => {})
-            // await wx.getUserProfile({
-            //     desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-            //     success: async (res) => {
-            //         console.log(res)
-            //         let signature = res.signature
-            //         const code = await publicFn.wxLogin()
-            //         console.log(code, 'logincode')
-            //         let obj = {
-            //             code: code,
-            //             // rawData: code,
-            //             // phone: '17625008824',
-            //             signature: signature
-            //             // encryptedData: res.encryptedData,
-            //             // iv: res.iv
-            //         }
-            //         const data = await API.login(obj);
-            //         console.log(data)
-            //         // wx.setStorageSync('hasPhone', true)
-            //         // this.setData({
-            //         //     hasPhone: true
-            //         // })
-            //         // redirectTo('mine')
+            // this.handleCamera()
+            //     .then(async (res) => {
 
-            //     }
-            // })
-
+            //         // goTo("compSearch", {
+            //         //     projectCode: "312330376891027456",
+            //         // });
+            //         // goTo("web-view",{openid:data});
+            //         switchTab("compSearch")
+            //     })
+            //     .catch((err) => {})
         }, null),
         goIndex: throttle(function () {
             if (this.properties.tabIndex == 2) return
-            redirectTo("index")
+            switchTab("index")
         }, null),
 
         goMine: throttle(function () {
             if (this.properties.tabIndex == 3) return
             let hasPhone = wx.getStorageSync('hasPhone')
             if (hasPhone) {
-                redirectTo("mine")
+                switchTab("mine")
             } else {
                 wx.showToast({
                     title: "请先登录",

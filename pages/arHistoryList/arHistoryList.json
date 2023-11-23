@@ -1,0 +1,12 @@
+{
+    "usingComponents": {
+        "top-bar": "/componments/topBar/index",
+        "collect-btn": "/componments/collectBtn/collectBtn",
+        "model-btn": "/componments/modelBtn/modelBtn",
+        "van-button": "@vant/weapp/button/index",
+        "my-dialog":"/componments/myDialog/myDialog"
+
+
+
+    }
+}

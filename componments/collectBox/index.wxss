@@ -1,0 +1,107 @@
+/* packageA/components/compBox/index.wxss */
+.compBox {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  margin-top: 20rpx;
+}
+.compBox .compContext {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.compBox .compContext .compName {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 250rpx;
+  margin-top: 40rpx;
+  margin-left: 25px;
+  font-size: 32rpx;
+  font-family: YouSheBiaoTiHei;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 46rpx;
+}
+.compBox .compContext .compName .compName2 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 27rpx;
+}
+.compBox .compContext .logoBox {
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+  width: 130rpx;
+  height: 130rpx;
+  background: #817E93;
+  border-radius: 30rpx;
+  box-sizing: border-box;
+  text-align: center;
+}
+.compBox .compContext .logoBox .logo {
+  width: 100%;
+  height: 100%;
+  background: #817E93;
+  border-radius: 30rpx;
+}
+.compBox .compContext .collectBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 45rpx;
+  right: 40rpx;
+  width: 80rpx;
+  height: 80rpx;
+  width: 650rpx;
+  height: 170rpx;
+  background-size: 100% 100%;
+  background: #3e3b50;
+  box-shadow: 0rpx 2rpx 2rpx 0 rgba(0, 0, 0, 0.5), inset 0 -6rpx 4rpx 0 rgba(0, 0, 0, 0.5), inset 0 4rpx 4rpx 0 rgba(255, 255, 255, 0.5);
+  border-radius: 30rpx;
+}
+.compBox .compContext .collectBtn .btn {
+  width: 80rpx !important;
+  height: 80rpx !important;
+  padding: 0 !important;
+  background: linear-gradient(90deg, #C841F5, #4F39DE);
+  border-radius: 50%;
+}
+.compBox .compContext .collectBtn .compImg {
+  color: #000;
+  position: absolute;
+  margin-top: 6px;
+  margin-left: 5px;
+  width: 9px;
+  height: 9px;
+  border-left: solid 1px #999;
+  border-bottom: solid 1px #999;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.compBox .compContext .collectBtn .compImg:before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -1px;
+  width: 8px;
+  height: 5px;
+  border-radius: 5px 5px 0 0;
+  border-top: solid 1px #999;
+  border-left: solid 1px #999;
+  border-right: solid 1px #999;
+}
+.compBox .compContext .collectBtn .compImg:after {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 8px;
+  width: 5px;
+  height: 8px;
+  border-radius: 0 5px 5px 0;
+  border-top: solid 1px #999;
+  border-right: solid 1px #999;
+  border-bottom: solid 1px #999;
+}

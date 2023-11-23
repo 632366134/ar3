@@ -3,9 +3,12 @@ const {
     API
 } = require("../../utils/request.js");
 import {
-    goTo
+    goTo,switchTab 
 } from "../../utils/navigate";
 const publicFn = require("../../utils/public");
+import {
+    throttle
+} from "../../utils/util";
 const NEAR = 0.001;
 const FAR = 1000;
 const app = getApp();
@@ -43,7 +46,8 @@ Page({
         compList2: [],
         compList3: [],
         compList4: [],
-        collectUrl: "/images/index/add.png",
+        moreCompList: [],
+        collectUrl: "/images/index/addCollect.png",
         isCollect: false,
         collect: [],
         isMask: false,
@@ -68,7 +72,7 @@ Page({
 
         publicFn.LoadingOff();
         console.log("页面准备完全");
-      
+
 
         this.setData({
             theme: wx.getSystemInfoSync().theme || "light",
@@ -85,7 +89,7 @@ Page({
         }
 
         let list = await API.selProjects();
-        await wx.setStorageSync("list", list);
+         wx.setStorageSync("list", list);
         //     let c = list.filter(v => v.projectCode == '369654870789541888')
         //     let collect = c[0]
         //   await wx.setStorageSync("collect",collect);
@@ -144,12 +148,18 @@ Page({
         })
         list = list1.slice(0, 6);
         console.log(list, compList1, compList2, compList3, compList4)
+         wx.setStorageSync("compList1", compList1);
+         wx.setStorageSync("compList2", compList2);
+         wx.setStorageSync("compList3", compList3);
+         wx.setStorageSync("compList4", compList4);
+
         this.setData({
             list,
             compList1,
             compList2,
-            compList3,
+            compList3: compList3.slice(0, 6),
             compList4,
+            moreCompList: compList1.slice(0, 3)
             //   collect,
             //   collectUrl: collect ?
             //     "https://arp3.arsnowslide.com/" +
@@ -159,10 +169,81 @@ Page({
 
         });
     },
+    handleCamera() {
+        return new Promise((resolve, reject) => {
+
+            wx.requirePrivacyAuthorize({
+                success: () => {
+                    wx.getSetting({
+                        success: (scope) => {
+                            if (scope.authSetting["scope.camera"]) {
+                                resolve();
+                            } else {
+                                wx.authorize({
+                                    scope: "scope.camera",
+                                    success: () => {
+                                        resolve();
+                                    },
+                                    fail: (err) => {
+                                        if (err.errno === 104) return
+
+                                        wx.showModal({
+                                            title: "", // 提示的标题,
+                                            content: "检测到您已拒绝摄像头授权，请先授权！", // 提示的内容,
+                                            showCancel: true, // 是否显示取消按钮,
+                                            cancelText: "取消", // 取消按钮的文字，默认为取消，最多 4 个字符,
+                                            cancelColor: "#000000", // 取消按钮的文字颜色,
+                                            confirmText: "去授权", // 确定按钮的文字，默认为取消，最多 4 个字符,
+                                            confirmColor: "#3CC51F", // 确定按钮的文字颜色,
+                                            success: (res) => {
+                                                if (res.confirm) {
+                                                    wx.openSetting({
+                                                        success: (res) => {
+
+                                                            if (res.authSetting["scope.camera"]) {
+                                                                return resolve();
+                                                            }
+
+                                                            reject(res);
+                                                        },
+                                                    });
+                                                } else if (res.cancel) {
+                                                    reject(res);
+                                                }
+                                            },
+                                        });
+                                    },
+                                });
+                            }
+                        },
+                        fail: (err) => {
+                            reject(err);
+                        },
+                    });
+                },
+                fail: () => {}, // 用户拒绝授权
+                complete: () => {}
+            })
+        });
+
+    },
+    goModel: throttle(async function () {
+        this.handleCamera()
+            .then(async (res) => {
+
+                goTo("arKit", {
+                    projectCode: "312330376891027456",
+                });
+                // goTo("web-view",{openid:data});
+            })
+            .catch((err) => {})
+    }, null),
     filterResult(v) {
         return userCodeList.indexOf(v) === -1
     },
     async onShow() {
+        publicFn.LoadingOff();
+        
         let collect = wx.getStorageSync("collect");
 
         this.setData({
@@ -170,7 +251,7 @@ Page({
             collectUrl: collect ?
                 "https://arp3.arsnowslide.com/" +
                 collect.bookCoverObsPath +
-                collect.bookCoverObsName : "/images/index/add.png",
+                collect.bookCoverObsName : "/images/index/addCollect.png",
             isCollect: collect ? true : false,
         });
         let flag = await wx.getStorageSync("flag");
@@ -183,7 +264,10 @@ Page({
             await wx.removeStorageSync("flag");
         }
     },
-
+    goCompList(){
+        goTo("compList")
+        // switchTab("compSearch")
+    },
     goHistroy() {
         publicFn.Loading();
         goTo("history");

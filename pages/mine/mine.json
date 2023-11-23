@@ -1,0 +1,10 @@
+{
+    "usingComponents": {
+        "tab-bar": "/componments/tabBar/tabBar",
+        "menu-item":"/componments/menu-item/menu-item",
+        "privacy-popup": "/componments/privacyPopup/privacyPopup",
+        "top-bar": "/componments/topBar/index"
+
+
+    }
+}

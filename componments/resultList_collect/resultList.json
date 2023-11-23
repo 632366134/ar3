@@ -1,0 +1,7 @@
+{
+    "component": true,
+    "usingComponents": {
+        "collect-btn":"/componments/collectBtn/collectBtn",
+        "my-dialog":"/componments/myDialog/myDialog"
+    }
+}

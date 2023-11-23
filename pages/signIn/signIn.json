@@ -1,7 +1,8 @@
 {
     "usingComponents": {
         "navigate-back":"/componments/navigateBack/navigateBack",
-        "privacy-popup": "/componments/privacyPopup/privacyPopup"
+        "privacy-popup": "/componments/privacyPopup/privacyPopup",
+        "top-bar": "/componments/topBar/index"
 
     }
 }

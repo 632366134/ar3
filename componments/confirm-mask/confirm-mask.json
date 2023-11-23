@@ -1,7 +1,9 @@
 {
     "component": true,
     "usingComponents": {
-        "privacy-popup": "/componments/privacyPopup/privacyPopup"
+        "privacy-popup": "/componments/privacyPopup/privacyPopup",
+        "top-bar": "/componments/topBar/index",
+        "collect-btn": "/componments/collectBtn/collectBtn"
 
     },
     "disableScroll": true

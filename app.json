@@ -4,33 +4,58 @@
         "pages/collect/collect",
         "pages/searchList/searchList",
         "pages/collectSearch/collectSearch",
+        "pages/collectSearchList/collectSearchList",
         "pages/compSearch/compSearch",
         "pages/compSearchList/compSearchList",
+        "pages/morecompSearch/compSearch",
+        "pages/morecompSearchList/compSearchList",
         "pages/web-view/web-view",
         "pages/signIn/signIn",
-        "pages/web-view2/web-view2"
+        "pages/web-view2/web-view2",
+        "pages/mine/mine",
+        "pages/arHistoryList/arHistoryList",
+        "componments/modelBtn/modelBtn"
     ],
+    "tabBar": {
+        "custom": true,
+        "color": "#7A7E83",
+        "selectedColor": "#3cc51f",
+        "borderStyle": "black",
+        "backgroundColor": "#ffffff",
+        "list": [
+            {
+                "pagePath": "pages/index/index"
+            },
+            {
+                "pagePath": "pages/mine/mine"
+            },
+            {
+                "pagePath": "pages/compSearch/compSearch"
+            }
+        ]
+    },
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#fff",
         "navigationBarTitleText": "ar宣传册",
         "navigationBarTextStyle": "black",
         "navigationStyle": "custom",
-        "onReachBottomDistance": 20
+        "onReachBottomDistance": 20,
+        "backgroundColor": "#2E2B3F"
     },
     "subpackages": [
         {
             "root": "packageA",
             "pages": [
                 "pages/mycomp/mycomp",
-                "pages/canvasAr/canvasAr"
+                "pages/canvasAr/canvasAr",
+                "pages/compList/compList"
             ]
         },
         {
             "root": "packageB",
             "pages": [
                 "pages/arKit/arKit",
-                "pages/mine/mine",
                 "pages/useQA/useQA",
                 "pages/answer/answer"
             ]

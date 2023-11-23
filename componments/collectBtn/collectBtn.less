@@ -1,31 +1,106 @@
+/* componments/collectBtn/collectBtn.wxss */
 .collectBtn {
-  position: fixed;
-  bottom: 40rpx;
-  left: 6.67%;
-  text-align: center;
-  width: 650rpx;
-  height: 90rpx;
-  font-size: 26rpx;
-  font-family: PingFang SC;
-  font-weight: bold;
-  color: #ffffff;
-  line-height: 90rpx;
-  background-color: #a1c4fd;
-  border-radius: 10rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+    width: 80rpx;
+    height: 80rpx;
+
+    .btn {
+
+        width: 80rpx !important;
+        height: 80rpx !important;
+        padding: 0 !important;
+        background: linear-gradient(90deg, #C841F5, #4F39DE);
+        border-radius: 50%;
+
+    }
+
+    .compImg {
+        color: #000;
+        position: absolute;
+        width: 9px;
+        height: 9px;
+        border-left: solid 1px #fff;
+        border-bottom: solid 1px #fff;
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        background-color: #fff;
+
+    }
+
+    .compImg:before {
+        content: '';
+        position: absolute;
+        top: -5px;
+        left: -1px;
+        width: 8px;
+        height: 5px;
+        border-radius: 5px 5px 0 0;
+        border-top: solid 1px #fff;
+        border-left: solid 1px #fff;
+        border-right: solid 1px #fff;
+        background-color: #fff;
+
+    }
+
+    .compImg:after {
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: 8px;
+        width: 5px;
+        height: 8px;
+        border-radius: 0 5px 5px 0;
+        border-top: solid 1px #fff;
+        border-right: solid 1px #fff;
+        border-bottom: solid 1px #fff;
+        background-color: #fff;
+
+    }
+
+    .compImg_iscollect {
+        color: #000;
+        position: absolute;
+        width: 9px;
+        height: 9px;
+        border-left: solid 1px #fff;
+        border-bottom: solid 1px #fff;
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        background-color: red;
+    }
+
+    .compImg_iscollect:before {
+        content: '';
+        position: absolute;
+        top: -5px;
+        left: -1px;
+        width: 8px;
+        height: 5px;
+        border-radius: 5px 5px 0 0;
+        border-top: solid 1px #fff;
+        border-left: solid 1px #fff;
+        border-right: solid 1px #fff;
+        background-color: red;
+
+    }
+
+    .compImg_iscollect:after {
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: 8px;
+        width: 5px;
+        height: 8px;
+        border-radius: 0 5px 5px 0;
+        border-top: solid 1px #fff;
+        border-right: solid 1px #fff;
+        border-bottom: solid 1px #fff;
+        background-color: red;
+
+    }
+
+
 }
-.collectBtn-x {
-    position: fixed;
-    bottom: 100rpx;
-    left: 6.67%;
-    text-align: center;
-    width: 650rpx;
-    height: 90rpx;
-    font-size: 26rpx;
-    font-family: PingFang SC;
-    font-weight: bold;
-    color: #ffffff;
-    line-height: 90rpx;
-    background-color: #a1c4fd;
-    border-radius: 10rpx;
-  }
-  

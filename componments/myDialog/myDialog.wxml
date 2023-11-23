@@ -1,0 +1,3 @@
+<view class="dialog">
+    <van-dialog title="{{title}}" message="{{message}}" show="{{ show }}" show-cancel-button custom-class="my-custom-class" cancle-button-class="cancle-button-class" confirm-button-class="confirm-button-class" bind:confirm="collectConfirm" bind:cancel="collectCancel" />
+</view>

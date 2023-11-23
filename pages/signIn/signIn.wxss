@@ -1,90 +1,75 @@
-/* pages/signIn/signIn.wxss */
-.container-x {
-    background: none;
-}
-
-.container {
-    background: none;
-}
-
 .phoneInput {
-    margin-top: 158rpx;
+    margin-top: 88rpx;
     width: 100%;
     height: 118rpx;
-    padding: 0 30rpx 0 38rpx;
+    padding: 0 30rpx;
     box-sizing: border-box;
 
 }
-.phoneInput2 {
-    margin-top: 1rpx;
-    width: 100%;
-    height: 118rpx;
-    padding: 0 30rpx 0 38rpx;
-    box-sizing: border-box;
-}
+
 .border {
     width: 100%;
-    padding:0 30rpx 0 0;
+    padding: 0 30rpx 0 0;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
-    border-bottom:3rpx solid #dcdcdc;
+    border-bottom: 3rpx solid #dcdcdc;
 }
 
 .phoneLabel {
-    font-size: 26rpx;
-    font-family: PingFang SC;
-    font-weight: 500;
-    color: #595959;
-    white-space: nowrap;
+
+    font-size: 32rpx;
+    font-family: YouSheBiaoTiHei;
+    font-weight: 400;
+    color: #FFFFFF;
+    line-height: 40rpx;
 }
 
 .userPhone {
-    margin-left: 65rpx;
-    font-size: 26rpx;
-    font-family: PingFang SC;
-    font-weight: 500;
-    color: #919191;
+    margin-left: 25rpx;
+    font-size: 28rpx;
+    font-family: YouSheBiaoTiHei;
+    font-weight: 400;
+    color: #B2ACD4;
+    line-height: 40rpx;
 
 }
 
 .serbtn {
     margin: 0 !important;
+    padding: 0 !important;
+
     width: 160rpx !important;
     height: 58rpx !important;
-    background: #E9EEFE;
-    border: 1rpx solid #829FFF;
-    border-radius: 10rpx;
-    padding: 0 !important;
-    font-size: 22rpx;
-    font-family: PingFang SC;
-    font-weight: 500;
-    color: #829FFF;
-    box-sizing: border-box;
     line-height: 58rpx;
-
+    background: #4D2F63;
+    border: 1px solid #C841F5;
+    border-radius: 10rpx;
+    font-size: 24rpx;
+    font-family: YouSheBiaoTiHei;
+    font-weight: 400;
+    color: #C841F5;
+    box-shadow: none;
 }
+
 .success {
     box-sizing: border-box;
-    margin-top:60rpx;
+    margin-top: 50rpx;
     width: 100%;
     height: 88rpx;
     padding: 0 75rpx;
 }
+
 .successBtn {
     width: 100% !important;
-height: 100% !important;
-background: #829FFF;
-border-radius: 10rpx;
-padding: 0 !important;
-margin: 0 !important;
-font-size: 26rpx;
-font-family: PingFang SC;
-font-weight: 500;
-box-sizing: border-box;
-
-color: #FFFFFF;
-line-height: 88rpx;
+    height: 100% !important;
+    padding: 0 !important;
+    font-size: 28rpx;
+    color: #FFFFFF;
+    box-sizing: border-box;
+    line-height: 88rpx;
+    background: linear-gradient(90deg, #C841F5, #4F39DE);
+    border-radius: 20rpx;
 }

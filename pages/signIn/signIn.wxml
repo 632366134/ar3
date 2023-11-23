@@ -1,10 +1,12 @@
 <view class='{{isIPhoneX ? "container-x ":"container"}}'>
-    <navigate-back url="" title3="登录"></navigate-back>
+    <top-bar text="登录">
+        <image bind:tap="goBack" slot="left" src="/images/compList/back.png" mode="" />
+    </top-bar>
     <view class="phoneInput">
         <view class="border">
             <label class="phoneLabel">手机号</label>
-            <input  disabled confirm-type="done" bindinput="phoneBlur" 	bindconfirm="phoneBlur" bindblur="phoneBlur" value="{{userPhone}}" maxlength="11" type="number" class="userPhone" name="userPhone" placeholder="输入/快捷获取手机号" />
-            <button plain="{{hasPhone}}" disabled="{{hasPhone}}" class="serbtn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">快捷获取</button>
+            <input disabled confirm-type="done" bindinput="phoneBlur" bindconfirm="phoneBlur" bindblur="phoneBlur" value="{{userPhone}}" maxlength="11" type="number" class="userPhone" name="userPhone" placeholder-style="font-family: YouSheBiaoTiHei;font-weight: 400;" placeholder="输入/快捷获取手机号" />
+            <button  disabled="{{hasPhone}}" class="serbtn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">快捷获取</button>
         </view>
 
 
@@ -19,7 +21,7 @@
 
     </view> -->
     <view class="success">
-        <button bindtap="goMine"  class="successBtn">完成</button>
+        <button bindtap="goMine" class="successBtn">完成</button>
     </view>
 </view>
 <privacy-popup></privacy-popup>

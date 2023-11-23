@@ -1,0 +1,10 @@
+{
+    "usingComponents": {
+        "result-list": "/componments/resultList_collect/resultList",
+        "confirm-mask": "/componments/confirm-mask/confirm-mask",
+        "top-bar": "/componments/topBar/index",
+        "search-row-history": "/componments/searchRowHistroy/searchRowHistroy",
+        "tab-bar": "/componments/tabBar/tabBar"
+
+    }
+}

@@ -1,0 +1,2 @@
+<!--componments/modelBtn/modelBtn.wxml-->
+                    <view  class="modelView">内置模型</view>

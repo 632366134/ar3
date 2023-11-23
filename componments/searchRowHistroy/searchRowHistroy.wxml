@@ -1,9 +1,11 @@
-<search-enter  bindmyKeyinput="myKeyinput" bindmyevent1="myevent1"></search-enter>
-    <view class="history">
-        <view class="historytop">
-        <view>历史记录</view>
-        </view>
-        <view class="historyGroup">
-        <history ></history>
-       </view>
+<search-enter bindmyKeyinput="myKeyinput" bindmyevent1="myevent1"></search-enter>
+<view class="history" wx:if="{{historyFlag}}">
+    <view class="historytop">
+        <text>历史搜索</text>
+        <image bind:tap="delete" class="delete" src="/images/search/delete.png" mode="aspectFit" />
     </view>
+    <view class="historyGroup" >
+        <view bind:tap="goSearch2" data-item="{{item}}" class="searchHistory" wx:for="{{SearchHistoryList}}" wx:key="index">{{item}}
+        </view>
+    </view>
+</view>
