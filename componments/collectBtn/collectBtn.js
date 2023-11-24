@@ -14,8 +14,7 @@ Component({
             default: {}
         }
     },
-    observers: {
-    },
+    observers: {},
     /**
      * 组件的初始数据
      */
@@ -47,7 +46,11 @@ Component({
                 //     collect: this.data.detail
                 // })
             }
-            this.triggerEvent('goCollect')
+            this.triggerEvent('changeCollect', {}, {
+                bubbles: true,
+                composed: true,
+                capturePhase: true
+            })
 
         },
         goCollect({

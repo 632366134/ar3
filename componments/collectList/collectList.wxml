@@ -2,19 +2,19 @@
     <view class="tabs">
         <van-tabs active="{{active}}" swipe-threshold="4" swipeable bind:change="onChange" color="#9266FA" line-width="116rpx" line-height="5rpx" animated custom-class="custom-class" nav-class="nav-class" tab-class="tab-class" tab-active-class="tab-active-class" wrap-class="wrap-class">
             <van-tab name="0" title="全部">
-                <collect-box bindchangecollectProjectCode="changecollectProjectCode" collect="{{collect}}" wx:for="{{list}}" compItem="{{item}}" wx:key="id"></collect-box>
+                <collect-box bindchangeCollect="changeCollect" collect="{{collect}}" wx:for="{{list}}" compItem="{{item}}" wx:key="id"></collect-box>
             </van-tab>
             <van-tab name="1" title="公关服务">
-                <collect-box bindchangecollectProjectCode="changecollectProjectCode" collect="{{collect}}" wx:for="{{compList1}}" compItem="{{item}}" wx:key="id"></collect-box>
+                <collect-box bindchangeCollect="changeCollect" collect="{{collect}}" wx:for="{{compList1}}" compItem="{{item}}" wx:key="id"></collect-box>
             </van-tab>
             <van-tab name="2" title="消费科技">
-                <collect-box bindchangecollectProjectCode="changecollectProjectCode" collect="{{collect}}" wx:for="{{compList2}}" compItem="{{item}}" wx:key="id"></collect-box>
+                <collect-box bindchangeCollect="changeCollect" collect="{{collect}}" wx:for="{{compList2}}" compItem="{{item}}" wx:key="id"></collect-box>
             </van-tab>
             <van-tab name="3" title="智能制造">
-                <collect-box bindchangecollectProjectCode="changecollectProjectCode" collect="{{collect}}" wx:for="{{compList3}}" compItem="{{item}}" wx:key="id"></collect-box>
+                <collect-box bindchangeCollect="changeCollect" collect="{{collect}}" wx:for="{{compList3}}" compItem="{{item}}" wx:key="id"></collect-box>
             </van-tab>
             <van-tab name="4" title="其他">
-                <collect-box bindchangecollectProjectCode="changecollectProjectCode" collect="{{collect}}" wx:for="{{compList4}}" compItem="{{item}}" wx:key="id"></collect-box>
+                <collect-box bindchangeCollect="changeCollect" collect="{{collect}}" wx:for="{{compList4}}" compItem="{{item}}" wx:key="id"></collect-box>
             </van-tab>
 
         </van-tabs>

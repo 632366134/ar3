@@ -30,10 +30,10 @@
     box-sizing: border-box;
     background: #2E2B3F 100% 100%;
 }
-
+/* 
 .mask-blur {
     filter: blur(16rpx);
-}
+} */
 
 page {
  

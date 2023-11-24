@@ -45,17 +45,28 @@ Component({
     /**
      * 组件的初始数据
      */
-    data: {},
+    data: {
+        isMask: false
+    },
 
     /**
      * 组件的方法列表
      */
     methods: {
-        goCollect() {
-            this.triggerEvent('changecollectProjectCode')
+        tap() {},
+        gopriview() {
+            console.log('gopriview')
+            this.triggerEvent("goCollectPriview", {
+                detail: this.data.compItem
+            }, {
+                bubbles: true,
+                composed: true,
+                capturePhase: true
+            })
         },
-        changeCollect() {
-
-        }
+        // goCollect() {
+        //     this.triggerEvent('changecollectProjectCode')
+        // },
+  
     }
 })

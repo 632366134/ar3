@@ -31,6 +31,9 @@ Page({
     onLoad(options) {
 
     },
+    goBack(){
+        wx.navigateBack()
+    },
     async getPhoneNumber(e) {
 
         if (!e.detail.code) return

@@ -2,6 +2,8 @@
     "component": true,
     "usingComponents": {
         "collect-btn":"/componments/collectBtn/collectBtn",
-        "my-dialog":"/componments/myDialog/myDialog"
+        "my-dialog":"/componments/myDialog/myDialog",
+        "confirm-mask": "/componments/confirm-mask/confirm-mask"
+
     }
 }

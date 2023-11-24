@@ -1,7 +1,6 @@
 <view class="collect_list">
     <view class=" collect_box " data-item="{{item}}" wx:for="{{list}}" wx:key="id" bindtap="select_box">
         <view class="border">
-        <image class="collect_point" wx:if="{{item.collect}}" src="/images/collect/collectType.png"></image>
             <image class="image" lazy-load="true" src="https://arp3.arsnowslide.com/{{item.bookCoverObsPath + item.bookCoverObsName}}"></image>
             <view class="desc">
                 <view class="proName">{{item.projectName}}</view>

@@ -9,5 +9,6 @@
         <image class="go" src="/images/collect/go.png"></image>
     </view>
     </view>
-  <collect-list  id="cl"></collect-list>
+  <collect-list bindgoCollectPriview="goCollectPriview" id="cl"></collect-list>
 </view>
+<confirm-mask   currentValue="{{0}}" borchureDetail="{{borchureDetail}}" bindchangeMask="changeMask" isShow="{{isMask}}"></confirm-mask>

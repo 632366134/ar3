@@ -26,7 +26,7 @@ Page({
         mediaList: [],
         paramList: [],
         mediaList2: [],
-        videoList:[],
+        videoList: [],
         i: 0,
         flag: false,
         name: '虚拟人',
@@ -122,11 +122,12 @@ Page({
         this.obsList = obsList
         this.mediaList = mediaList
         this.paramList = paramList
-        this.videoList=videoList
+        this.videoList = videoList
     },
     changeModel({
         target
     }) {
+
         let modelIndex = this.data.modelIndex
         const length = this.data.mediaList.length - 1
         if (length === -1) {
@@ -158,16 +159,32 @@ Page({
     changeModelIndex({
         detail
     }) {
-        if (detail.index > this.data.mediaList.length - 1) {
+        if (this.child.anchor.visible == true) {
+            wx.showToast({
+                title: '请先放置模型',
+                icon: 'none'
+            })
+            return
+        }
+        if (this.data.mediaList.length === 1) {
+            wx.showToast({
+                title: '没有更多模型',
+                icon: 'none'
+            })
+            return
+        }
+        let index = this.data.modelIndex + 1
+        if (index> this.data.mediaList.length - 1) {
 
             this.setData({
                 modelIndex: 0
             })
         } else {
             this.setData({
-                modelIndex: detail.index
+                modelIndex: index
             })
         }
+        this.child.changeModel(this.data.modelIndex)
 
     },
     reset() {

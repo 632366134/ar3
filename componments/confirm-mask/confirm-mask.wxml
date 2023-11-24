@@ -1,4 +1,4 @@
-<page-container z-index="99999" bind:enter="enter" bind:beforeleave="exit" custom-style="height:100vh;background: rgba(255,255,255,.8);" position="bottom" show="{{isShow}}">
+<page-container z-index="99999"  bind:enter="enter" bind:beforeleave="goBack" custom-style="height:100vh;background: rgba(255,255,255,.8);" position="bottom" show="{{isShow}}" class="confirm-mask">
     <view class="{{isIPhoneX ? 'container-x' :'container'}}">
         <view class="{{isIPhoneX ? 'top_bar-x' :'top_bar'}}">
             <view class="left">
@@ -7,16 +7,26 @@
             <text class="compText">AR宣传册</text>
         </view>
         <view class="projectMain">
-            <collect-btn  class="collectBtn" detail="{{borchureDetail}}" ></collect-btn>
+            <collect-btn bindchangeCollect="changeCollect" flag="{{flag}}" class="collectBtn" detail="{{borchureDetail}}"></collect-btn>
 
             <image mode="aspectFill" src="https://arp3.arsnowslide.com/{{borchureDetail.bookCoverObsPath +borchureDetail.bookCoverObsName}}" class="projectImg"></image>
         </view>
-        <button class="confirmBtn" bindtap="confirmAr" hover-class="hover_confirmBtn">{{m2.flag2(borchureDetail.projectCode)}}</button>
-        <button class="arKitBtn" disabled="{{m2.flag(borchureDetail.mediaType)}}" bindtap="arKitBtn" hover-class="hover_arKitBtn">{{m2.flag3(borchureDetail.projectCode)}}</button>
-        <button class="ShowRoomBtn" bindtap="ShowRoomBtn" hover-class="hover_ShowRoomBtn">虚拟展厅</button>
+        <view class="btnGroups">
+            <van-button type="primary" class="arKitBtn tabpBtn" disabled="{{m2.flag(borchureDetail.mediaType)}}" bindtap="arKitBtn">模型放置</van-button>
+            <van-button type="primary" class="arKitBtn tabpBtn"  bindtap="ShowRoomBtn">虚拟展厅</van-button>
+            <van-button type="primary" class="ShowRoomBtn tabpBtn" disabled>虚拟人</van-button>
+        </view>
         <view class="pointRow">
-            <image src="/images/confirm-mask/point.png"></image>
-            <text>建议在wifi环境下加载AR宣传册</text>
+            <view class="pn">{{borchureDetail.projectName}}</view>
+            <view class="cn">{{borchureDetail.companyName}}</view>
+            <van-slider bind:drag-start="dragStart" wx:if="{{sliderFlag}}" custom-class="slider-custom-class" value="{{ currentValue }}" use-button-slot bind:change="onChange">
+                <image src="/images/confirm-mask/logo.png" class="custom-button" slot="button"></image>
+            </van-slider>
+            <view class="textGroup">
+                <image class="point" src="/images/confirm-mask/point.png"></image>
+                <text>建议在wifi环境下加载AR宣传册</text>
+            </view>
+
         </view>
     </view>
 </page-container>

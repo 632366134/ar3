@@ -3,7 +3,9 @@
     "usingComponents": {
         "privacy-popup": "/componments/privacyPopup/privacyPopup",
         "top-bar": "/componments/topBar/index",
-        "collect-btn": "/componments/collectBtn/collectBtn"
+        "collect-btn": "/componments/collectBtn/collectBtn",
+        "van-slider": "@vant/weapp/slider/index",
+        "van-button": "@vant/weapp/button/index"
 
     },
     "disableScroll": true

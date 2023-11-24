@@ -6,7 +6,7 @@
         <view wx:for="{{historyList}}" wx:key="id" class="swiperItem">
             <view class="date">{{item.date}}</view>
             <view class="bgc">
-                <view class="main">
+                <view bind:tap="goCollectPriview" data-item="{{item}}" class="main">
                     <image class="projectImg" mode="aspectFill" src="https://arp3.arsnowslide.com/{{item.bookCoverObsPath +item.bookCoverObsName}}">
 
                     </image>
@@ -19,8 +19,8 @@
                 <model-btn wx:if="{{m1.flag(item.mediaType) == true}}"></model-btn>
                 <view wx:else></view>
                 <view class="projectBtn">
-                    <collect-btn data-item="{{item}}" bind:goCollect="goCollect" flag="{{m1.flag2(collect,item)}}"></collect-btn>
 
+                    <collect-btn bindchangeCollect="changeCollect" flag="{{item.projectCode===collect.projectCode}}" class="collectBtn" detail="{{item}}"></collect-btn>
                     <view data-index="{{index}}" class="delete" bind:tap="deleteHistory">
                         <van-button type="primary" custom-class="btn"></van-button>
                         <image class="deleteImg" src="/images/history/delete.png" mode="aspectFit" />
@@ -30,8 +30,9 @@
         </view>
     </scroll-view>
 </view>
-<my-dialog bind:collectCancel="collectCancel" bind:collectConfirm="collectConfirm" title="提示" message="{{message}}" show="{{show}}"></my-dialog>
+<!-- <my-dialog bind:collectCancel="collectCancel" bind:collectConfirm="collectConfirm" title="提示" message="{{message}}" show="{{show}}"></my-dialog> -->
 <my-dialog bind:collectCancel="collectCancel2" bind:collectConfirm="collectConfirm2" title="提示" message="{{message2}}" show="{{show2}}"></my-dialog>
+<confirm-mask currentValue="{{0}}" borchureDetail="{{borchureDetail}}" bindchangeMask="changeMask" isShow="{{isMask}}"></confirm-mask>
 <image wx:if="{{flag}}" src="/images/tabBar/top.png" mode="aspectFit" class="{{isIPhoneX ? 'goTop-x' :'goTop'}}" bind:tap="goTop"></image>
 <wxs module="m1">
     var flag = function (mediaType) {

@@ -1,169 +1,247 @@
-.container-x {
-    padding-top: 80rpx;
-    padding-bottom: 320rpx;
-    min-height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-sizing: border-box;
-    position: relative;
-    top: 0;
-    left: 0;
-}
-
-.container {
-    width: 100vw;
-
-    top: 0;
-    left: 0;
-    padding-top: 40rpx;
-    padding-bottom: 252rpx;
-    position: relative;
-    height: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-sizing: border-box;
-}
-
-.top_bar {
-    width: 100vw;
-    height: 128rpx;
-    display: flex;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    padding-top: 40rpx;
-    left: 0;
-    z-index: 99;
-    box-sizing: border-box;
-
-}
-
-.top_bar-x {
-    width: 100vw;
-    height: 168rpx;
-    display: flex;
-    padding-top: 80rpx;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    box-sizing: border-box;
-
-    z-index: 99;
-
-}
-
-
-
-.left {
-    width: 58rpx;
-    height: 58rpx;
-    background: #FFFFFF;
-    box-shadow: 2rpx 3rpx 10rpx 0rpx rgba(165, 189, 251, 0.4);
-    border-radius: 50%;
-    margin-left: 20rpx !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .goBack {
-        width: 17rpx;
-        height: 29rpx;
+.confirm-mask {
+z-index: 99999;
+    .container-x {
+        padding-top: 80rpx;
+        padding-bottom: 320rpx;
+        min-height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
+        position: relative;
+        top: 0;
+        left: 0;
+        background: none !important;
     }
-}
 
-.compText {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    font-size: 34rpx;
-    line-height: 88rpx;
-    font-size: 34rpx;
-    color: #020202;
-    line-height: 48rpx;
-}
+    .container {
+        width: 100vw;
+        background: none !important;
 
-.projectMain {
-    width: 540rpx;
-    height: 620rpx;
-    background: #FFFFFF;
-    box-shadow: 0rpx 4rpx 30rpx 0rpx rgba(165, 189, 251, 0.4);
-    border-radius: 80rpx;
-    margin-top: 108rpx;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    .collectBtn {
+        top: 0;
+        left: 0;
+        padding-top: 40rpx;
+        padding-bottom: 252rpx;
+        position: relative;
+        height: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
+    }
+
+    .top_bar {
+        width: 100vw;
+        height: 128rpx;
+        display: flex;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        padding-top: 40rpx;
+        left: 0;
+        z-index: 99;
+        box-sizing: border-box;
+
+    }
+
+    .top_bar-x {
+        width: 100vw;
+        height: 168rpx;
+        display: flex;
+        padding-top: 80rpx;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+
+        z-index: 99;
+
+    }
+
+
+
+    .left {
+        width: 58rpx;
+        height: 58rpx;
+        background: #FFFFFF;
+        box-shadow: 2rpx 3rpx 10rpx 0rpx rgba(165, 189, 251, 0.4);
+        border-radius: 50%;
+        margin-left: 20rpx !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .goBack {
+            width: 17rpx;
+            height: 29rpx;
+        }
+    }
+
+    .compText {
         position: absolute;
-        top: 30rpx;
-        left: 30rpx;
+        left: 50%;
+        transform: translate(-50%);
+        font-size: 34rpx;
+        line-height: 88rpx;
+        font-size: 34rpx;
+        color: #020202;
+        line-height: 48rpx;
     }
 
-    .projectImg {
-        width: 460rpx;
-        height: 540rpx;
-        background: #817E93;
+    .projectMain {
+        width: 540rpx;
+        height: 620rpx;
+        background: #FFFFFF;
         box-shadow: 0rpx 4rpx 30rpx 0rpx rgba(165, 189, 251, 0.4);
-        border-radius: 60rpx;
-    }
-}
+        border-radius: 80rpx;
+        margin-top: 108rpx;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
 
-.confirmBtn {
-    background-color: #829fff;
-    margin-top: 80rpx;
-    width: 400rpx;
-    height: 88rpx;
-    text-align: center;
-    line-height: 88rpx;
-    font-size: 28rpx;
-    font-family: PingFang SC;
-    font-weight: 500;
-    color: #fff;
-    border-radius: 10rpx;
-}
+        .collectBtn {
+            position: absolute;
+            top: 30rpx;
+            left: 30rpx;
+        }
 
-.arKitBtn {
-    margin-top: 42rpx;
-    background-color: RGBA(219, 234, 252, 1);
-    width: 400rpx;
-    height: 88rpx;
-    text-align: center;
-    line-height: 88rpx;
-    font-size: 28rpx;
-    font-family: PingFang SC;
-    font-weight: 500;
-    color: #829fff;
-    border-radius: 10rpx;
-}
-
-.pointRow {
-    position: absolute;
-    bottom: 99rpx;
-
-    image {
-        width: 19rpx;
-        height: 19rpx;
+        .projectImg {
+            width: 460rpx;
+            height: 540rpx;
+            background: #817E93;
+            box-shadow: 0rpx 4rpx 30rpx 0rpx rgba(165, 189, 251, 0.4);
+            border-radius: 60rpx;
+        }
     }
 
-    text {
-        margin-left: 9rpx;
-        font-size: 24rpx;
-        font-family: PingFang SC;
-        font-weight: 500;
-        color: #4e4e4f;
-    }
-}
+    .btnGroups {
+        display: flex;
+        width: 100vw;
+        padding: 0 60rpx;
+        box-sizing: border-box;
+        margin-top: 40rpx;
+        justify-content: space-between;
 
-.slam {
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: block;
-    width: 100vw;
-    height: 100vh;
+        .tabpBtn {
+            width: 200rpx;
+            height: 78rpx;
+            background: linear-gradient(90deg, #C841F5, #4F39DE);
+            border-radius: 36rpx;
+            font-size: 28rpx;
+            font-family: YouSheBiaoTiHei;
+            font-weight: 400;
+            color: #FFFFFF;
+            line-height: 48rpx;
+        }
+
+        .van-button {
+            width: 200rpx;
+            height: 78rpx;
+            background: linear-gradient(90deg, #C841F5, #4F39DE);
+            border-radius: 36rpx;
+            font-size: 28rpx;
+            font-family: YouSheBiaoTiHei;
+            font-weight: 400;
+            color: #FFFFFF;
+            line-height: 48rpx;
+            padding: 0 !important;
+
+        }
+
+        .ShowRoomBtn {}
+
+        .confirmBtn {}
+
+        .arKitBtn {}
+    }
+
+
+    .pointRow {
+        margin-top: 33rpx;
+        width: 630rpx;
+        background: #2E2B3F;
+        border-radius: 100rpx;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding-bottom: 48rpx;
+        box-sizing: border-box;
+
+        .van-slider {
+            margin-top: 42rpx;
+            width: 500rpx;
+            height: 98rpx;
+            background-color: #817E93 !important;
+            border-radius: 49rpx;
+            box-shadow: 0 0 16rpx 0 rgba(200, 65, 245, 0.5);
+
+            .van-slider__bar {
+                height: 100%;
+                border-radius: 49rpx;
+                background: linear-gradient(270deg, #A541FF, #3FBBFE) !important;
+                background-color:transparent !important; 
+            }
+        }
+
+        .custom-button {
+            width: 88rpx;
+            height: 98rpx;
+        }
+
+        .pn {
+            margin-top: 40rpx;
+            font-size: 34rpx;
+            font-family: YouSheBiaoTiHei;
+            font-weight: 400;
+            color: #FFFFFF;
+            line-height: 25rpx;
+        }
+
+        .cn {
+            margin-top: 24rpx;
+
+            font-size: 28rpx;
+            font-family: YouSheBiaoTiHei;
+            font-weight: 400;
+            color: #FFFFFF;
+            line-height: 21rpx;
+
+        }
+
+        .textGroup {
+            margin-top: 30rpx;
+            display: flex;
+            align-items: center;
+
+            .point {
+                width: 24rpx;
+                height: 24rpx;
+                margin-right: 13rpx;
+            }
+
+            text {
+
+                font-size: 24rpx;
+                font-family: PingFang SC;
+                font-weight: 400;
+                color: #FFFFFF;
+                line-height: 23rpx;
+            }
+        }
+
+    }
+
+    .slam {
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100vw;
+        height: 100vh;
+    }
+
 }

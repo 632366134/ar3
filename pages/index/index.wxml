@@ -68,5 +68,5 @@
 
     <tab-bar tabIndex='2'></tab-bar>
 </view>
-<confirm-mask borchureDetail="{{borchureDetail}}" bindchangeMask="changeMask" isShow="{{isMask}}"></confirm-mask>
+<confirm-mask currentValue="{{0}}" borchureDetail="{{borchureDetail}}" bindchangeMask="changeMask" isShow="{{isMask}}"></confirm-mask>
 <privacy-popup></privacy-popup>

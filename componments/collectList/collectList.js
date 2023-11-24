@@ -17,7 +17,7 @@ Component({
     data: {
         isIPhoneX: app.isIPhoneX,
         modelList: [],
-        collect: '',
+        collect: {},
         show: false,
         flag: false,
         message: '',
@@ -42,12 +42,10 @@ Component({
             const compList3 = this.compList3 = wx.getStorageSync("compList3")
             const compList4 = this.compList4 = wx.getStorageSync("compList4")
 
-            const {
-                projectCode
-            } = wx.getStorageSync("collect");
-            if (projectCode) {
+            const collect = wx.getStorageSync("collect") ||{};
+            if (collect) {
                 this.setData({
-                    collectProjectCode: projectCode
+                    collect: collect
                 })
             }
 
@@ -150,10 +148,8 @@ Component({
         //         })
         //     }
         // },
-
-        changecollectProjectCode({
-            detail
-        }) {
+        changeCollect() {
+            console.log('changeCollectchangeCollectchangeCollect')
             const collect = wx.getStorageSync('collect') || {}
             this.setData({
                 collect

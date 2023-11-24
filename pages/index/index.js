@@ -3,7 +3,8 @@ const {
     API
 } = require("../../utils/request.js");
 import {
-    goTo,switchTab 
+    goTo,
+    switchTab
 } from "../../utils/navigate";
 const publicFn = require("../../utils/public");
 import {
@@ -89,7 +90,7 @@ Page({
         }
 
         let list = await API.selProjects();
-         wx.setStorageSync("list", list);
+        wx.setStorageSync("list", list);
         //     let c = list.filter(v => v.projectCode == '369654870789541888')
         //     let collect = c[0]
         //   await wx.setStorageSync("collect",collect);
@@ -148,10 +149,10 @@ Page({
         })
         list = list1.slice(0, 6);
         console.log(list, compList1, compList2, compList3, compList4)
-         wx.setStorageSync("compList1", compList1);
-         wx.setStorageSync("compList2", compList2);
-         wx.setStorageSync("compList3", compList3);
-         wx.setStorageSync("compList4", compList4);
+        wx.setStorageSync("compList1", compList1);
+        wx.setStorageSync("compList2", compList2);
+        wx.setStorageSync("compList3", compList3);
+        wx.setStorageSync("compList4", compList4);
 
         this.setData({
             list,
@@ -243,8 +244,8 @@ Page({
     },
     async onShow() {
         publicFn.LoadingOff();
-        
-        let collect = wx.getStorageSync("collect");
+
+        let collect = wx.getStorageSync("collect") ;
 
         this.setData({
             collect,
@@ -264,7 +265,7 @@ Page({
             await wx.removeStorageSync("flag");
         }
     },
-    goCompList(){
+    goCompList() {
         goTo("compList")
         // switchTab("compSearch")
     },
@@ -282,9 +283,19 @@ Page({
         });
     },
     changeMask() {
+        let collect = wx.getStorageSync("collect");
+
         this.setData({
-            isMask: false,
+            collect,
+            collectUrl: collect ?
+                "https://arp3.arsnowslide.com/" +
+                collect.bookCoverObsPath +
+                collect.bookCoverObsName : "/images/index/addCollect.png",
+            isCollect: collect ? true : false,
+            isMask: false
+
         });
+
     },
 
     goService() {

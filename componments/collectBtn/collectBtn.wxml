@@ -1,5 +1,5 @@
 <!--componments/collectBtn/collectBtn.wxml-->
-<view class="collectBtn" catch:tap="goCollect">
+<view class="collectBtn" catchtap="goCollect">
     <van-button type="primary" custom-class="btn"></van-button>
     <view class="{{flag?'compImg_iscollect' :'compImg'}}">
     </view>

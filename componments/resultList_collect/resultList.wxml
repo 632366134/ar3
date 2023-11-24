@@ -1,15 +1,19 @@
 <view class="collect_list">
-    <view class=" collect_box " data-item="{{item}}" wx:for="{{list}}" wx:key="id" bindtap="select_box">
+    <view catch:tap="goCollectPriview" class="collect_box " data-item="{{item}}" wx:for="{{list}}" wx:key="id">
         <view class="border">
-            <image class="collect_point" wx:if="{{item.collect}}" src="/images/collect/collectType.png"></image>
+
             <image class="image" lazy-load="true" src="https://arp3.arsnowslide.com/{{item.bookCoverObsPath + item.bookCoverObsName}}"></image>
             <view class="desc">
                 <view class="proName">{{item.projectName}}</view>
                 <view class="compName">{{item.companyName}}</view>
 
             </view>
-            <collect-btn class="collectBtn" data-item="{{item}}" bind:goCollect="goCollect" flag="{{item.projectCode===collectProjectCode}}"></collect-btn>
+            <view catch:tap="tap">
+                <collect-btn bindchangeCollect="changeCollect" flag="{{item.projectCode===collect.projectCode}}" class="collectBtn" detail="{{item}}"></collect-btn>
+            </view>
         </view>
+
     </view>
 </view>
 <my-dialog bind:collectCancel="collectCancel" bind:collectConfirm="collectConfirm" title="提示" message="{{message}}" show="{{show}}"></my-dialog>
+<confirm-mask currentValue="{{0}}" borchureDetail="{{borchureDetail}}" bindchangeMask="changeMask" isShow="{{isMask}}"></confirm-mask>

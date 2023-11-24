@@ -16,6 +16,7 @@ Page({
         isIPhoneX: app.isIPhoneX,
         collect: [],
         isCover: false,
+        isMask: false
     },
 
     /**
@@ -39,6 +40,23 @@ Page({
         //   collect: this.data.collect,
         // });
         // publicFn.LoadingOff();
+    },
+    goCollectPriview({
+        detail
+    }) {
+
+        this.setData({
+            borchureDetail: detail.detail,
+            isMask: true
+        })
+    },
+    changeMask() {
+       this.child.changeCollect()
+     
+        this.setData({
+            isMask: false,
+            
+        });
     },
     delCollect() {
         this.setData({

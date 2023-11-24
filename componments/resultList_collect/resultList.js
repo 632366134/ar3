@@ -25,19 +25,33 @@ Component({
             type: String
         }
     },
+    observers: {
+        // collect(newval) {
+        //     console.log(newval)
+        //     if (newval && newval.projectCode === this.data.borchureDetail.projectCode) {
+        //         this.setData({
+        //             flag: true
+        //         })
+        //     } else {
+        //         this.setData({
+        //             flag: false
+        //         })
+        //     }
+        // }
+    },
     data: {
         isIPhoneX: app.isIPhoneX,
         modelList: [],
-        collectProjectCode: ''
+        collect: {},
+        isMask: false,
+        borchureDetail: {}
     },
     lifetimes: {
         async ready() {
-            const {
-                projectCode
-            } = wx.getStorageSync("collect");
-            if (projectCode) {
+            const collect = wx.getStorageSync("collect");
+            if (collect) {
                 this.setData({
-                    collectProjectCode: projectCode
+                    collect
                 })
             }
 
@@ -49,53 +63,44 @@ Component({
 
 
     methods: {
-        collectCancel() {},
-        collectConfirm() {
-            console.log(this.detail, this.data.collectProjectCode)
-            if (this.detail.projectCode === this.data.collectProjectCode) {
-                wx.removeStorageSync('collect')
-                this.setData({
-                    collectProjectCode: ''
-                })
-            } else {
-                wx.setStorageSync('collect', this.detail)
-                this.setData({
-                    collectProjectCode: this.detail.projectCode
-                })
-            }
-        },
+        tap() {},
+        changeMask() {
+            const collect = wx.getStorageSync('collect') || {}
+          
+            this.setData({
+                isMask: false,
+                collect
 
-        goCollect({
-            target
+            });
+        },
+        goCollectPriview({
+            currentTarget
         }) {
-            console.log(target)
-            this.detail = target.dataset.item
-            if (this.detail.projectCode !== this.data.collectProjectCode) {
-                this.setData({
-                    message: "是否收藏该AR项目？",
-                    show: true
-
-                })
-            } else {
-                this.setData({
-                    message: "是否取消收藏该AR项目？",
-                    show: true
-
-                })
-            }
+            console.log(currentTarget)
+            this.setData({
+                borchureDetail: currentTarget.dataset.item,
+                isMask: true
+            })
         },
-        select_box(e) {
-            if (this.data.flag) return;
-            let data = e.currentTarget.dataset.item;
-            //   let id = data.id;
-            //   if (this.data.listIndex == id) {
-            //     id = "";
-            //     data = {};
-            //   }
-            //   this.setData({
-            //     listIndex: id,
-            //   });
-            this.triggerEvent("myevent", data);
+        changeCollect() {
+            console.log('uzch collect')
+            const collect = wx.getStorageSync('collect') || {}
+            this.setData({
+                collect
+            })
         },
+        // select_box(e) {
+        //     if (this.data.flag) return;
+        //     let data = e.currentTarget.dataset.item;
+        //     //   let id = data.id;
+        //     //   if (this.data.listIndex == id) {
+        //     //     id = "";
+        //     //     data = {};
+        //     //   }
+        //     //   this.setData({
+        //     //     listIndex: id,
+        //     //   });
+        //     this.triggerEvent("myevent", data);
+        // },
     },
 });

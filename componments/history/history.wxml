@@ -5,7 +5,7 @@
             <view class="swiper-item-item" bindtap="gopriview" data-item="{{item}}">
                 <image mode="aspectFit" src="https://arp3.arsnowslide.com/{{item.bookCoverObsPath + item.bookCoverObsName}}" class="scrollImage"></image>
                 <text>{{item.projectName}}</text>
-                <image wx:if="{{m1.flag2(item.projectCode,collect) == true}}" src="/images/collect/collectType.png" class="collect_point">收藏</image>
+              
 
                 <view class="btn_view">
                     <view wx:if="{{m1.flag2(item.projectCode,collect) == true}}" class="collect_btn">收藏</view>

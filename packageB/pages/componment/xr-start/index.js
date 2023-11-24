@@ -387,7 +387,6 @@ Component({
                     rotation: [0, rotation, 0]
                 })
             } else {}
-            console.log(index, 'video-index')
 
             if (this.videoList.length > 0) {
                 if (videoItem.length > 0) {
@@ -431,10 +430,10 @@ Component({
             this.gltfItemTRS = this.markerShadowTrs
             // 开启旋转缩放逻辑
             this.scene.event.addOnce('touchstart', this.handleTouchStart)
-            index++
-            this.triggerEvent("changeModelIndex", {
-                index
-            })
+            // index++
+            // this.triggerEvent("changeModelIndex", {
+            //     index
+            // })
             this.loading = false
 
         },

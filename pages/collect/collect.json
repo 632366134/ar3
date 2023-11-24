@@ -2,7 +2,8 @@
     "usingComponents": {
         "collect-list":"/componments/collectList/collectList",
         "top-bar": "/componments/topBar/index",
-        "collect-btn":"/componments/collectBtn/collectBtn"
+        "collect-btn":"/componments/collectBtn/collectBtn",
+        "confirm-mask": "/componments/confirm-mask/confirm-mask"
 
     }
 }

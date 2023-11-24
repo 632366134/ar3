@@ -11,6 +11,9 @@ Component({
     /**
      * 组件的属性列表
      */
+    options: {
+        styleIsolation: 'shared'
+    },
     properties: {
         borchureDetail: {
             type: Object,
@@ -20,6 +23,24 @@ Component({
             type: Boolean,
             default: false,
         },
+        currentValue: {
+            type: Number,
+            default: 0,
+        },
+    },
+    observers: {
+        collect(newval) {
+            console.log(newval)
+            if (newval && newval.projectCode === this.data.borchureDetail.projectCode) {
+                this.setData({
+                    flag: true
+                })
+            } else {
+                this.setData({
+                    flag: false
+                })
+            }
+        }
     },
 
     /**
@@ -28,14 +49,68 @@ Component({
     data: {
         isIPhoneX: app.isIPhoneX,
         mediaTypeFlag: false,
+        collect: {},
+        flag: false,
+        sliderFlag: false
     },
 
     /**
      * 组件的方法列表
      */
+    lifetimes: {
+
+    },
 
     methods: {
+        dragStart() {
+            wx.vibrateLong({
+                success(e) {
+                    console.log(e, 's')
+                },
+                fail(e) {
+                    console.log(e, 'f')
+
+                }
+            })
+        },
+        onChange({
+            detail
+        }) {
+            console.log(detail)
+            if (detail > 75) {
+                this.confirmAr()
+                this.timer = setTimeout(() => {
+                    clearTimeout(this.timer)
+                    this.setData({
+                        sliderFlag: false
+                    })
+                    this.setData({
+                        sliderFlag: true
+                    })
+                }, 300);
+
+            } else {
+                this.setData({
+                    sliderFlag: false
+                })
+                this.setData({
+                    sliderFlag: true
+                })
+            }
+
+        },
         async enter() {
+            console.log('enter')
+            this.setData({
+                sliderFlag: true
+            })
+            const collect = wx.getStorageSync("collect") || {};
+            console.log(collect)
+            if (collect) {
+                this.setData({
+                    collect: collect
+                })
+            }
             let list = wx.getStorageSync("historyList") || [];
             let detail = this.properties.borchureDetail;
 
@@ -95,20 +170,28 @@ Component({
                 return resultDate + " " + resultTime;
             }
         },
-        changeCollect(){
-            this.setData({
-                collect:wx.getStorageSync('changeCollect') || {}
-            })
-        },
+        // changeCollect() {
+        //     this.setData({
+        //         collect: wx.getStorageSync('changeCollect') || {}
+        //     })
+        // },
         goBack() {
+
             this.triggerEvent("changeMask");
+        },
+        changeCollect() {
+            console.log("changeCollect")
+            const collect = wx.getStorageSync('collect') || {}
+            this.setData({
+                collect
+            })
         },
         move() {
             console.log("1");
         },
         confirmAr() {
             //   publicFn.Loading();
-            let url = `https://arp3.arsnowslide.com/${this.properties.borchureDetail.bookCoverObsPath}${this.properties.borchureDetail.bookCoverObsName}`;
+            // let url = `https://arp3.arsnowslide.com/${this.properties.borchureDetail.bookCoverObsPath}${this.properties.borchureDetail.bookCoverObsName}`;
             this.handleCamera()
                 .then((res) => {
                     //   wx.setStorageSync("imgUrl", url);
@@ -132,7 +215,7 @@ Component({
         },
         arKitBtn() {
             //   publicFn.Loading();
-            let url = `https://arp3.arsnowslide.com/${this.properties.borchureDetail.bookCoverObsPath}${this.properties.borchureDetail.bookCoverObsName}`;
+            // let url = `https://arp3.arsnowslide.com/${this.properties.borchureDetail.bookCoverObsPath}${this.properties.borchureDetail.bookCoverObsName}`;
             this.handleCamera()
                 .then((res) => {
                     //   wx.setStorageSync("imgUrl", url);
@@ -184,7 +267,8 @@ Component({
             return new Promise((resolve, reject) => {
 
                 wx.requirePrivacyAuthorize({
-                    success: () => {
+                    success: (s) => {
+                        console.log(s, 'success')
                         wx.getSetting({
                             success: (scope) => {
                                 if (scope.authSetting["scope.camera"]) {
@@ -232,7 +316,10 @@ Component({
                             },
                         });
                     },
-                    fail: () => {}, // 用户拒绝授权
+                    fail: (s) => {
+                        console.log(s, 'fail')
+
+                    }, // 用户拒绝授权
                     complete: () => {}
                 })
             });

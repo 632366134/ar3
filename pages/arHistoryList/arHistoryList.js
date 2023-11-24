@@ -14,7 +14,10 @@ Page({
         show: false,
         message: '',
         show2: false,
-        message2: ''
+        message2: '',
+        flag: false,
+        isMask: false,
+        borchureDetail: {}
     },
 
     /**
@@ -24,7 +27,6 @@ Page({
         const historyList = wx.getStorageSync('historyList') || []
         const collect = wx.getStorageSync('collect') || {}
 
-        console.log(historyList, 'historyList'),
             this.setData({
                 historyList,
                 collect
@@ -33,45 +35,38 @@ Page({
     goBack() {
         wx.navigateBack()
     },
-    collectCancel() {},
-    collectConfirm() {
-        if (this.detail.projectCode === this.data.collect.projectCode) {
-            wx.removeStorageSync('collect')
-            this.setData({
-                collect: {}
-            })
-        } else {
-            wx.setStorageSync('collect', this.detail)
-            this.setData({
-                collect: this.detail
-            })
-        }
+    changeMask() {
+        const collect = wx.getStorageSync('collect') || {}
+
+        this.setData({
+            isMask: false,
+            collect
+
+        });
     },
-    goCollect({
-        target
+    goCollectPriview({
+        currentTarget
     }) {
-        console.log(target)
-        this.detail = target.dataset.item
-        if (this.detail.projectCode !== this.data.collect.projectCode) {
-            this.setData({
-                message: "是否收藏该AR项目？",
-                show: true
-
-            })
-        } else {
-            this.setData({
-                message: "是否取消收藏该AR项目？",
-                show: true
-
-            })
-        }
+        console.log(currentTarget)
+        this.setData({
+            borchureDetail: currentTarget.dataset.item,
+            isMask: true
+        })
     },
+    changeCollect() {
+        console.log('uzch collect')
+        const collect = wx.getStorageSync('collect') || {}
+        this.setData({
+            collect
+        })
+    },
+
     collectCancel2() {},
     collectConfirm2() {
         const list = this.data.historyList
         list.splice(this.index, 1)
         this.setData({
-            historyList:list,
+            historyList: list,
         })
         wx.setStorageSync('historyList', list)
     },
@@ -86,7 +81,7 @@ Page({
 
         })
     },
-  
+
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
