@@ -31,7 +31,7 @@
     </scroll-view>
 </view>
 <!-- <my-dialog bind:collectCancel="collectCancel" bind:collectConfirm="collectConfirm" title="提示" message="{{message}}" show="{{show}}"></my-dialog> -->
-<my-dialog bind:collectCancel="collectCancel2" bind:collectConfirm="collectConfirm2" title="提示" message="{{message2}}" show="{{show2}}"></my-dialog>
+<my-dialog confirmBtnText="{{confirmBtnText}}" bind:collectCancel="collectCancel2" bind:collectConfirm="collectConfirm2" title="提示" message="{{message2}}" show="{{show2}}"></my-dialog>
 <confirm-mask currentValue="{{0}}" borchureDetail="{{borchureDetail}}" bindchangeMask="changeMask" isShow="{{isMask}}"></confirm-mask>
 <image wx:if="{{flag}}" src="/images/tabBar/top.png" mode="aspectFit" class="{{isIPhoneX ? 'goTop-x' :'goTop'}}" bind:tap="goTop"></image>
 <wxs module="m1">

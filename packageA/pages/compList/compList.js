@@ -97,7 +97,7 @@ Page({
         scrollTop
     }) {
         console.log(scrollTop)
-        if (scrollTop > 900) {
+        if (scrollTop > 50) {
             this.setData({
                 flag: true
             })
@@ -152,7 +152,22 @@ Page({
         }
 
     },
+    changeMask() {
 
+        this.setData({
+            isMask: false,
+
+        });
+    },
+    goPriview(
+        {currentTarget}
+    ) {
+        console.log(currentTarget)
+        this.setData({
+            borchureDetail: currentTarget.dataset.detail,
+            isMask: true
+        })
+    },
     /**
      * 用户点击右上角分享
      */

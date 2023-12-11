@@ -39,7 +39,7 @@
 }
 .tabs .goTop-x {
   width: 100%;
-  height: 230rpx;
+  height: 174rpx;
   bottom: 0;
   position: fixed;
   padding-bottom: 56rpx;

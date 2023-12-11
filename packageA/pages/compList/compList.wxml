@@ -1,23 +1,24 @@
 <view class="{{isIPhoneX ? 'container-x' :'container'}}">
-    <top-bar text="企业榜单">
+    <top-bar text="AR企业">
         <image bind:tap="goBack" slot="left" src="/images/compList/back.png" mode="" />
         <image bind:tap="goSearch" slot="right" src="/images/compList/search.png" mode="" />
     </top-bar>
     <view class="tabs">
         <van-tabs bind:change="onChange" color="#9266FA" line-width="116rpx" line-height="5rpx" swipeable animated custom-class="custom-class" nav-class="nav-class" tab-class="tab-class" tab-active-class="tab-active-class" wrap-class="wrap-class">
             <van-tab name="0" title="公关服务">
-                <comp-box wx:for="{{compList1}}" compItem="{{item}}" wx:key="id"></comp-box>
+                <comp-box data-detail="{{item}}" bind:tap="goPriview" wx:for="{{compList1}}" compItem="{{item}}" wx:key="id"></comp-box>
             </van-tab>
             <van-tab name="1" title="消费科技">
-                <comp-box wx:for="{{compList2}}" compItem="{{item}}" wx:key="id"></comp-box>
+                <comp-box data-detail="{{item}}" bind:tap="goPriview" wx:for="{{compList2}}" compItem="{{item}}" wx:key="id"></comp-box>
             </van-tab>
             <van-tab name="2" title="智能制造">
-                <comp-box wx:for="{{compList3}}" compItem="{{item}}" wx:key="id"></comp-box>
+                <comp-box data-detail="{{item}}" bind:tap="goPriview" wx:for="{{compList3}}" compItem="{{item}}" wx:key="id"></comp-box>
             </van-tab>
             <van-tab name="3" title="其他">
-                <comp-box wx:for="{{compList4}}" compItem="{{item}}" wx:key="id"></comp-box>
+                <comp-box data-detail="{{item}}" bind:tap="goPriview" wx:for="{{compList4}}" compItem="{{item}}" wx:key="id"></comp-box>
             </van-tab>
         </van-tabs>
     </view>
     <image wx:if="{{flag}}" src="/images/tabBar/top.png" mode="aspectFit" class="{{isIPhoneX ? 'goTop-x' :'goTop'}}" bind:tap="goTop"></image>
 </view>
+<confirm-mask currentValue="{{0}}" borchureDetail="{{borchureDetail}}" catchchangeMask="changeMask" isShow="{{isMask}}"></confirm-mask>

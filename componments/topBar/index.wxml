@@ -5,5 +5,9 @@
     <view class="right">
         <slot name="right"></slot>
     </view>
-    <text class="compText">{{text}}</text>
+    <view class="compText">{{text}}
+        <text class="add" wx:if="{{text =='AR企业'}}" style="vertical-align:super">+</text>
+
+    </view>
+    
 </view>

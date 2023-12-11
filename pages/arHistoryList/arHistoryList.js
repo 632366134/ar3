@@ -17,7 +17,8 @@ Page({
         message2: '',
         flag: false,
         isMask: false,
-        borchureDetail: {}
+        borchureDetail: {},
+        confirmBtnText:''
     },
 
     /**
@@ -77,7 +78,8 @@ Page({
         this.index = currentTarget.dataset.index
         this.setData({
             message2: "是否删除该历史记录？",
-            show2: true
+            show2: true,
+            confirmBtnText:"确认"
 
         })
     },
@@ -97,7 +99,7 @@ Page({
         scrollTop
     }) {
         console.log(scrollTop)
-        if (scrollTop > 900) {
+        if (scrollTop > 50) {
             this.setData({
                 flag: true
             })

@@ -47,6 +47,7 @@ Page({
         compList2: [],
         compList3: [],
         compList4: [],
+        showList: [],
         moreCompList: [],
         collectUrl: "/images/index/addCollect.png",
         isCollect: false,
@@ -160,6 +161,7 @@ Page({
             compList2,
             compList3: compList3.slice(0, 6),
             compList4,
+            showList: [...compList1.slice(0, 1), ...compList2.slice(0, 1), ...compList3.slice(0, 1), ...compList4.slice(0, 1)],
             moreCompList: compList1.slice(0, 3)
             //   collect,
             //   collectUrl: collect ?
@@ -245,7 +247,7 @@ Page({
     async onShow() {
         publicFn.LoadingOff();
 
-        let collect = wx.getStorageSync("collect") ;
+        let collect = wx.getStorageSync("collect");
 
         this.setData({
             collect,

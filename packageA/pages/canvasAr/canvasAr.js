@@ -212,7 +212,7 @@ Page({
             this.child.changeModel(index)
         },
         back() {
-           navigateBack('index')
+            wx.navigateBack()
         },
         changeShow({
             detail

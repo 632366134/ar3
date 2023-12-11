@@ -200,7 +200,7 @@ Page({
         scrollTop
     }) {
         console.log(scrollTop)
-        if (scrollTop > 900) {
+        if (scrollTop > 50) {
             this.setData({
                 topflag: true
             })

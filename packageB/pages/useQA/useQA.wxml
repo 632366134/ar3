@@ -1,9 +1,11 @@
 <view class="{{isIPhoneX ? 'container-x' :'container'}}">
-    <navigate-back url="mine" title3="常见问题"></navigate-back>
-    <van-collapse  border="{{false}}" value="{{activeNames}}" >
+    <top-bar text="常见问题">
+        <image bind:tap="goBack" slot="left" src="/images/compList/back.png" mode="" />
+    </top-bar>
+    <van-collapse border="{{false}}" value="{{activeNames}}">
         <block wx:for="{{list}}" wx:key="index" wx:for-item="item">
-            <van-collapse-item  is-link="{{false}}"  data-index="{{index}}" bindtap="goAnswer" title="{{item.q}}" name="{{index}}">
-                <van-icon   slot="right-icon" class="right-icon" name="arrow" />
+            <van-collapse-item is-link="{{false}}" data-index="{{index}}" bindtap="goAnswer" title="{{item.q}}" name="{{index}}">
+                <van-icon slot="right-icon" class="right-icon" name="arrow" />
             </van-collapse-item>
         </block>
     </van-collapse>

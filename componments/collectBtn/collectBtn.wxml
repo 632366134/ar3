@@ -4,4 +4,4 @@
     <view class="{{flag?'compImg_iscollect' :'compImg'}}">
     </view>
 </view>
-<my-dialog bind:collectCancel="collectCancel" bind:collectConfirm="collectConfirm" title="提示" message="{{message}}" show="{{show}}"></my-dialog>
+<my-dialog  bind:collectCancel="collectCancel" bind:collectConfirm="collectConfirm" title="提示" message="{{message}}" confirmBtnText="{{confirmBtnText}}" show="{{show}}"></my-dialog>

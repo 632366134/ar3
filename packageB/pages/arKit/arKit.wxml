@@ -18,9 +18,10 @@
             </view>
             <image mode="aspectFit" class="logo" src="https://arp3.arsnowslide.com/zz/gif.gif"></image>
             <!-- <view class="boxShadow"></view> -->
+            <view class="bottom">
             <view class="progressPercent">正在加载素材中...</view>
             <progress active-mode="forwards" active activeColor="#B32BD5" class="progress" percent="{{percent}}"></progress>
-            <view class="longText">AR宣传册让宣传刊加添了一个全新的角度</view>
+        </view>
         </view>
 
     </view>

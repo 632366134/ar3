@@ -1,0 +1,31 @@
+<view class='{{isIPhoneX ? "container-x ":"container"}}'>
+    <top-bar text="">
+        <image bind:tap="goBack" slot="left" src="/images/compList/back.png" mode="" />
+        <image bind:tap="goHome" slot="right" src="/images/compList/home.png" mode="" />
+    </top-bar>
+    <view class="title">请选择角色</view>
+    <view class="roleGroup">
+        <view class="roleBorder {{gender==0 ?'tap' :''}}" bind:tap="getMan">
+            <image mode="aspectFit" class="role" src="{{manImg}}">
+
+            </image>
+            <view class="confirm" wx:if="{{gender==0}}">
+                <image class="confirmImg" src="/images/selectRole/confirm.png" mode="aspectFit" />
+            </view>
+        </view>
+        <view class="roleBorder {{gender==1 ?'tap' :''}}" bind:tap="getWoman">
+            <image mode="aspectFit" class="role" src="{{womanImg}}">
+
+            </image>
+            <view class="confirm" wx:if="{{gender==1}}">
+                <image class="confirmImg" src="/images/selectRole/confirm.png" mode="aspectFit" />
+            </view>
+        </view>
+    </view>
+    <view class="roleName">
+        <view>男生</view>
+        <view>女生</view>
+
+    </view>
+    <van-button type="primary" custom-class="Btn" catch:tap="goShowRoomBtn">确定</van-button>
+</view>

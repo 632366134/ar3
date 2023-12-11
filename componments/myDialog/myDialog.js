@@ -18,6 +18,10 @@ Component({
         message: {
             type: String,
             default: ""
+        },
+        confirmBtnText:{
+            type: String,
+            default: ""
         }
     },
 
@@ -25,7 +29,7 @@ Component({
      * 组件的初始数据
      */
     data: {
-
+      
     },
 
     /**

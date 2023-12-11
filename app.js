@@ -5,7 +5,8 @@ const {
 const app = getApp();
 App({
     globalData: {
-        isIPhoneX: false, // 当前设备是否为 iPhone X
+        isIPhoneX: false,
+        statusBarHeight: "" // 当前设备是否为 iPhone X
     },
     async onLaunch() {
         // await this.getUserInfo();
@@ -24,6 +25,7 @@ App({
                 if (safeBottom === 34 || statusBarHeight >= 44) {
                     that.globalData.isIPhoneX = true
                     that.isIPhoneX = true
+                    that.statusBarHeight = statusBarHeight
                 }
                 // // 根据 model 进行判断
                 // if (res.model.search('iPhone X') != -1) {
@@ -44,7 +46,7 @@ App({
             source: 'url("https://arp3.arsnowslide.com/zz/YouSheBiaoTiHei-2.ttf")',
             success(res) {
                 console.log(res.status)
-         
+
             },
             fail: function (res) {
                 console.log(res.status)

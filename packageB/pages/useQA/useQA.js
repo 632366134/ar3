@@ -1,4 +1,5 @@
 const { goTo } = require("../../../utils/navigate");
+const app = getApp();
 
 // packageB/pages/useQA/useQA.js
 Page({
@@ -17,17 +18,22 @@ Page({
           "识别图片以及点击屏幕即可渲染模型，请在wifi环境或者网速正常情况下使用",
       }
     ],
-    activeNames:''
+    activeNames:'',
+    isIPhoneX: app.isIPhoneX,
+
   },
 
   goAnswer({target}){
+      console.log('goAnswer')
       goTo('answer',target.dataset.index)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {},
-
+  goBack(){
+      wx.navigateBack()
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

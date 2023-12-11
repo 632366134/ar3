@@ -1,14 +1,16 @@
 <!--pages/collect/collect.wxml-->
 <view class="{{isIPhoneX ? 'container-x' :'container'}}">
+    <view wx:if="{{isIPhoneX}}" style="{{haveMask ?'position: fixed;top:0;left:0; z-index: 2000; width: 100vw; background-color: rgba(0, 0, 0, 0.7);height: 342rpx;' : ''}}"></view>
+    <view wx:else style="{{haveMask ?'position: fixed;top:0;left:0; z-index: 2000; width: 100vw; background-color: rgba(0, 0, 0, 0.7);height: 302rpx;' : ''}}"></view>
     <top-bar text="收藏">
         <image bind:tap="goBack" slot="left" src="/images/compList/back.png" mode="" />
     </top-bar>
-    <view bindtap="goCollectSearch" class="{{isIPhoneX ? 'msg_box-x' :'msg_box'}}">
-    <view class="searchTips">
-        <text class="msg">找不到宣传册？前往搜索</text>
-        <image class="go" src="/images/collect/go.png"></image>
+    <view bindtap="goCollectSearch" class="{{isIPhoneX ? 'msg_box-x' :'msg_box'}} ">
+        <view class="searchTips">
+            <text class="msg">找不到宣传册？前往搜索</text>
+            <image class="go" src="/images/collect/go.png"></image>
+        </view>
     </view>
-    </view>
-  <collect-list bindgoCollectPriview="goCollectPriview" id="cl"></collect-list>
+    <collect-list bindgoCollectModal="goCollectModal" bindcollectCancel="collectCancel" bindchangeCollect="changeCollect" bindgoCollectPriview="goCollectPriview" id="cl"></collect-list>
 </view>
-<confirm-mask   currentValue="{{0}}" borchureDetail="{{borchureDetail}}" bindchangeMask="changeMask" isShow="{{isMask}}"></confirm-mask>
+<confirm-mask currentValue="{{0}}" borchureDetail="{{borchureDetail}}" bindchangeMask="changeMask" isShow="{{isMask}}"></confirm-mask>

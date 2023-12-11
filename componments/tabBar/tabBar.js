@@ -30,7 +30,9 @@ Component({
      */
     data: {
         isIPhoneX: app.isIPhoneX,
-        tabbarIMG: ['/images/tabBar/left.png', '/images/tabBar/right.png', '/images/tabBar/mid.png']
+        statusBarHeight: app.statusBarHeight || 0,
+        tabbarIMG: ['/images/tabBar/left.png', '/images/tabBar/right.png', '/images/tabBar/mid.png'],
+   
     },
 
     /**

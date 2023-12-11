@@ -23,10 +23,7 @@ Component({
             type: Boolean,
             default: false,
         },
-        currentValue: {
-            type: Number,
-            default: 0,
-        },
+
     },
     observers: {
         collect(newval) {
@@ -51,7 +48,8 @@ Component({
         mediaTypeFlag: false,
         collect: {},
         flag: false,
-        sliderFlag: false
+        sliderFlag: false,
+        currentValue: 0
     },
 
     /**
@@ -249,13 +247,32 @@ Component({
             //     "projectCode",
             //     this.properties.borchureDetail.projectCode
             //   );
-            goTo("web-view", {
+            // goTo("selectRole", {
+            //     userCode: this.data.borchureDetail.userCode,
+            //     userName: this.data.borchureDetail.companyName
+            // });
+            let param = {
                 userCode: this.data.borchureDetail.userCode,
                 userName: this.data.borchureDetail.companyName
-            });
-            this.setData({
-                isShow: true
-            });
+            }
+            wx.navigateTo({
+                url: `/pages/selectRole/selectRole?param=${JSON.stringify(param)}`,
+                events: {
+                    // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+                    acceptDataFromOpenedPage :(data)=> {
+                        this.setData({isShow:false})
+                    }
+                },
+                success: function (res) {
+                    // 通过eventChannel向被打开页面传送数据
+                    res.eventChannel.emit('acceptDataFromOpenerPage', {
+                        data: 'test'
+                    })
+                }
+            })
+            // this.setData({
+            //     isShow: true
+            // });
             // },
             //   });
             // })

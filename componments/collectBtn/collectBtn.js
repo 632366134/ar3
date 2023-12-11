@@ -25,14 +25,21 @@ Component({
     },
     data: {
         message: '',
-        show: false
+        show: false,
+        confirmBtnText:''
     },
 
     /**
      * 组件的方法列表
      */
     methods: {
-        collectCancel() {},
+        collectCancel() {
+            this.triggerEvent('collectCancel', {}, {
+                bubbles: true,
+                composed: true,
+                capturePhase: true
+            })
+        },
         collectConfirm() {
             if (this.data.flag) {
                 wx.removeStorageSync('collect')
@@ -40,7 +47,18 @@ Component({
                 //     collect: {}
                 // })
             } else {
-                console.log(this.data.detail)
+                wx.vibrateLong({
+                    success(e) {
+                        console.log(e, 's')
+                    },
+                    fail(e) {
+                        console.log(e, 'f')
+    
+                    }
+                })
+                wx.showToast({
+                  title: '收藏成功',
+                })
                 wx.setStorageSync('collect', this.data.detail)
                 // this.setData({
                 //     collect: this.data.detail
@@ -56,16 +74,24 @@ Component({
         goCollect({
             target
         }) {
+            this.triggerEvent('goCollectModal', {}, {
+                bubbles: true,
+                composed: true,
+                capturePhase: true
+            })
             if (!this.data.flag) {
                 this.setData({
                     message: "是否收藏该AR项目？",
-                    show: true
+                    show: true,
+                    confirmBtnText:"收藏"
 
                 })
             } else {
                 this.setData({
-                    message: "是否取消收藏该AR项目？",
-                    show: true
+                    message: "是否移除已收藏AR项目",
+                    show: true,
+                    confirmBtnText:"移除"
+
 
                 })
             }

@@ -1,8 +1,6 @@
 .container {
-  background: #fff;
 }
 .container-x {
-  background: #fff;
 }
 .van-collapse {
   margin-top: 170rpx;

@@ -385,8 +385,9 @@
 }
 
 .container2 .logo {
-    width: 368rpx;
-    height: 365rpx;
+    margin-bottom: 120rpx;
+    width: 500rpx;
+    height: 500rpx;
 }
 
 .container2 .boxShadow {
@@ -413,7 +414,6 @@
 }
 
 .container2 .progressPercent {
-    margin-top: 254rpx;
     font-size: 26rpx;
     font-family: YouSheBiaoTiHei;
     font-weight: 400;
@@ -453,8 +453,9 @@
 }
 
 .container2-x .logo {
-    width: 368rpx;
-    height: 365rpx;
+    margin-bottom: 120rpx;
+    width: 500rpx;
+    height: 500rpx;
     /* animation: 1.2s ease-in-out 0s infinite alternate move_eye; */
 }
 
@@ -482,7 +483,6 @@
 }
 
 .container2-x .progressPercent {
-    margin-top: 254rpx;
     font-size: 26rpx;
     font-family: YouSheBiaoTiHei;
     font-weight: 400;
@@ -534,4 +534,14 @@
 .scanImg {
     width: 100vw;
     height: 819rpx;
+}
+.container-x .bottom{
+    position:absolute;
+    text-align: center;
+    bottom: 228rpx;
+}
+.container .bottom{
+    position:absolute;
+    text-align: center;
+    bottom: 172rpx;
 }

@@ -16,7 +16,8 @@ Page({
         isIPhoneX: app.isIPhoneX,
         collect: [],
         isCover: false,
-        isMask: false
+        isMask: false,
+        haveMask: false,
     },
 
     /**
@@ -51,13 +52,38 @@ Page({
         })
     },
     changeMask() {
-       this.child.changeCollect()
-     
+        this.child.changeCollect()
+
         this.setData({
             isMask: false,
-            
+
         });
     },
+        goCollectModal() {
+            let timer =setTimeout(() => {
+                clearTimeout(timer)
+                this.setData({
+                    haveMask: true
+                })
+            },50);
+
+        },
+        collectCancel() {
+            let timer =setTimeout(() => {
+                clearTimeout(timer)
+                this.setData({
+                    haveMask: false
+                })
+            }, 50);
+        },
+        changeCollect() {
+            let timer =setTimeout(() => {
+                clearTimeout(timer)
+                this.setData({
+                    haveMask: false
+                })
+            }, 50);
+        },
     delCollect() {
         this.setData({
             isCover: true,

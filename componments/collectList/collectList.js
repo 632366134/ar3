@@ -33,22 +33,24 @@ Component({
     },
     lifetimes: {
         attached() {
+            const collect = wx.getStorageSync("collect") || {};
+
             let list = this.list = wx.getStorageSync("list")
             list = list.filter((v) => {
-                return v.projectCode != "312330376891027456";
+                return v.projectCode != "312330376891027456" && v.projectCode != collect.projectCode;
             });
             const compList1 = this.compList1 = wx.getStorageSync("compList1")
             const compList2 = this.compList2 = wx.getStorageSync("compList2")
             const compList3 = this.compList3 = wx.getStorageSync("compList3")
             const compList4 = this.compList4 = wx.getStorageSync("compList4")
 
-            const collect = wx.getStorageSync("collect") ||{};
-            if (collect) {
+            if (JSON.stringify(collect) !== '{}') {
                 this.setData({
                     collect: collect
                 })
-            }
+                list.unshift(collect)
 
+            }
             this.index = 2
             console.log(list.slice(0, this.index * 7))
             this.setData({
@@ -123,7 +125,7 @@ Component({
         },
         onPageScroll(scrollTop) {
             console.log(scrollTop)
-            if (scrollTop > 900) {
+            if (scrollTop > 50) {
                 this.setData({
                     flag: true
                 })

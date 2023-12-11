@@ -17,12 +17,10 @@ Page({
      */
     onLoad({param}) {
         let img,height
-        if(param ==0){
-            img = '../images/a1.png'
-            height ='3413'
-        }else if (param ==1){
-            img = '../images/a2.png'
-            height = '3285'
+        if(param ==1){
+            img = 'https://arp3.arsnowslide.com/zz/%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA%E4%BF%AE%E6%94%B9.png'
+        }else if (param ==0){
+            img = 'https://arp3.arsnowslide.com/zz/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E8%AF%B4%E6%98%8E.png'
         }
         this.setData({img,height})
     },

@@ -1,7 +1,7 @@
-<view class="{{isIPhoneX ? 'tabBar-x' :'tabBar'}}">
+<view class="{{isIPhoneX ? 'tabBar-x' :'tabBar'}}" >
     <image class="tabBarimg" src="{{m1.flag(tabIndex)}}" mode="aspectFit">
     </image>
-    <view class="tabbarBoxList">
+    <view class="tabbarBoxList" >
         <view bindtap="goSearch" class="tabBar-box">
             <text wx:if="{{tabIndex!==1}}" class="{{tabIndex==1?'clickStyle' : 'noClickStyle'}}">搜索</text>
         </view>
@@ -12,6 +12,7 @@
             <text wx:if="{{tabIndex!==3}}" class="{{tabIndex==3?'clickStyle' : 'noClickStyle'}} ">我的</text>
         </view>
     </view>
+    <view class="bottom3" ></view>
 
 </view>
 <wxs module="m1">

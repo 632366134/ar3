@@ -49,14 +49,17 @@
         </view>
     </view>
     <view class="compListNav">
-        <left-text text="企业榜单"></left-text>
+        <view class="left_textBox">
+            <view class="left_line"></view>
+            <text class="left_text">AR企业<text style="vertical-align:super">+</text></text>
+        </view>
         <view class="moreComp" bind:tap="goCompList">
             <text class="moreComptext">More</text>
             <image class="moreBtn" src="/images/index/more.png" mode="aspectFit" />
         </view>
     </view>
     <scroll-view class="compList" enhanced="true" bounces="true" enable-flex="{{true}}" scroll-x="{{true}}">
-        <view wx:for="{{compList3}}" wx:key="id" bindtap="gopriview" data-item="{{item}}">
+        <view wx:for="{{showList}}" wx:key="id" bindtap="gopriview" data-item="{{item}}">
             <view class="compBorder">
                 <view class="compBox">
                     <image class="compLogo" src="{{item.logoPath}}" mode="aspectFill" />

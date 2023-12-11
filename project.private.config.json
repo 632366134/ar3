@@ -13,7 +13,7 @@
             "list": [
                 {
                     "name": "packs/mycomp/mycomp",
-                    "pathName": "pages/compSearchList/compSearchList",
+                    "pathName": "pages/selectRole/selectRole",
                     "query": "",
                     "launchMode": "default",
                     "scene": null

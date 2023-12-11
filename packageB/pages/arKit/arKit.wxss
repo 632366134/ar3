@@ -351,8 +351,9 @@
 
 
 .container2 .logo {
-    width: 368rpx;
-    height: 365rpx;
+    margin-bottom: 120rpx;
+    width: 500rpx;
+    height: 500rpx;
 }
 
 .container2 .boxShadow {
@@ -408,8 +409,9 @@
 
 
 .container2-x .logo {
-    width: 368rpx;
-    height: 365rpx;
+    margin-bottom: 120rpx;
+    width: 500rpx;
+    height: 500rpx;
     /* animation: 1.2s ease-in-out 0s infinite alternate move_eye; */
 }
 
@@ -456,8 +458,8 @@
 .selectionModel {
     position: fixed;
     z-index: 111;
-    bottom: 300rpx;
-    right: 4rpx;
+    bottom: 500rpx;
+    right: 40rpx;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -517,4 +519,14 @@
 .container .container2 .back2 {
     position: fixed;
     bottom: 140rpx;
+}
+.container-x .bottom{
+    position:absolute;
+    text-align: center;
+    bottom: 228rpx;
+}
+.container .bottom{
+    position:absolute;
+    text-align: center;
+    bottom: 172rpx;
 }

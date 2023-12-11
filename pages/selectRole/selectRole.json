@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+        "top-bar": "/componments/topBar/index",
+        "van-button": "@vant/weapp/button/index"
+
+
+    }
+}

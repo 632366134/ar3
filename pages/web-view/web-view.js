@@ -13,8 +13,8 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-       const {userCode,userName} = JSON.parse(options.param)
-       this.setData({url:`https://www.arsnowslide.net/?userCode=${userCode}&userName=${userName}`})
+       const {userCode,userName,gender} = JSON.parse(options.param)
+       this.setData({url:`https://www.arsnowslide.net/?userCode=${userCode}&userName=${userName}&gender=${gender}`})
         
     },
 
