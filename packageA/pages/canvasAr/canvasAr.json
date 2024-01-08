@@ -1,7 +1,8 @@
 {
   "usingComponents": {
       "xr-marker":"/componments/xr-marker/index",
-      "navigate-back":"/componments/navigateBack/navigateBack"
+      "navigate-back":"/componments/navigateBack/navigateBack",
+      "van-button": "@vant/weapp/button/index"
   },
   "navigationStyle": "custom",
   "disableScroll": true

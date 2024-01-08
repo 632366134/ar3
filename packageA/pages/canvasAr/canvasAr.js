@@ -3,7 +3,8 @@ const {
     API
 } = require("../../../utils/request");
 import {
-    navigateBack
+    navigateBack,
+    goTo
 } from "../../../utils/navigate";
 const app = getApp();
 const NEAR = 0.001;
@@ -43,9 +44,37 @@ Page({
       scale:1,
       rotateX:0,
       rotateY:0,
-      percent:0
+      percent:0,
+    //   modelName:'123'
 
 
+    },
+    goImageList(){
+        console.log('goImageList')
+        // goTo('imageList')
+        let param ={
+            obsList:this.data.obsList
+        }
+        wx.navigateTo({
+            url: `/packageA/pages/imageList/imageList?param=${JSON.stringify(param)}`,
+            events: {
+                // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+                acceptDataFromOpenedPage: (data) => {
+                    console.log(data,'acceptDataFromOpenedPage')
+                    const eventChannel = this.getOpenerEventChannel()
+                    console.log(eventChannel,'eventChannel')
+                    eventChannel.emit('acceptDataFromOpenedPage', {
+                        flag: true
+                    });
+                }
+            },
+            success: function (res) {
+                // 通过eventChannel向被打开页面传送数据
+                res.eventChannel.emit('acceptDataFromOpenerPage', {
+                    data: 'test'
+                })
+            }
+        })
     },
     onShareAppMessage() {
         const promise = new Promise(resolve => {

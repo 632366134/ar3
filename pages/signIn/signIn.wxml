@@ -11,15 +11,7 @@
 
 
     </view>
-    <!-- <view class="phoneInput2" wx:if="{{userPhone.length == 11}}">
-        <view class="border">
-            <label class="phoneLabel">验证码</label>
-            <input value="{{code}}" maxlength="11" type="number" class="userPhone" name="userPhone" placeholder="请输入验证码" />
-            <button hidden='{{hidden}}' disabled='{{btnDisabled}}' bindtap="sendMsg" class="serbtn" >获取验证码</button>
-        </view>
-
-
-    </view> -->
+   
     <view class="success">
         <button bindtap="goMine" class="successBtn">完成</button>
     </view>

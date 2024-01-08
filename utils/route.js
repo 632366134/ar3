@@ -13,6 +13,8 @@ export default {
     'compList': '/packageA/pages/compList/compList', // 历史
     'hdr': '/packageA/pages/hdr/hdr', // 历史
     'canvasAr': '/packageA/pages/canvasAr/canvasAr', // 历史
+    'imageList': '/packageA/pages/imageList/imageList', // 历史
+
     'arKit': '/packageB/pages/arKit/arKit', // 历史
     'mine': '/pages/mine/mine', // 历史
     'useQA': '/packageB/pages/useQA/useQA', // 历史

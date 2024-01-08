@@ -27,15 +27,7 @@ App({
                     that.isIPhoneX = true
                     that.statusBarHeight = statusBarHeight
                 }
-                // // 根据 model 进行判断
-                // if (res.model.search('iPhone X') != -1) {
-                //   that.globalData.isIPhoneX = true
-                //   that.isIPhoneX = true
-                // }
-                // // 或者根据 screenHeight 进行判断
-                // if (res.screenHeight == 812 || res.screenHeight == 896) {
-                //   that.isIPhoneX = true
-                // }
+                
             }
         })
     },

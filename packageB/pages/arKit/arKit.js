@@ -6,6 +6,10 @@ const app = getApp();
 const NEAR = 0.001;
 const FAR = 1000;
 Page({
+    options: {
+        multipleSlots: true,
+        styleIsolation: 'shared'
+    },
     data: {
         isIPhoneX: app.isIPhoneX,
         isShowScan: false,
@@ -30,8 +34,10 @@ Page({
         i: 0,
         flag: false,
         name: '虚拟人',
-        modelIndex: 0,
-        percent: 0
+        modelIndex:'',
+        percent: 0,
+        modelSelectListFlag: false,
+        modelName: ''
 
     },
     onShareTimeline: function () {
@@ -124,23 +130,28 @@ Page({
         this.paramList = paramList
         this.videoList = videoList
     },
-    changeModel({
-        target
-    }) {
+    // changeModel({
+    //     target
+    // }) {
 
-        let modelIndex = this.data.modelIndex
-        const length = this.data.mediaList.length - 1
-        if (length === -1) {
-            wx.showToast({
-                title: '无模型数据',
-                icon: 'none'
-            })
-            return
-        }
+    //     let modelIndex = this.data.modelIndex
+    //     const length = this.data.mediaList.length - 1
+    //     if (length === -1) {
+    //         wx.showToast({
+    //             title: '无模型数据',
+    //             icon: 'none'
+    //         })
+    //         return
+    //     }
 
-        this.child.changeLight(true)
+    //     this.child.changeLight(true)
 
-        this.child.changeModel(modelIndex)
+    //     this.child.changeModel(modelIndex)
+    // },
+    modelSelect() {
+        this.setData({
+            modelSelectListFlag: !this.data.modelSelectListFlag
+        })
     },
     loadingProgress({
         detail
@@ -156,41 +167,55 @@ Page({
         })
 
     },
-    changeModelIndex({
-        detail
+    modelIndexSelect({
+        currentTarget
     }) {
-        if (this.child.anchor.visible == true) {
-            wx.showToast({
-                title: '请先放置模型',
-                icon: 'none'
-            })
-            return
-        }
-        if (this.data.mediaList.length === 1) {
-            wx.showToast({
-                title: '没有更多模型',
-                icon: 'none'
-            })
-            return
-        }
-        let index = this.data.modelIndex + 1
-        if (index> this.data.mediaList.length - 1) {
-
-            this.setData({
-                modelIndex: 0
-            })
-        } else {
-            this.setData({
-                modelIndex: index
-            })
-        }
-        this.child.changeModel(this.data.modelIndex)
-
+        let index = currentTarget.dataset.index
+        this.setData({
+            modelName: this.data.mediaList[index].mediaObsName,
+            modelIndex: index
+        })
+        this.child.changeLight(true)
+        this.child.changeModel(index)
     },
-    reset() {
+    // changeModelIndex({
+    //     detail
+    // }) {
+    //     if (this.child.anchor.visible == true) {
+    //         wx.showToast({
+    //             title: '请先放置模型',
+    //             icon: 'none'
+    //         })
+    //         return
+    //     }
+    //     if (this.data.mediaList.length === 1) {
+    //         wx.showToast({
+    //             title: '没有更多模型',
+    //             icon: 'none'
+    //         })
+    //         return
+    //     }
+    //     let index = this.data.modelIndex + 1
+    //     if (index > this.data.mediaList.length - 1) {
+
+    //         this.setData({
+    //             modelIndex: 0
+    //         })
+    //     } else {
+    //         this.setData({
+    //             modelIndex: index
+    //         })
+    //     }
+    //     this.child.changeModel(this.data.modelIndex)
+
+    // },
+    modelReset() {
         this.child.changeLight(false)
         this.child.reset()
-
+        this.setData({
+            modelName: '',
+            modelIndex:''
+        })
 
     },
     back() {

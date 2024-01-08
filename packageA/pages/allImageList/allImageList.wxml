@@ -1,0 +1,47 @@
+<view class="{{isIPhoneX ? 'container-x' :'container'}}">
+    <top-bar text="识别图相册">
+        <image bind:tap="goBack" slot="left" src="/images/compList/back.png" mode="" />
+        <image bind:tap="goHome" slot="right" src="/images/compList/home.png" mode="" />
+    </top-bar>
+    <view wx:if="{{!selecting}}" class="title">
+        <view></view>
+
+        <view>选择</view>
+    </view>
+    <view wx:else class="title">
+        <view wx:if="{{!as}}" class="left" bind:tap="allSelect">
+            <view class="All"></view>
+            <text>全选</text>
+        </view>
+        <view wx:else class="left" bind:tap="NoSelect">
+            <view class="noAll">
+                <view class="ponit"></view>
+            </view>
+            <text>全选</text>
+        </view>
+        <view bind:tap="cancelSelect">取消</view>
+
+    </view>
+    <view class="allList">
+        <block wx:for="{{obsList}}" wx:key="id" wx:for-item="item">
+
+            <view bind:tap="selectObs" data-index="{{index}}" class="{{item.select ? 'image_box_select':'image_box'}}">
+                <view class="selected" wx:if="{{item.select}}">
+                    <view class="selected_boder">
+
+                        <van-icon color="#fff" size="40rpx" name="success" />
+                    </view>
+                </view>
+                <image src="https:{{item.mediaUrl}}" mode="aspectFill"  />
+
+            </view>
+
+        </block>
+
+    </view>
+    <view wx:if="{{selecting}}" class="{{isIPhoneX ? 'save-x' :'save'}}">
+        <view class="saveLength">已选 {{length}} 张</view>
+        <van-button bind:tap="goSave" custom-class="saveBtn" type="primary">保存至本地</van-button>
+    </view>
+</view>
+<privacy-popup></privacy-popup>

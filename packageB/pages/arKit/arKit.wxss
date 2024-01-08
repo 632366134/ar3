@@ -1,29 +1,55 @@
-.container .left_back {
-    width: 58rpx;
-    height: 58rpx;
-    background: linear-gradient(90deg, #C841F5, #4F39DE);
-    border-radius: 50%;
-    position: fixed;
+.model_name {
+
+    font-size: 40rpx;
+    font-family: YouSheBiaoTiHei;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+
+
+.title_left {
+    position: absolute;
     left: 60rpx;
-    top: 55rpx;
-    z-index: 10;
     display: flex;
     align-items: center;
-    justify-content: center;
-    box-shadow: 0rpx 5rpx 5rpx 2rpx rgba(0, 0, 0, 0.5),
-        inset 0 -6rpx 4rpx 0 rgba(0, 0, 0, 0.5),
-        inset 0 6rpx 6rpx 0 rgba(255, 255, 255, 0.5);
 
 }
 
-.container-x .left_back-x {
+.btn_des {
+    margin-left: 18rpx;
+    font-size: 30rpx;
+    font-family: PingFang SC;
+    font-weight: 800;
+    color: #FFFFFF;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 88rpx;
+    position: fixed;
+    z-index: 10;
+
+}
+
+.container .title {
+    top: 55rpx;
+
+}
+
+.container-x .title {
+    top: 95rpx;
+}
+
+.left_back {
     width: 58rpx;
     height: 58rpx;
     background: linear-gradient(90deg, #C841F5, #4F39DE);
     border-radius: 50%;
-    position: fixed;
-    left: 60rpx;
-    top: 95rpx;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -482,51 +508,115 @@
         inset 0 6rpx 6rpx 0 rgba(255, 255, 255, 0.5);
 }
 
-.tap {
-    padding: 0 !important;
 
-    width: 220rpx;
-    height: 78rpx;
-    background: linear-gradient(90deg, #C841F5, #9E17DD);
-    border-radius: 20rpx;
-    font-size: 28rpx;
-    font-family: YouSheBiaoTiHei;
-    font-weight: 400;
-    color: #FFFFFF;
-    box-shadow: 0rpx 5rpx 5rpx 2rpx rgba(0, 0, 0, 0.5),
-        inset 0 -6rpx 4rpx 0 rgba(0, 0, 0, 0.5),
-        inset 0 6rpx 6rpx 0 rgba(255, 255, 255, 0.5);
-    text-align: center;
-    line-height: 78rpx;
 
-}
-
-.container-x .container2 .back {
-    position: fixed;
-    bottom: 200rpx;
-}
-
-.container-x .container2 .back2 {
-    position: fixed;
-    bottom: 100rpx;
-}
-
-.container .container2 .back {
-    position: fixed;
-    bottom: 240rpx;
-}
-
-.container .container2 .back2 {
-    position: fixed;
-    bottom: 140rpx;
-}
-.container-x .bottom{
-    position:absolute;
+.container-x .bottom {
+    position: absolute;
     text-align: center;
     bottom: 228rpx;
 }
-.container .bottom{
-    position:absolute;
+
+.container .bottom {
+    position: absolute;
     text-align: center;
     bottom: 172rpx;
+}
+
+.buttonGroup {
+    position: fixed;
+    bottom: 355rpx;
+    left: 0;
+}
+
+.container-x .buttonGroup {
+    position: fixed;
+    bottom: 413rpx;
+    left: 0;
+}
+
+.model_select,
+.model_reset {
+    width: 260rpx;
+    height: 118rpx;
+    background: rgba(204, 185, 218, 0.2);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-x .model_select,
+.container-x .model_reset {}
+
+.model_select {}
+
+.model_select_btn,
+.model_reset_btn {
+    width: 220rpx !important;
+    height: 78rpx !important;
+    background: linear-gradient(90deg, #C841F5, #C841F5, #9E17DD) !important;
+    border-radius: 20rpx !important;
+    padding: 0 !important;
+    font-size: 28rpx !important;
+    font-family: YouSheBiaoTiHei;
+    font-weight: 400;
+    color: #FFFFFF;
+    line-height: 78rpx !important;
+}
+
+.select_hover,
+.reset_hover {
+    background: rgba(118, 16, 166, 0.2);
+}
+
+
+.reset_btn_hover,
+.select_btn_hover {
+    background: #7610A6 !important;
+}
+
+.model_select_list {
+    display: flex;
+    width: 260rpx;
+    height: 590rpx;
+    position: fixed;
+    left: 260rpx !important;
+    bottom: 0;
+}
+
+.container-x .model_select_list {
+    bottom: 56rpx;
+
+}
+
+.model_index_boder {
+    width: 260rpx;
+    height: 118rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(204, 185, 218, 0.2);
+}
+
+.model_index_select {
+    width: 220rpx !important;
+    height: 78rpx !important;
+    background: #B78BC6 !important;
+    border-radius: 20rpx !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+
+}
+
+.model_index_select_active {
+    border: 5rpx solid #7610A6 !important;
+    width: 220rpx !important;
+    height: 78rpx !important;
+    background: #CCB9DA !important;
+    border: 2px solid #7610A6 !important;
+    border-radius: 20rpx !important;
+    font-size: 28rpx!important;
+    font-family: YouSheBiaoTiHei!important;
+    font-weight: 400!important;
+    color: #7610A6!important;
 }

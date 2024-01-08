@@ -1,27 +1,32 @@
 <view class="{{isIPhoneX ? 'container-x' :'container'}}">
-    <view class="{{isIPhoneX ? 'left_back-x' :'left_back'}}" bind:tap="back" wx:if="{{isShowScan}}">
-        <image class=" backImg" src="/images/loading/back.png" alt="" />
+    <view class="{{isIPhoneX ? 'top-x' :'top'}}" wx:if="{{isShowScan}}">
+        <view class="{{isIPhoneX ? 'left_back-x' :'left_back'}}" bind:tap="back" >
+            <image class=" backImg" src="/images/loading/back.png" alt="" />
+        </view>
+        <text bind:tap="back" class="backText">返回</text>
+        <!-- <text class="modelName">{{modelName}}</text> -->
     </view>
     <view class="main">
         <view class="container2  page" data-weui-theme="{{theme}}">
             <xr-marker bind:handleAssetsProgress="loadingProgress" wx:if="{{flag}}" class="xr" bind:closeVideo="closeVideo" bind:videoShow="videoShow" bind:changeShow="changeShow" disable-scroll id="main-frame" width="{{renderWidth}}" height="{{renderHeight}}" style="width:{{width}}px;height:{{height}}px;" obsList="{{obsList}}" mediaList="{{mediaList}}" paramList="{{paramList}}" imageResList="{{imageResList}}" videoResList="{{videoResList}}" gltfResList="{{gltfResList}}" />
-    
+
             <!-- <view class="back" wx:if="{{isShowScan}}" bindtap="back">返回</view> -->
             <view class="scan">
                 <image class="scanImg" src="../../images/scan.png" mode="aspectFit" />
             </view>
+            <van-button bind:tap="goImageList" type="primary" custom-class="{{isIPhoneX ? 'imageListBtn-x' :'imageListBtn'}}">识别图相册</van-button>
         </view>
         <view class="{{isIPhoneX ? 'container2-x' :'container2'}}" wx:if="{{!isShowScan}}">
             <view class="{{isIPhoneX ? 'left_back-x' :'left_back'}}" bind:tap="back">
-                <image class="backImg" src="/images/loading/back.png"  />
+                <image class="backImg" src="/images/loading/back.png" />
             </view>
             <image mode="aspectFit" class="logo" src="https://arp3.arsnowslide.com/zz/gif.gif"></image>
             <!-- <view class="boxShadow"></view> -->
             <view class="bottom">
                 <view class="progressPercent">正在加载素材中...</view>
-            <progress active-mode="forwards" active activeColor="#B32BD5" class="progress" percent="{{percent}}"></progress>
+                <progress active-mode="forwards" active activeColor="#B32BD5" class="progress" percent="{{percent}}"></progress>
             </view>
-           
+
         </view>
 
     </view>

@@ -1,0 +1,20 @@
+<view class="{{isIPhoneX ? 'container-x' :'container'}}">
+    <top-bar text="识别图相册">
+        <image bind:tap="goBack" slot="left" src="/images/compList/back.png" mode="" />
+        <image bind:tap="goHome" slot="right" src="/images/compList/home.png" mode="" />
+    </top-bar>
+    <view class="title">
+        <view bind:tap="goAllImageList">查看全部相册</view>
+    </view>
+    <swiper bindchange="currentChange" previous-margin="45rpx" circular class="obsSwiper">
+        <block>
+            <swiper-item class="swiper-item" wx:for="{{obsList}}" wx:key="id">
+                <view class="swiper-item-bgc">
+                    <image mode="aspectFit" class="swiper-item-image" src="{{item.mediaUrl}}"></image>
+                </view>
+            </swiper-item>
+        </block>
+    </swiper>
+    <van-button bind:tap="goSave" type="primary" custom-class="{{isIPhoneX ? 'saveBtn-x' :'saveBtn'}}">保存至本地</van-button>
+</view>
+<privacy-popup></privacy-popup>

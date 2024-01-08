@@ -336,7 +336,7 @@ Component({
                     if (Math.abs(theta) < .01 && Math.abs(phi) < .01) {
                         return
                     }
-                    this.gltfItemTRS.rotation.x -= phi
+                    // this.gltfItemTRS.rotation.x -= phi
                     this.gltfItemSubTRS.rotation.z += theta
                     this.mouseInfo.startX = x
                     this.mouseInfo.startY = y

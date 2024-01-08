@@ -1,0 +1,9 @@
+{
+    "usingComponents": {
+        "top-bar": "/componments/topBar/index",
+        "van-button": "@vant/weapp/button/index",
+        "privacy-popup": "/componments/privacyPopup/privacyPopup",
+        "van-icon": "@vant/weapp/icon/index"
+  
+    }
+}

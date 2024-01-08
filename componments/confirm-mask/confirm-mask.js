@@ -49,7 +49,9 @@ Component({
         collect: {},
         flag: false,
         sliderFlag: false,
-        currentValue: 0
+        currentValue: 0,
+        modelDisable: true,
+        ShowRoomDisable: true
     },
 
     /**
@@ -111,7 +113,12 @@ Component({
             }
             let list = wx.getStorageSync("historyList") || [];
             let detail = this.properties.borchureDetail;
+            if (detail.userCode === "305179302161764352") {
+                this.setData({
+                    ShowRoomDisable: false
 
+                });
+            }
             let {
                 mediaList
             } = await API.selMediaApps({
@@ -125,7 +132,8 @@ Component({
                 console.log("5");
                 detail.mediaType = 5;
                 this.setData({
-                    borchureDetail: detail
+                    borchureDetail: detail,
+                    modelDisable: false
                 });
             }
             detail.date = this.unixStandardDate();
@@ -174,7 +182,10 @@ Component({
         //     })
         // },
         goBack() {
-
+            this.setData({
+                modelDisable: true,
+                ShowRoomDisable: true
+            })
             this.triggerEvent("changeMask");
         },
         changeCollect() {
@@ -188,22 +199,27 @@ Component({
             console.log("1");
         },
         confirmAr() {
-            //   publicFn.Loading();
-            // let url = `https://arp3.arsnowslide.com/${this.properties.borchureDetail.bookCoverObsPath}${this.properties.borchureDetail.bookCoverObsName}`;
+
             this.handleCamera()
                 .then((res) => {
-                    //   wx.setStorageSync("imgUrl", url);
-                    //   console.log(this.properties.borchureDetail.projectCode);
-                    //   wx.setStorageSync(
-                    //     "projectCode",
-                    //     this.properties.borchureDetail.projectCode
-                    //   );
-                    goTo("canvasAr", {
-                        projectCode: this.properties.borchureDetail.projectCode,
-                    });
-                    this.setData({
-                        isShow: true
-                    });
+                    let param = {projectCode: this.properties.borchureDetail.projectCode}
+                    wx.navigateTo({
+                        url: `/packageA/pages/canvasAr/canvasAr?param=${JSON.stringify(param)}`,
+                        events: {
+                            // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+                            acceptDataFromOpenedPage: (data) => {
+                                this.setData({
+                                    isShow: false
+                                })
+                            }
+                        },
+                        success: function (res) {
+                            // 通过eventChannel向被打开页面传送数据
+                            res.eventChannel.emit('acceptDataFromOpenerPage', {
+                                data: 'test'
+                            })
+                        }
+                    })
                     // },
                     //   });
                 })
@@ -214,6 +230,7 @@ Component({
         arKitBtn() {
             //   publicFn.Loading();
             // let url = `https://arp3.arsnowslide.com/${this.properties.borchureDetail.bookCoverObsPath}${this.properties.borchureDetail.bookCoverObsName}`;
+            if (this.data.modelDisable) return
             this.handleCamera()
                 .then((res) => {
                     //   wx.setStorageSync("imgUrl", url);
@@ -222,35 +239,37 @@ Component({
                     //     "projectCode",
                     //     this.properties.borchureDetail.projectCode
                     //   );
-                    goTo("arKit", {
-                        projectCode: this.properties.borchureDetail.projectCode,
-                    });
-                    this.setData({
-                        isShow: true
-                    });
+                    // goTo("arKit", {
+                    //     projectCode: this.properties.borchureDetail.projectCode,
+                    // });
+                    let param = {projectCode: this.properties.borchureDetail.projectCode}
+                    wx.navigateTo({
+                        url: `/packageB/pages/arKit/arKit?param=${JSON.stringify(param)}`,
+                        events: {
+                            // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+                            acceptDataFromOpenedPage: (data) => {
+                        console.log('acceptDataFromOpenedPage')
+
+                                this.setData({
+                                    isShow: false
+                                })
+                            }
+                        },
+                        success: function (res) {
+                            // 通过eventChannel向被打开页面传送数据
+                            res.eventChannel.emit('acceptDataFromOpenerPage', {
+                                data: 'test'
+                            })
+                        }
                     // },
-                    //   });
+                      });
                 })
                 .catch((err) => {
                     publicFn.LoadingOff();
                 });
         },
         ShowRoomBtn() {
-            console.log(this.data.borchureDetail)
-
-            // publicFn.Loading();
-            // this.handleCamera()
-            //     .then((res) => {
-            //   wx.setStorageSync("imgUrl", url);
-            //   console.log(this.properties.borchureDetail.projectCode);
-            //   wx.setStorageSync(
-            //     "projectCode",
-            //     this.properties.borchureDetail.projectCode
-            //   );
-            // goTo("selectRole", {
-            //     userCode: this.data.borchureDetail.userCode,
-            //     userName: this.data.borchureDetail.companyName
-            // });
+            if (this.data.ShowRoomDisable) return
             let param = {
                 userCode: this.data.borchureDetail.userCode,
                 userName: this.data.borchureDetail.companyName
@@ -259,8 +278,11 @@ Component({
                 url: `/pages/selectRole/selectRole?param=${JSON.stringify(param)}`,
                 events: {
                     // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-                    acceptDataFromOpenedPage :(data)=> {
-                        this.setData({isShow:false})
+                    acceptDataFromOpenedPage: (data) => {
+                        console.log('acceptDataFromOpenedPage')
+                        this.setData({
+                            isShow: false
+                        })
                     }
                 },
                 success: function (res) {
